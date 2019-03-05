@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {Button, FormGroup, FormControl, FormLabel} from 'react-bootstrap';
-import {Link} from "react-router-dom";
 import './ForgotPassword.css';
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   constructor(props) {
     super(props);
 
@@ -14,7 +13,7 @@ export default class Login extends Component {
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0;
   }
 
   handleChange = event => {
@@ -30,6 +29,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="ForgotPassword">
+        <h4 className={'text-center mb-3'}> Please enter your email address and we will send you a code to reset your password </h4>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" size="large">
             <FormLabel>Email</FormLabel>
@@ -40,24 +40,13 @@ export default class Login extends Component {
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="password" size="large">
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Link to={'/forgot-password'} className={'float-right mb-3'}>
-            Forgot Password?
-          </Link>
           <Button
             block
             size="large"
             disabled={!this.validateForm()}
             type="submit"
           >
-            Login
+            Forgot Password
           </Button>
         </form>
       </div>
