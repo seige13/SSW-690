@@ -8,5 +8,12 @@ cache:
     - node_modules
 script:
   - npm install
-  - npm run build
   - npm test
+  - npm run build
+deploy:
+  provider: surge
+  skip_cleanup: true
+  domain: hobby-matcher.surge.sh
+  project: ./build/
+  on:
+    branch: develop
