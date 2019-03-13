@@ -18,7 +18,7 @@ public class UserServiceTest extends BaseTest {
     @Test
     public void testGetUserList() {
         List<User> userList = userService.getUserList();
-        assertEquals("robert",  userList.get(1).getNickName());
+        assertEquals("robert", userList.get(1).getNickName());
     }
 
 }
