@@ -4,10 +4,33 @@ import java.util.Date;
 
 public class User {
     // User Bean
+    private String id;
     private String nickName;
     private String firstName;
     private String lastName;
     private String email;
+    private String passWord;
+    private Date dob;
+    private String gender;
+    private String status;
+    private String hobbies;
+    private String events;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -33,11 +56,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassWord() {
         return passWord;
     }
 
-    public void setPassword(String passWord) {
+    public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
 
@@ -81,19 +104,5 @@ public class User {
         this.events = events;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    private String passWord;
-    private Date dob;
-    private String gender;
-    private String status;
-    private String hobbies;
-    private String events;
 
 }
