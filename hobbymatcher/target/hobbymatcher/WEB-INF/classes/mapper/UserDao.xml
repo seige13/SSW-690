@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hobbymatcher.dao.UserDao">
     <select id="queryUser" resultType="com.hobbymatcher.entity.User">
-		SELECT nick_name, first_name,
-		last_name, email, pass_word, dob, gender, gender, status, hobbies, events
+		SELECT *
 		FROM user
 		ORDER BY nick_name
 		DESC
