@@ -43,7 +43,7 @@ public class UserController {
     }
 
     //login
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     private boolean login(String email, String password) {
         String passwordByMd5 = Md5.MD5(password);
