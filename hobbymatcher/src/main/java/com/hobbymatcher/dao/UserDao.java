@@ -23,4 +23,6 @@ public interface UserDao {
 
     int deleteUser(@Param("id") String id);
 
+    User findUserByEmail(@Param("email") String email);
+
 }

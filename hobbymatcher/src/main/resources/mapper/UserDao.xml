@@ -22,6 +22,10 @@
    		 select * from user where id=#{id}
     </select>
 
+    <select id="findUserByEmail" parameterType="map" resultType="User">
+   		 select * from user where email=#{email}
+    </select>
+
     <update id="updateUser" parameterType="com.hobbymatcher.entity.User">
         update user
         <set>

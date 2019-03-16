@@ -12,4 +12,6 @@ public interface UserService {
     boolean login(String email, String passWord);
 
     boolean deleteUser(String id);
+
+    User findUserByEmail(String email);
 }
