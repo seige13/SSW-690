@@ -13,8 +13,6 @@ public interface EventsDao {
      */
     List<Events> queryEvents();
 
-    int insertEvents(Events event);
-
-	int insertUserToEvents(String name);
+	int addEvents(Events event);
 
 }

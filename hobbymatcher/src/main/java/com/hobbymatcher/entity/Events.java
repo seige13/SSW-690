@@ -8,7 +8,7 @@ public class Events {
     private Date eventsTime;
     private String location;
     private String description;
-    private Int fee;
+    private String fee;
     private String holder;
     //private picture
 
@@ -20,7 +20,7 @@ public class Events {
         this.eventsTitle = eventsTitle;
     }
 
-    public String getEventsTime() {
+    public Date getEventsTime() {
         return eventsTime;
     }
 
@@ -44,11 +44,11 @@ public class Events {
         this.description = description;
     }
 
-    public Int getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(Int fee) {
+    public void setFee(String fee) {
         this.fee = fee;
     }
 

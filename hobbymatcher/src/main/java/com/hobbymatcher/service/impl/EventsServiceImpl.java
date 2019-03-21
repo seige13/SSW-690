@@ -19,28 +19,19 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public List<User> getEventsList() {
+    public List<Events> getEventsList() {
         return eventsDao.queryEvents();
     }
 
     @Override
     public boolean addEvents(Events event) {
         try {
-            eventsDao.insertEvents(event);
+            eventsDao.addEvents(event);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-   @Override
-    public boolean insertUserToEvents(String name) {
-        try {
-            userDao.insertUserToEvents(name);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
    
 }

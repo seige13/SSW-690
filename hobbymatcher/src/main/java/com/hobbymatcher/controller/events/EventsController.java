@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 @SessionAttributes()
 @Controller
@@ -33,7 +34,7 @@ public class EventsController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            list = EventsService.getUserList();
+            list = eventsService.getEventsList();
             modelMap.put("rows", list);
             modelMap.put("total", list.size());
         } catch (Exception e) {
@@ -44,6 +45,18 @@ public class EventsController {
         return modelMap;
     }
 
-  
+	//register
+    @RequestMapping(value = "/addevents", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean add(String eventsTitle, Date eventsTime, String location, String description, String fee, String holder) {
+        Events events = new Events();
+		events.setEventsTitle(eventsTitle);
+		events.setEventsTime(eventsTime);
+		events.setLocation(location);
+		events.setDescription(description);
+		events.setFee(fee);
+		events.setHolder(holder);
+        return eventsService.addEvents(events);
+    }
 
 }
