@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {FormGroup, FormControl, FormLabel, Alert} from 'react-bootstrap';
+import {Button, FormGroup, FormControl, FormLabel} from 'react-bootstrap';
 import {Link} from "react-router-dom";
-import ApiService from '../services/ApiService';
-import LoaderButton from '../components/LoaderButton'
-import './Login.css';
+import './ForgotPassword.css';
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,10 +9,7 @@ export default class Login extends Component {
 
     this.state = {
       email: '',
-      password: '',
-      isLoading: false,
-      hasErrors: false,
-      errorMessage: ''
+      password: ''
     };
   }
 
@@ -28,43 +23,13 @@ export default class Login extends Component {
     });
   };
 
-  onAlertClose = () => {
-    this.setState({
-      hasErrors: false,
-      errorMessage: ''
-    });
-  };
-
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
-
-    this.setState({isLoading: true});
-
-    ApiService.userLogin(this.state.email, this.state.password)
-      .then(function (success) {
-        this.props.userHasAuthenticated(true);
-        this.props.history.push("/");
-      }.bind(this))
-      .catch(function (error) {
-        this.setState({
-          hasErrors: true,
-          isLoading: false,
-          errorMessage: 'Invalid Login Credentials!'
-        });
-
-        console.log(error.statusText);
-      }.bind(this));
   };
 
   render() {
-    if (this.state.hasErrors) {
-      var alertMessage = <Alert variant={'danger'} onClose={this.onAlertClose} className={'mb-3'}
-                                dismissible>{this.state.errorMessage}</Alert>
-    }
-
     return (
-      <div className="Login">
-        {alertMessage}
+      <div className="ForgotPassword">
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" size="large">
             <FormLabel>Email</FormLabel>
@@ -86,14 +51,14 @@ export default class Login extends Component {
           <Link to={'/forgot-password'} className={'float-right mb-3'}>
             Forgot Password?
           </Link>
-          <LoaderButton
+          <Button
             block
+            size="large"
             disabled={!this.validateForm()}
             type="submit"
-            isLoading={this.state.isLoading}
-            text="Login"
-            loadingText="Logging in…"
-          />
+          >
+            Login
+          </Button>
         </form>
       </div>
     );
