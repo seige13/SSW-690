@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Date;
+import java.time.LocalDateTime;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
@@ -26,7 +26,7 @@ public class EventsDaoTest extends BaseTest {
     public void testInsertEvents() {
         Events events = new Events();
         events.setEventsTitle("Play Basketball!");
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         events.setEventsTime(date);
         events.setDescription("NBA");
         events.setLocation("howe");

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @SessionAttributes()
 @Controller
@@ -47,7 +47,7 @@ public class EventsController {
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String eventsTitle, Date eventsTime, String location, String description, String fee, String holder) {
+    public boolean add(String eventsTitle, LocalDateTime eventsTime, String location, String description, String fee, String holder) {
         Events events = new Events();
 		events.setEventsTitle(eventsTitle);
 		events.setEventsTime(eventsTime);

@@ -1,11 +1,11 @@
 package com.hobbymatcher.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Events {
     
     private String eventsTitle;
-    private Date eventsTime;
+    private LocalDateTime eventsTime;
     private String location;
     private String description;
     private String fee;
@@ -20,11 +20,11 @@ public class Events {
         this.eventsTitle = eventsTitle;
     }
 
-    public Date getEventsTime() {
+    public LocalDateTime getEventsTime() {
         return eventsTime;
     }
 
-    public void setEventsTime(Date eventsTime) {
+    public void setEventsTime(LocalDateTime eventsTime) {
         this.eventsTime = eventsTime;
     }
 
