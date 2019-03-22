@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hobbymatcher.dao.EventsDao">
+    <select id="queryEvents" resultType="com.hobbymatcher.entity.Events">
+		SELECT *
+		FROM events
+		ORDER BY eventsTitle
+		DESC
+	</select>
+
+	<insert id="addEvents" useGeneratedKeys="true" keyProperty="id">
+		insert into events (eventsTitle,eventsTime,location,description,fee, holder) values(#{eventsTitle},#{eventsTime},#{location},#{description},${fee}, ${holder})
+	</insert>
+
+</mapper>
