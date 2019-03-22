@@ -45,7 +45,6 @@ public class EventsController {
         return modelMap;
     }
 
-	//register
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
     public boolean add(String eventsTitle, Date eventsTime, String location, String description, String fee, String holder) {
