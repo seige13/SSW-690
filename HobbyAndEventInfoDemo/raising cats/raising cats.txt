@@ -1,0 +1,8 @@
+Hobby name: raising cats
+
+Description: Raising a cat requires that you provide not only for its most basic needs, such as food and a clean litter box, but also for its health, its comfort, and its mind. If you are interested in raising a cat, take the time to understand the commitment you are making and learn how to raise it right. If you do this, you are more likely to end up with a well-adjusted, happy, and healthy cat.
+
+category:  pets/raising cats
+
+Hobby picture: check the file folder
+

@@ -1,0 +1,47 @@
+Ball: football, billiards, badminton, table tennis;
+
+Board games: Gomoku, Chess, Go, Flag, Chess;
+
+Musical instruments: piano, electronic organ, guzheng, playing guitar, saxophone, cucurbit, large, trumpet; calligraphy: soft pen, hard pen;
+
+Painting: sketch, watercolor, Chinese painting;
+
+Dance: Jazz, hip-hop, hip-hop, Latin, tango;
+
+Singing: Bel Canto, National Singing, Popular Singing;
+
+Film and television: anime, film, Korean drama, drama;
+
+Eloquence: reading, hosting, campaigning, speaking, debate;
+
+Sports: skiing, swimming, running, fitness, skateboarding, roller skating
+
+Social: Internet, chat, party; reading: reading, reading newspapers, reading novels;
+
+Gourmet: tasting, cooking;
+
+Tourism: domestic tourism, foreign tourism, long-distance travel, short-distance travel;
+
+Music: pop, classical, rock, light music;
+
+Drinking tea: green tea, black tea, oolong tea; 
+
+film and television: movies, serials, short plays, drama;
+
+Books: literature, philosophy, economics, politics;
+
+Outdoor: rock climbing, adventure, camping;
+
+Hands-on: write a diary, do a hand account, puzzle, disassemble paper-cut, origami;
+
+Pets: raising flowers, raising cats, raising dogs;
+
+Adventure: rock climbing, adventure, camping;
+
+Collection: Collection of playing cards, cars, watches, shoes;
+
+Martial Arts: Taekwondo, Free Fight
+
+Art: Graffiti, flower arrangement, exhibition, listening to cross talk
+
+Games: board games, online games, mobile games
