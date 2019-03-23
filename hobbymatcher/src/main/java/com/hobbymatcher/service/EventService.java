@@ -4,7 +4,7 @@ import com.hobbymatcher.entity.Events;
 
 import java.util.List;
 
-public interface UserService {
+public interface EventService {
     List<Events> getEventList();
 
     boolean addEvents(Events events);
