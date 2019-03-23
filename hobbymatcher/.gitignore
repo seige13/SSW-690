@@ -1,7 +1,7 @@
 *.class
 
 #folders#
-/target
+target
 /neoDb*
 /data
 /src/main/webapp/WEB-INF/classes

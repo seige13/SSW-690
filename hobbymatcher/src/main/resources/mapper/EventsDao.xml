@@ -11,7 +11,7 @@
 	</select>
 
 	<insert id="addEvents" useGeneratedKeys="true" >
-		insert into events (EventsTitle,EventsTime,Location,Description,Fee,Holder) values(#{eventsTitle},#{eventsTime},#{location},#{description},#{fee},#{holder})
+		insert into events (EventsTitle,EventsTime,Location,Description,Fee,Holder,EventsImage) values(#{eventsTitle},#{eventsTime},#{location},#{description},#{fee},#{holder},#{eventsImage})
 	</insert>
 
 </mapper>

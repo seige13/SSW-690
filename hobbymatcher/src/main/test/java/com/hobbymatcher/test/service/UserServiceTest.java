@@ -22,12 +22,12 @@ public class UserServiceTest extends BaseTest {
         assertEquals("robert", userList.get(1).getNickName());
     }
 
-   // @Test
+    // @Test
     public void testLogin() {
         assertTrue(userService.login("kslup7@gmail.com", "123"));
     }
 
-//    @Test
+    //    @Test
     public void testRegist() {
         User user = new User();
         user.setEmail("sunzheshiwoerzi@gmail.com");
@@ -38,7 +38,7 @@ public class UserServiceTest extends BaseTest {
         //assertTrue(userService.regist(user));
     }
 
-   // @Test
+    // @Test
     public void testDelete() {
         assertTrue(userService.deleteUser("12"));
         //assertTrue(userService.login("sunzheshiwoerzi@gmail.com", "123456"));

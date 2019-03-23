@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.time.LocalDateTime;
+import java.io.File;
+import java.util.UUID;
+import java.io.IOException;
 
 @SessionAttributes()
 @Controller
@@ -47,7 +50,7 @@ public class EventsController {
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String eventsTitle, LocalDateTime eventsTime, String location, String description, String fee, String holder) {
+    public boolean add(String eventsTitle, LocalDateTime eventsTime, String location, String description, String fee, String holder, MultipartFile imageFile) throws IOException{
         Events events = new Events();
 		events.setEventsTitle(eventsTitle);
 		events.setEventsTime(eventsTime);
@@ -55,6 +58,12 @@ public class EventsController {
 		events.setDescription(description);
 		events.setFee(fee);
 		events.setHolder(holder);
+		String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
+        String originalFilename = imageFile.getOriginalFilename();
+        String newFileName = UUID.randomUUID() + originalFilename;
+        File targetFile = new File(filePath, newFileName);
+        imageFile.transferTo(targetFile);
+        events.setEventsImage(newFileName);
         return eventsService.addEvents(events);
     }
 

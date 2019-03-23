@@ -3,7 +3,7 @@ package com.hobbymatcher.entity;
 import java.time.LocalDateTime;
 
 public class Events {
-    
+
     private String eventsTitle;
     private LocalDateTime eventsTime;
     private String location;
@@ -11,6 +11,7 @@ public class Events {
     private String fee;
     private String holder;
     //private picture
+    private String eventsImage;
 
     public String getEventsTitle() {
         return eventsTitle;
@@ -58,5 +59,14 @@ public class Events {
 
     public void setHolder(String holder) {
         this.holder = holder;
+    }
+
+    public void setEventsImage(String eventsImage)
+    {
+        this.eventsImage = eventsImage;
+    }
+
+    public String getEventsImage() {
+        return eventsImage;
     }
 }

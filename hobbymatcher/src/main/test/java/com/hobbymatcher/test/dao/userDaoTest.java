@@ -34,19 +34,19 @@ public class UserDaoTest extends BaseTest {
         assertEquals(0, result);
     }
 
-   // @Test
+    // @Test
     public void testFindUserByEmailAndPwd() {
         User user = userDao.findUserByEmailAndPwd("kslup7@gmail.com", "123456");
         assertNotNull(user);
     }
 
-  //  @Test
+    //  @Test
     public void testFindUserById() {
         User user = userDao.findUserById("1");
         assertNotNull(user);
     }
 
-   // @Test
+    // @Test
     public void testUpdateUser() {
         User user = userDao.findUserByEmailAndPwd("kslup7@gmail.com", "123456");
         user.setPassWord("123");
