@@ -3,13 +3,14 @@ package com.hobbymatcher.entity;
 import java.time.LocalDateTime;
 
 public class Events {
-    
+
     private String eventsTitle;
     private LocalDateTime eventsTime;
     private String location;
     private String description;
     private String fee;
     private String holder;
+    //private picture
     private String eventsImage;
 
     public String getEventsTitle() {
