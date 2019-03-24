@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hobbymatcher.dao.HobbyDao">
+    <select id="queryHobby" resultType="com.hobbymatcher.entity.Hobby">
+		SELECT *
+		FROM hobby
+		ORDER BY hobby_id
+		DESC
+	</select>
+
+    <insert id="insertHobby" useGeneratedKeys="true" keyProperty="id">
+		insert into hobby (description,classification,constrains,blogs,status) values(#{description},#{classification},#{constrains},#{blogs},${status})
+	</insert>
+
+    <select id="findHobbyById" parameterType="map" resultType="Hobby">
+   		 select * from hobby where hobby_id=#{hobbyid}
+    </select>
+
+    <update id="updateHobby" parameterType="com.hobbymatcher.entity.Hobby">
+        update hobby
+        <set>
+            <if test="description != null">description=#{description},</if>
+            <if test="classification != null">classification=#{classification},</if>
+            <if test="constrains != null">constrains=#{constrains},</if>
+            <if test="blogs != null">blogs=#{blogs},</if>
+            <if test="status != null">status=#{status},</if>
+        </set>
+        where hobby_id=#{id}
+    </update>
+    <delete id="deleteHobby">
+		DELETE FROM
+		hobby
+		WHERE
+		hobby_id=#{id}
+	</delete>
+</mapper>
