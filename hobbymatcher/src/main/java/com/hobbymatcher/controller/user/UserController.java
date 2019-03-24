@@ -5,10 +5,7 @@ import com.hobbymatcher.service.UserService;
 import com.hobbymatcher.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -16,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @SessionAttributes()
 @Controller
 @RequestMapping("/user")
@@ -59,23 +57,11 @@ public class UserController {
         return userService.login(email, passwordByMd5);
     }
 
-    //toRegister
-//    @RequestMapping(value = "toAdd")
-//    public String toAdd() {
-//        return "register";
-//    }
-
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String email, String password, String nickname, String firstname, String lastname) {
-        User user = new User();
-        user.setNickName(nickname);
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setEmail(email);
-        user.setPassWord(Md5.MD5(password));
-        return userService.regist(user);
+    public boolean add(@RequestBody User user) {
+        return userService.register(user);
     }
 
     //register
