@@ -57,23 +57,11 @@ public class UserController {
         return userService.login(email, passwordByMd5);
     }
 
-    //toRegister
-//    @RequestMapping(value = "toAdd")
-//    public String toAdd() {
-//        return "register";
-//    }
-
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String email, String password, String nickname, String firstname, String lastname) {
-        User user = new User();
-        user.setNickName(nickname);
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setEmail(email);
-        user.setPassWord(Md5.MD5(password));
-        return userService.regist(user);
+    public boolean add(@RequestBody User user) {
+        return userService.register(user);
     }
 
     //register

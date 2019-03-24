@@ -35,7 +35,7 @@ public class UserServiceTest extends BaseTest {
         user.setLastName("la");
         user.setNickName("ksl");
         user.setPassWord("123456");
-        //assertTrue(userService.regist(user));
+        //assertTrue(userService.register(user));
     }
 
     // @Test
