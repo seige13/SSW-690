@@ -5,10 +5,7 @@ import com.hobbymatcher.service.UserService;
 import com.hobbymatcher.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -48,15 +45,14 @@ public class UserController {
     //login
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    private boolean login(String email, String password, HttpServletRequest request) {
-        String passwordByMd5 = Md5.MD5(password);
-        User user = userService.findUserByEmail(email);
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
-            User user1 = (User) request.getSession().getAttribute("user");
-            System.out.println(user1.getId() + user1.getLastName() + user1.getPassWord());
+    private boolean login(@RequestBody User user, HttpServletRequest request) {
+        String passwordByMd5 = Md5.MD5(user.getPassWord());
+        User user1 = userService.findUserByEmail(user.getEmail());
+        if (user1 == null) {
+            return false;
         }
-        return userService.login(email, passwordByMd5);
+        request.getSession().setAttribute("user", user);
+        return userService.login(user1.getEmail(), passwordByMd5);
     }
 
     //toRegister
@@ -68,22 +64,20 @@ public class UserController {
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String email, String password, String nickname, String firstname, String lastname) {
-        User user = new User();
-        user.setNickName(nickname);
-        user.setFirstName(firstname);
-        user.setLastName(lastname);
-        user.setEmail(email);
-        user.setPassWord(Md5.MD5(password));
-        return userService.regist(user);
+    public boolean add(@RequestBody User user) {
+        if (user != null) {
+            user.setPassWord(Md5.MD5(user.getPassWord()));
+            return userService.regist(user);
+        }
+        return false;
     }
 
     //register
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteUser(String email) {
-        User user = userService.findUserByEmail(email);
-        if (user != null) {
+    public boolean deleteUser(@RequestBody User user) {
+        User user1 = userService.findUserByEmail(user.getEmail());
+        if (user1 != null) {
             return userService.deleteUser(user.getId());
         }
         return false;
