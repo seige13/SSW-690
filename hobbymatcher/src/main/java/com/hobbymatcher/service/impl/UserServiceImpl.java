@@ -3,6 +3,7 @@ package com.hobbymatcher.service.impl;
 import com.hobbymatcher.dao.UserDao;
 import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.UserService;
+import com.hobbymatcher.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean regist(User user) {
+    public boolean register(User user) {
         try {
+            user.setPassWord(Md5.MD5(user.getPassWord()));
             userDao.insertUser(user);
             return true;
         } catch (Exception e) {

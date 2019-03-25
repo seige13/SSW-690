@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @SessionAttributes()
 @Controller
 @RequestMapping("/user")
@@ -54,12 +55,6 @@ public class UserController {
         request.getSession().setAttribute("user", user);
         return userService.login(user1.getEmail(), passwordByMd5);
     }
-
-    //toRegister
-//    @RequestMapping(value = "toAdd")
-//    public String toAdd() {
-//        return "register";
-//    }
 
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
