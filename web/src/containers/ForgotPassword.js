@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, FormGroup, FormControl, FormLabel} from 'react-bootstrap';
+import {Button, FormGroup, FormControl, FormLabel, Alert} from 'react-bootstrap';
 import './ForgotPassword.css';
 
 export default class ForgotPassword extends Component {
@@ -8,7 +8,8 @@ export default class ForgotPassword extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      emailSent: false,
+      alertMessage: ''
     };
   }
 
@@ -24,12 +25,27 @@ export default class ForgotPassword extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
+    // @TODO Send forgot password request to API
+
+    this.setState({
+      emailSent: true,
+      alertMessage: `An email with a link to reset your password has been sent to ${this.state.email}`
+    })
   };
 
   render() {
+    if (this.state.emailSent) {
+      var alertMessage = <Alert variant={'info'} onClose={this.onAlertClose} className={'mb-3'}
+                                dismissible>{this.state.alertMessage}</Alert>
+    }
+
     return (
       <div className="ForgotPassword">
-        <h4 className={'text-center mb-3'}> Please enter your email address and we will send you a code to reset your password </h4>
+        <h4 className={'text-center mb-3'}>
+          Please enter your email address and we will send you a code to reset your password
+        </h4>
+        {alertMessage}
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" size="large">
             <FormLabel>Email</FormLabel>

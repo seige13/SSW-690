@@ -11,11 +11,24 @@ const ApiService = {
   userLogin(email, password) {
     return Request({
       url: '/user/login',
-      method: 'POST',
-      body: {
+      method: 'post',
+      data: {
         email: email,
-        password: password
-      }
+        passWord: password
+      },
+    })
+  },
+  registerUser(username, password, email, firstname, lastname) {
+    return Request({
+      url: '/user/adduser',
+      method: 'post',
+      data: {
+        nickName: username,
+        passWord: password,
+        email: email,
+        firstName: firstname,
+        lastName: lastname
+      },
     })
   }
 };

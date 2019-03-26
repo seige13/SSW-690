@@ -42,17 +42,27 @@ export default class Login extends Component {
 
     ApiService.userLogin(this.state.email, this.state.password)
       .then(function (success) {
-        this.props.userHasAuthenticated(true);
-        this.props.history.push("/");
+        if (success) {
+          this.props.userHasAuthenticated(true);
+          this.props.history.push("/");
+        } else {
+          this.setState({
+            hasErrors: true,
+            isLoading: false,
+            errorMessage: 'Invalid Login Credentials!',
+            password: ''
+          });
+        }
       }.bind(this))
       .catch(function (error) {
+        console.log(error.statusText);
+
         this.setState({
           hasErrors: true,
           isLoading: false,
-          errorMessage: 'Invalid Login Credentials!'
+          errorMessage: 'Invalid Login Credentials!',
+          password: ''
         });
-
-        console.log(error.statusText);
       }.bind(this));
   };
 

@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {Carousel, InputGroup, FormControl} from "react-bootstrap";
-
 import CardCollection from '../components/CardCollection';
+import basketBallImage from '../assets/basketball.jpg'
+import divingImage from '../assets/diving.jpg'
+import photographyImage from '../assets/photography.jpg'
 import './Home.css';
 
 
@@ -13,22 +15,22 @@ export default class Home extends Component {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://via.placeholder.com/800x400.png?text=Basketball"
-              alt="First slide"
+              src={basketBallImage}
+              alt="Basketball"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://via.placeholder.com/800x400.png?text=Soccer"
-              alt="Third slide"
+              src={divingImage}
+              alt="Diving"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://via.placeholder.com/800x400.png?text=Hockey"
-              alt="Third slide"
+              src={photographyImage}
+              alt="Photography"
             />
           </Carousel.Item>
         </Carousel>
@@ -51,7 +53,7 @@ export default class Home extends Component {
         </div>
 
         <div className="container">
-            <CardCollection/>
+          <CardCollection/>
         </div>
       </div>
     );
