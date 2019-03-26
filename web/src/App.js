@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
+import React, {Component, Fragment} from 'react';
+import {Nav, Navbar} from 'react-bootstrap';
 import NavLink from 'react-bootstrap/NavLink';
-import { LinkContainer } from 'react-router-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 import Routes from './Routes';
 import './App.css';
 
@@ -10,17 +10,27 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
     };
   }
 
   userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
+    this.setState({isAuthenticated: authenticated});
   };
 
   handleLogout = event => {
     this.userHasAuthenticated(false);
   };
+
+  async componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      return;
+    }
+
+    // @TODO get user info
+
+    this.setState({ isLoading: false });
+  }
 
   render() {
     const childProps = {
@@ -34,7 +44,7 @@ class App extends Component {
           <LinkContainer to="/">
             <Navbar.Brand>Hobby Matcher</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {this.state.isAuthenticated ? (
@@ -52,7 +62,7 @@ class App extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        <Routes childProps={childProps} />
+        <Routes childProps={childProps}/>
       </div>
     );
   }

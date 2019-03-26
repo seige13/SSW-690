@@ -1,5 +1,8 @@
-import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {FormGroup, FormControl, FormLabel, Alert} from 'react-bootstrap';
+import {Link} from "react-router-dom";
+import ApiService from '../services/ApiService';
+import LoaderButton from '../components/LoaderButton'
 import './Login.css';
 
 export default class Login extends Component {
@@ -8,7 +11,10 @@ export default class Login extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoading: false,
+      hasErrors: false,
+      errorMessage: ''
     };
   }
 
@@ -22,13 +28,53 @@ export default class Login extends Component {
     });
   };
 
-  handleSubmit = event => {
+  onAlertClose = () => {
+    this.setState({
+      hasErrors: false,
+      errorMessage: ''
+    });
+  };
+
+  handleSubmit = async event => {
     event.preventDefault();
+
+    this.setState({isLoading: true});
+
+    ApiService.userLogin(this.state.email, this.state.password)
+      .then(function (success) {
+        if (success) {
+          this.props.userHasAuthenticated(true);
+          this.props.history.push("/");
+        } else {
+          this.setState({
+            hasErrors: true,
+            isLoading: false,
+            errorMessage: 'Invalid Login Credentials!',
+            password: ''
+          });
+        }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error.statusText);
+
+        this.setState({
+          hasErrors: true,
+          isLoading: false,
+          errorMessage: 'Invalid Login Credentials!',
+          password: ''
+        });
+      }.bind(this));
   };
 
   render() {
+    if (this.state.hasErrors) {
+      var alertMessage = <Alert variant={'danger'} onClose={this.onAlertClose} className={'mb-3'}
+                                dismissible>{this.state.errorMessage}</Alert>
+    }
+
     return (
       <div className="Login">
+        {alertMessage}
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" size="large">
             <FormLabel>Email</FormLabel>
@@ -47,14 +93,17 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
-          <Button
+          <Link to={'/forgot-password'} className={'float-right mb-3'}>
+            Forgot Password?
+          </Link>
+          <LoaderButton
             block
-            size="large"
             disabled={!this.validateForm()}
             type="submit"
-          >
-            Login
-          </Button>
+            isLoading={this.state.isLoading}
+            text="Login"
+            loadingText="Logging in…"
+          />
         </form>
       </div>
     );
