@@ -4,16 +4,14 @@ import com.hobbymatcher.entity.Hobby;
 import com.hobbymatcher.service.HobbyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @SessionAttributes()
 @Controller
 @RequestMapping("/hobby")
@@ -47,21 +45,26 @@ public class HobbyController {
     //register
     @RequestMapping(value = "/addhobby", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String description, String classification, String constrains, String blogs, String status) {
-        Hobby hobby = new Hobby();
-        hobby.setBlogs(blogs);
-        hobby.setClassification(classification);
-        hobby.setConstrains(constrains);
-        hobby.setDescription(description);
-        hobby.setStatus(status);
-        return hobbyService.insertHobby(hobby);
+    public boolean add(@RequestBody Hobby hobby) {
+        if (hobby != null) {
+            hobby.setBlogs(hobby.getBlogs());
+            hobby.setClassification(hobby.getClassification());
+            hobby.setConstrains(hobby.getConstrains());
+            hobby.setDescription(hobby.getDescription());
+            hobby.setStatus(hobby.getStatus());
+            return hobbyService.insertHobby(hobby);
+        }
+        return false;
     }
 
     //register
     @RequestMapping(value = "/deletehobby", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteUser(String id) {
-        return hobbyService.deleteHobby(id);
+    public boolean deleteUser(@RequestBody Hobby hobby) {
+        if (hobby != null) {
+            return hobbyService.deleteHobby(hobby.getHobbyId());
+        }
+        return false;
     }
 
 }

@@ -56,6 +56,12 @@ public class UserController {
         return userService.login(user1.getEmail(), passwordByMd5);
     }
 
+    //toRegister
+//    @RequestMapping(value = "toAdd")
+//    public String toAdd() {
+//        return "register";
+//    }
+
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
