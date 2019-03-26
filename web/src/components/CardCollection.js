@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
 import {Card} from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import './CardCollection.css';
 
+import badminton from '../assets/event-cards/badminton.png';
+import basketball from '../assets/event-cards/basketball.png'
+import bodybuilding from '../assets/event-cards/bodybuilding.png'
+import cat from '../assets/event-cards/cat.png'
+import diving from '../assets/event-cards/diving.png'
+import drawing from '../assets/event-cards/drawing.png'
+import orchid from '../assets/event-cards/orchid.jpg'
+import photography from '../assets/event-cards/photography.png'
 
 export default class CardCollection extends Component {
 
@@ -12,36 +21,36 @@ export default class CardCollection extends Component {
     this.cardData = [
       {
         name: 'Basketball',
-        description: 'basketball description',
-        img: 'https://via.placeholder.com/250.png'
+        description: 'Learn more about basketball',
+        img: basketball
       }, {
-        name: 'Basketball2',
-        description: 'basketball2 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Badminton',
+        description: 'Learn more about Badminton',
+        img: badminton
       }, {
-        name: 'Basketball3',
-        description: 'basketball3 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Body building',
+        description: 'Learn more about body building',
+        img: bodybuilding
       }, {
-        name: 'Basketball4',
-        description: 'basketball4 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Cat',
+        description: 'Learn more about owning a cat',
+        img: cat
       }, {
-        name: 'Basketball5',
-        description: 'basketball5 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Diving',
+        description: 'Learn more about diving',
+        img: diving
       }, {
-        name: 'Basketball6',
-        description: 'basketball6 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Drawing',
+        description: 'Learn more about drawing',
+        img: drawing
       }, {
-        name: 'Basketball7',
-        description: 'basketball7 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Orchid',
+        description: 'Learn more about growing orchids',
+        img: orchid
       }, {
-        name: 'Basketball8',
-        description: 'basketball8 description',
-        img: 'https://via.placeholder.com/250.png'
+        name: 'Photography',
+        description: 'Learn more about photography',
+        img: photography
       }];
   }
 
@@ -55,6 +64,7 @@ export default class CardCollection extends Component {
                 <Card.Img
                   variant="top"
                   src={item.img}
+                  className={'card-img'}
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
