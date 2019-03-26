@@ -11,7 +11,7 @@
 	</select>
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
-		insert into user (first_name,last_name,nick_name,email,pass_word) values(#{firstName},#{lastName},#{nickName},#{email},${passWord})
+		insert into user (first_name,last_name,nick_name,email,pass_word) values(#{firstName},#{lastName},#{nickName},#{email},#{passWord})
 	</insert>
 
     <select id="findUserByEmailAndPwd" parameterType="map" resultType="User">

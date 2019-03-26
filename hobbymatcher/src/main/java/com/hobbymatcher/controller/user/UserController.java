@@ -46,30 +46,39 @@ public class UserController {
     //login
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    private boolean login(String email, String password, HttpServletRequest request) {
-        String passwordByMd5 = Md5.MD5(password);
-        User user = userService.findUserByEmail(email);
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
-            User user1 = (User) request.getSession().getAttribute("user");
-            System.out.println(user1.getId() + user1.getLastName() + user1.getPassWord());
+    private boolean login(@RequestBody User user, HttpServletRequest request) {
+        String passwordByMd5 = Md5.MD5(user.getPassWord());
+        User user1 = userService.findUserByEmail(user.getEmail());
+        if (user1 == null) {
+            return false;
         }
-        return userService.login(email, passwordByMd5);
+        request.getSession().setAttribute("user", user);
+        return userService.login(user1.getEmail(), passwordByMd5);
     }
+
+    //toRegister
+//    @RequestMapping(value = "toAdd")
+//    public String toAdd() {
+//        return "register";
+//    }
 
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
     public boolean add(@RequestBody User user) {
-        return userService.register(user);
+        if (user != null) {
+            user.setPassWord(Md5.MD5(user.getPassWord()));
+            return userService.regist(user);
+        }
+        return false;
     }
 
     //register
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteUser(String email) {
-        User user = userService.findUserByEmail(email);
-        if (user != null) {
+    public boolean deleteUser(@RequestBody User user) {
+        User user1 = userService.findUserByEmail(user.getEmail());
+        if (user1 != null) {
             return userService.deleteUser(user.getId());
         }
         return false;

@@ -1,4 +1,4 @@
-package com.hobbymatcher.controller.events;
+package com.hobbymatcher.controller.user;
 
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
@@ -7,14 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.time.LocalDateTime;
 import java.io.File;
-import java.util.UUID;
 import java.io.IOException;
+import java.util.*;
 
 @CrossOrigin
 @SessionAttributes()
@@ -48,15 +43,11 @@ public class EventsController {
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(String eventsTitle, LocalDateTime eventsTime, String location, String description, String fee, String holder, MultipartFile imageFile) throws IOException{
-        Events events = new Events();
-		events.setEventsTitle(eventsTitle);
-		events.setEventsTime(eventsTime);
-		events.setLocation(location);
-		events.setDescription(description);
-		events.setFee(fee);
-		events.setHolder(holder);
-		String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
+    public boolean add(@RequestBody Events events, MultipartFile imageFile) throws IOException {
+        if (events == null) {
+            return false;
+        }
+        String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
         String originalFilename = imageFile.getOriginalFilename();
         String newFileName = UUID.randomUUID() + originalFilename;
         File targetFile = new File(filePath, newFileName);
