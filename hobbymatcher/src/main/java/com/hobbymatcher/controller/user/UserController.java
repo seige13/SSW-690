@@ -68,7 +68,7 @@ public class UserController {
     public boolean add(@RequestBody User user) {
         if (user != null) {
             user.setPassWord(Md5.MD5(user.getPassWord()));
-            return userService.regist(user);
+            return userService.register(user);
         }
         return false;
     }
