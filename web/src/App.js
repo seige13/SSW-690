@@ -22,6 +22,16 @@ class App extends Component {
     this.userHasAuthenticated(false);
   };
 
+  async componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      return;
+    }
+
+    // @TODO get user info
+
+    this.setState({ isLoading: false });
+  }
+
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
