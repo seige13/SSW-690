@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Events {
 
+    private String EventId;
     private String eventsTitle;
     private LocalDateTime eventsTime;
     private String location;
@@ -12,6 +13,14 @@ public class Events {
     private String holder;
     //private picture
     private String eventsImage;
+
+    public String getEventId() {
+        return EventId;
+    }
+
+    public void setEventId(String EventId) {
+        this.EventId = EventId;
+    }
 
     public String getEventsTitle() {
         return eventsTitle;
