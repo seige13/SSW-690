@@ -56,4 +56,12 @@ public class EventsController {
         return eventsService.addEvents(events);
     }
 
+    @RequestMapping(value = "/deleteevents", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean deleteEvents(@RequestBody Events events) {
+        if (events != null) {
+            return eventsService.deleteEvents(events.getEventId());
+        }
+        return false;
+    }
 }

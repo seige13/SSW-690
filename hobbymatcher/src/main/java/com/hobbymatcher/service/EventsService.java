@@ -9,5 +9,5 @@ public interface EventsService {
 
     boolean addEvents(Events events);
 
-
+    boolean deleteEvents(String id);
 }

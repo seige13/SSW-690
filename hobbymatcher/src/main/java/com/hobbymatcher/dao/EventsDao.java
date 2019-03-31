@@ -15,4 +15,5 @@ public interface EventsDao {
 
 	int addEvents(Events event);
 
+    int deleteEvents(@Param("id") String id);
 }

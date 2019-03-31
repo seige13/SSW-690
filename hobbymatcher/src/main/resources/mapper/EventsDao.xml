@@ -6,7 +6,7 @@
     <select id="queryEvents" resultType="com.hobbymatcher.entity.Events">
 		SELECT *
 		FROM events
-		ORDER BY events_time
+		ORDER BY events_id
 		DESC
 	</select>
 
@@ -14,4 +14,10 @@
 		insert into events (events_title,events_time,Location,Description,Fee,Holder,events_image, hobby_id) values(#{eventsTitle},#{eventsTime},#{location},#{description},#{fee},#{holder},#{eventsImage},#{hobbyId})
 	</insert>
 
+	<delete id="deleteEvents">
+		DELETE FROM
+		events
+		WHERE
+		events_id=#{id}
+	</delete>
 </mapper>
