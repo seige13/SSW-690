@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@SessionAttributes()
+@SessionAttributes
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -33,12 +33,12 @@ public class UserController {
         List<User> list = new ArrayList<User>();
         try {
             list = userService.getUserList();
-            modelMap.put("rows", list);
-            modelMap.put("total", list.size());
+            modelMap.put("list", list);
+            modelMap.put("code", 200);
         } catch (Exception e) {
             e.printStackTrace();
             modelMap.put("success", false);
-            modelMap.put("errMsg", e.toString());
+            modelMap.put("code", "400");
         }
         return modelMap;
     }
@@ -46,14 +46,20 @@ public class UserController {
     //login
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    private boolean login(@RequestBody User user, HttpServletRequest request) {
+    private Map<String, Object> login(@RequestBody User user, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
         String passwordByMd5 = Md5.MD5(user.getPassWord());
         User user1 = userService.findUserByEmail(user.getEmail());
         if (user1 == null) {
-            return false;
+            modelMap.put("status", false);
+            modelMap.put("code", 401);
+            return modelMap;
         }
         request.getSession().setAttribute("user", user);
-        return userService.login(user1.getEmail(), passwordByMd5);
+        Boolean result = userService.login(user1.getEmail(), passwordByMd5);
+        modelMap.put("status", result);
+        modelMap.put("code", result ? 200 : 401);
+        return modelMap;
     }
 
     //toRegister
@@ -65,23 +71,36 @@ public class UserController {
     //register
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(@RequestBody User user) {
+    public Map<String, Object> add(@RequestBody User user) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
         if (user != null) {
             user.setPassWord(Md5.MD5(user.getPassWord()));
-            return userService.register(user);
+            Boolean result = userService.regist(user);
+            modelMap.put("status", result);
+            modelMap.put("code", result ? 200 : 400);
+            return modelMap;
+        } else {
+            modelMap.put("status", false);
+            modelMap.put("code", 400);
+            return modelMap;
         }
-        return false;
     }
 
     //register
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteUser(@RequestBody User user) {
+    public Map<String, Object> deleteUser(@RequestBody User user) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
         User user1 = userService.findUserByEmail(user.getEmail());
         if (user1 != null) {
-            return userService.deleteUser(user.getId());
+            Boolean result = userService.deleteUser(user1.getId());
+            modelMap.put("status", result);
+            modelMap.put("code", result ? 200 : 400);
+            return modelMap;
         }
-        return false;
+        modelMap.put("status", false);
+        modelMap.put("code", 400 );
+        return modelMap;
     }
 
 }
