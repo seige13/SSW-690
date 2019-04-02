@@ -13,5 +13,5 @@ public interface UserService {
 
     boolean deleteUser(String id);
 
-    User findUserByEmail(String email);
+    User   findUserByEmail(String email);
 }
