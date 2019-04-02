@@ -10,7 +10,7 @@ import cat from '../assets/event-cards/cat.png'
 import diving from '../assets/event-cards/diving.png'
 import drawing from '../assets/event-cards/drawing.png'
 import orchid from '../assets/event-cards/orchid.jpg'
-import photography from '../assets/event-cards/photography.png'
+import addHobby from '../assets/add.png'
 
 export default class CardCollection extends Component {
 
@@ -121,13 +121,13 @@ export default class CardCollection extends Component {
             <Card style={{width: "16rem"}}>
               <Card.Img
                 variant="top"
-                src=''
+                src={addHobby}
                 className={'card-img'}
               />
               <Card.Body>
                 <Card.Title>Create a Hobby</Card.Title>
                 <Card.Text>
-                  Add
+
                 </Card.Text>
               </Card.Body>
             </Card>
