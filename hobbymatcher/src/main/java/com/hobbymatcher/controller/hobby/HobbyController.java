@@ -74,7 +74,6 @@ public class HobbyController {
             modelMap.put("status",false);
             response.setStatus(400);
         }
-
         return modelMap;
     }
 
@@ -94,7 +93,6 @@ public class HobbyController {
             modelMap.put("status",false);
             response.setStatus(400);
         }
-
         return modelMap;
     }
 
