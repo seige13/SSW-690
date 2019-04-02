@@ -1,13 +1,24 @@
 package com.hobbymatcher.entity;
 
-public class Hobby {
+import java.io.Serializable;
+
+public class Hobby implements Serializable {
 
     private String hobbyId;
+    private String name;
     private String description;
     private String classification;
     private String constrains;
     private String blogs;
     private String status;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getHobbyId() {
         return hobbyId;
