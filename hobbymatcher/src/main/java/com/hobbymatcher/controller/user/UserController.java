@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@SessionAttributes
+@SessionAttributes()
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -53,7 +53,7 @@ public class UserController {
         User user1 = userService.findUserByEmail(user.getEmail());
         if (user1 == null) {
             modelMap.put("status", false);
-            response.setStatus(200);
+            response.setStatus(400);
             return modelMap;
         }
         request.getSession().setAttribute("user", user);
