@@ -30,6 +30,17 @@ const ApiService = {
         lastName: lastname
       },
     })
+  },
+  createHobby(name, description, category) {
+    return Request({
+      url: '/user/addhobby',
+      method: 'post',
+      data: {
+        name: name,
+        description: description,
+        classification: category,
+      },
+    })
   }
 };
 

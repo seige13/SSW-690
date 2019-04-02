@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FormGroup, FormControl, FormLabel, Alert, Form} from 'react-bootstrap';
+import {FormGroup, FormControl, FormLabel, Alert} from 'react-bootstrap';
 import ApiService from '../services/ApiService'
 import FileUpload from '../components/FileUpload';
 import LoaderButton from '../components/LoaderButton';
@@ -8,19 +8,20 @@ import './AddHobby.css';
 export default class AddHobby extends Component {
   constructor(props) {
     super(props);
+    this.categories = [
+      {id: 0, name: 'Select Hobby Category'},
+      {id: 1, name: 'Sports'},
+      {id: 2, name: 'Music'},
+      {id: 3, name: 'Art'},
+      {id: 4, name: 'Adventure'},
+      {id: 5, name: 'Other'},
+    ];
 
     this.state = {
       isLoading: false,
       name: '',
       description: '',
-      categories: [
-        {id: 0, name: 'Select Hobby Category'},
-        {id: 1, name: 'Sports'},
-        {id: 2, name: 'Music'},
-        {id: 3, name: 'Art'},
-        {id: 4, name: 'Adventure'},
-        {id: 5, name: 'Other'},
-      ],
+      category: this.categories[0].name,
       picture: '',
       hasErrors: false,
       errorMessage: ''
@@ -29,8 +30,20 @@ export default class AddHobby extends Component {
 
   validateForm() {
     return (
-      true
+      this.state.name !== '' && this.state.description !== '' && this.isValidCategory()
     );
+  }
+
+  onCategoryChange = (event) => {
+    if (event) {
+      this.setState({
+        category: event.target.value
+      })
+    }
+  };
+
+  isValidCategory() {
+    return this.state.category !== '' && this.state.category !== this.categories[0].name;
   }
 
   handleChange = event => {
@@ -44,7 +57,7 @@ export default class AddHobby extends Component {
 
     this.setState({isLoading: true});
 
-    ApiService.registerUser(this.state.username, this.state.password, this.state.email, this.state.firstname, this.state.lastname)
+    ApiService.createHobby(this.state.name, this.state.description, this.state.categories)
       .then(function (response) {
         if (response) {
           this.props.userHasAuthenticated(true);
@@ -101,13 +114,13 @@ export default class AddHobby extends Component {
           </FormGroup>
           <FormGroup controlId="category">
             <FormLabel>Hobby Category</FormLabel>
-            <Form.Control as="select">
+            <FormControl as="select" defaultValue={this.categories[0].name} onChange={this.onCategoryChange}>
               {
-                this.state.categories.map(category => {
-                  return <option value={category.id} key={category.id}>{category.name}</option>
+                this.categories.map(category => {
+                  return <option value={category.name} key={category.id}>{category.name}</option>
                 })
               }
-            </Form.Control>
+            </FormControl>
           </FormGroup>
 
           <FormLabel>Hobby Photo</FormLabel>
@@ -118,7 +131,7 @@ export default class AddHobby extends Component {
             type="submit"
             isLoading={this.state.isLoading}
             text="Create Hobby"
-            loadingText="Signing up…"
+            loadingText="Creating Hobby..."
           />
         </form>
       </div>

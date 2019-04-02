@@ -4,8 +4,8 @@ import {FormLabel} from 'react-bootstrap';
 import './FileUpload.css';
 
 export default class FileUpload extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onDrop = (files) => {
       this.setState({files})
     };
