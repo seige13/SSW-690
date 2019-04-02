@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@SessionAttributes
+@SessionAttributes()
 @Controller
 @RequestMapping("/user")
 public class UserController {

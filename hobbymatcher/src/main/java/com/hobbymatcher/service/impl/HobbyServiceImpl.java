@@ -49,6 +49,7 @@ public class HobbyServiceImpl implements HobbyService {
             hobbyDao.insertHobby(hobby);
             return true;
         } catch (Exception e) {
+            System.out.print(e.toString());
             return false;
         }
     }
