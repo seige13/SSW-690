@@ -7,13 +7,13 @@ import java.util.List;
 public interface HobbyService {
     List<Hobby> listHobby();
 
-    boolean deleteHobby(String id);
+    boolean deleteHobby(int id);
 
     boolean updateHobby(Hobby hobby);
 
     Hobby findHobbyByName(String name);
 
-    Hobby findHobbyById(String id);
+    Hobby findHobbyById(int id);
 
     boolean insertHobby(Hobby hobby);
 }
