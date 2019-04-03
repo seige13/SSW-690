@@ -24,7 +24,7 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
-    public boolean deleteHobby(String id) {
+    public boolean deleteHobby(int id) {
         return hobbyDao.deleteHobby(id) != 0;
     }
 
@@ -39,8 +39,8 @@ public class HobbyServiceImpl implements HobbyService {
     }
 
     @Override
-    public Hobby findHobbyById(String id) {
-        return null;
+    public Hobby findHobbyById(int id) {
+        return hobbyDao.findHobbyById(id);
     }
 
     @Override
@@ -49,6 +49,7 @@ public class HobbyServiceImpl implements HobbyService {
             hobbyDao.insertHobby(hobby);
             return true;
         } catch (Exception e) {
+            System.out.print(e.toString());
             return false;
         }
     }

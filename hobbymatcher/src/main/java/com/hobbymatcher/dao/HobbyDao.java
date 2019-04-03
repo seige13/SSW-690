@@ -12,10 +12,10 @@ public interface HobbyDao {
 
     Hobby findHobbyByName(@Param("name") String name);
 
-    Hobby findHobbyById(@Param("id") String id);
+    Hobby findHobbyById(@Param("id") int id);
 
     int updateHobby(Hobby hobby);
 
-    int deleteHobby(@Param("id") String id);
+    int deleteHobby(@Param("id") int id);
 
 }

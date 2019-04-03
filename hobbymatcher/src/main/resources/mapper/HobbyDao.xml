@@ -10,17 +10,18 @@
 		DESC
 	</select>
 
-    <insert id="insertHobby" useGeneratedKeys="true" keyProperty="id">
-		insert into hobby (description,classification,constrains,blogs,status) values(#{description},#{classification},#{constrains},#{blogs},${status})
+    <insert id="insertHobby" useGeneratedKeys="true" keyProperty="hobbyId">
+		insert into hobby (name,description,classification) values(#{name},#{description},#{classification})
 	</insert>
 
     <select id="findHobbyById" parameterType="map" resultType="Hobby">
-   		 select * from hobby where hobby_id=#{hobbyid}
+   		 select * from hobby where hobby_id=#{id}
     </select>
 
     <update id="updateHobby" parameterType="com.hobbymatcher.entity.Hobby">
         update hobby
         <set>
+            <if test="name != null">name=#{name},</if>
             <if test="description != null">description=#{description},</if>
             <if test="classification != null">classification=#{classification},</if>
             <if test="constrains != null">constrains=#{constrains},</if>
