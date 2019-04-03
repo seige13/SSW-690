@@ -11,6 +11,10 @@ echo "Generating latest JAR file..."
 mvn install
 mv ./target/hobbymatcher.war /var/lib/tomcat/webapps
 
+echo "Removing generated tomcat files..."
+rm -rf /var/lib/tomcat/webapps/hobbymatcher
+
+sleep 5
 echo "Restarting Tomcat..."
 systemctl restart tomcat
 
