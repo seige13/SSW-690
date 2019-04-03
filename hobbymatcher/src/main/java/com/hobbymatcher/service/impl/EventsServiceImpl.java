@@ -33,5 +33,9 @@ public class EventsServiceImpl implements EventsService {
         }
     }
 
+    @Override
+    public boolean deleteEvents(String id) {
+        return eventsDao.deleteEvents(id) != 0;
+    }
    
 }
