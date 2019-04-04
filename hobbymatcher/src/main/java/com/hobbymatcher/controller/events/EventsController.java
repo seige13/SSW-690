@@ -2,6 +2,7 @@ package com.hobbymatcher.controller.events;
 
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -46,22 +47,30 @@ public class EventsController {
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) throws IOException {
+    public Map<String, Object> add(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        if (events == null || imageFile == null) {
-            modelMap.put("status", false);
-            response.setStatus(400);
-            return modelMap;
-        } else {
-            String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
-            String originalFilename = imageFile.getOriginalFilename();
-            String newFileName = UUID.randomUUID() + originalFilename;
-            File targetFile = new File(filePath, newFileName);
-            imageFile.transferTo(targetFile);
-            events.setEventsImage(newFileName);
+        if (events != null) {
+            if (imageFile != null)
+            {
+                String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
+                String originalFilename = imageFile.getOriginalFilename();
+                String newFileName = UUID.randomUUID() + originalFilename;
+                File targetFile = new File(filePath, newFileName);
+                try {
+                    imageFile.transferTo(targetFile);
+                    events.setEventsImage(newFileName);
+                } catch (Exception e) {
+                    modelMap.put("status", false);
+                    response.setStatus(400);
+                }
+            }
             Boolean result = eventsService.addEvents(events);
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);
+            return modelMap;
+        }else {
+            modelMap.put("status", false);
+            response.setStatus(400);
             return modelMap;
         }
     }
