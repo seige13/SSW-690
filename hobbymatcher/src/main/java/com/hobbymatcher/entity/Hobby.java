@@ -50,6 +50,7 @@ public class Hobby implements Serializable {
     }
 
     public void setClassification(String classification) {
+
         this.classification = classification;
     }
 
@@ -68,41 +69,6 @@ public class Hobby implements Serializable {
     public void setBlogs(String blogs) {
         this.blogs = blogs;
     }
-
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-}
-
-    public String getClassification() {
-        return classification;
-    }
-
-    public void setClassification(String classification) {
-        this.classification = classification;
-    }
-
-    public String getConstrains() {
-        return constrains;
-    }
-
-    public void setConstrains(String constrains) {
-        this.constrains = constrains;
-    }
-
-    public String getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(String blogs) {
-        this.blogs = blogs;
-    }
-
 
     public String getStatus() {
         return status;
