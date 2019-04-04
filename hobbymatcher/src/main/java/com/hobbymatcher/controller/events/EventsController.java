@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -26,42 +27,58 @@ public class EventsController {
 
     @RequestMapping(value = "/listevents", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> listEvents() {
+    private Map<String, Object> listEvents(HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
             list = eventsService.getEventsList();
-            modelMap.put("rows", list);
-            modelMap.put("total", list.size());
+            modelMap.put("list", list);
+            modelMap.put("status", true);
+            response.setStatus(200);
         } catch (Exception e) {
             e.printStackTrace();
-            modelMap.put("success", false);
-            modelMap.put("errMsg", e.toString());
+            modelMap.put("status", false);
+            modelMap.put("msg", e.toString());
+            response.setStatus(400);
         }
         return modelMap;
     }
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public boolean add(@RequestBody Events events, MultipartFile imageFile) throws IOException {
-        if (events == null) {
-            return false;
+    public Map<String, Object> add(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) throws IOException {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        if (events == null || imageFile == null) {
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        } else {
+            String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
+            String originalFilename = imageFile.getOriginalFilename();
+            String newFileName = UUID.randomUUID() + originalFilename;
+            File targetFile = new File(filePath, newFileName);
+            imageFile.transferTo(targetFile);
+            events.setEventsImage(newFileName);
+            Boolean result = eventsService.addEvents(events);
+            modelMap.put("status", result);
+            response.setStatus(result ? 200 : 400);
+            return modelMap;
         }
-        String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
-        String originalFilename = imageFile.getOriginalFilename();
-        String newFileName = UUID.randomUUID() + originalFilename;
-        File targetFile = new File(filePath, newFileName);
-        imageFile.transferTo(targetFile);
-        events.setEventsImage(newFileName);
-        return eventsService.addEvents(events);
     }
 
     @RequestMapping(value = "/deleteevents", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteEvents(@RequestBody Events events) {
+    public Map<String, Object> deleteEvents(@RequestBody Events events, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
-            return eventsService.deleteEvents(events.getEventId());
+            Boolean result = eventsService.deleteEvents(events.getEventId());
+            modelMap.put("status", result);
+            response.setStatus(result ? 200 : 400);
+            return modelMap;
+        } else {
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
         }
-        return false;
     }
 }

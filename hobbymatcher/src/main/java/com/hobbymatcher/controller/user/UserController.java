@@ -87,7 +87,7 @@ public class UserController {
         }
     }
 
-    //register
+    //delete user
     @RequestMapping(value = "/deleteuser", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> deleteUser(@RequestBody User user, HttpServletResponse response) {
@@ -104,4 +104,21 @@ public class UserController {
         return modelMap;
     }
 
+    //update user
+    @RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> updateUser(@RequestBody User user, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        if (user != null) {
+            Boolean result = userService.updateUser(user);
+            modelMap.put("status", result);
+            response.setStatus(result ? 200 : 400);
+            return modelMap;
+        } else {
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        }
+
+    }
 }
