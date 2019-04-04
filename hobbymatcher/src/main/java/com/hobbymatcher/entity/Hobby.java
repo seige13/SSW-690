@@ -11,6 +11,15 @@ public class Hobby implements Serializable {
     private String constrains;
     private String blogs;
     private String status;
+    private String hobbyImage;
+
+    public String getHobbyImage() {
+        return hobbyImage;
+    }
+
+    public void setHobbyImage(String hobbyImage) {
+        this.hobbyImage = hobbyImage;
+    }
 
     public String getName() {
         return name;

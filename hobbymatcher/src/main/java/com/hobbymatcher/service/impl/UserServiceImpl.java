@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private  UserDao userDao;
+    private UserDao userDao;
 
     @Autowired
     public UserServiceImpl(UserDao userDao) {
@@ -58,5 +58,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userDao.findUserByEmail(email);
+    }
+
+    @Override
+    public Boolean updateUser(User user) {
+        try {
+            return userDao.updateUser(user) == 1;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
