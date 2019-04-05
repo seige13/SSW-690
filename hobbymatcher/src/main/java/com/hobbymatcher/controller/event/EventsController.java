@@ -18,18 +18,18 @@ import java.util.*;
 @SessionAttributes()
 @Controller
 @RequestMapping("/events")
-public class EventController {
+public class EventsController {
 
     private final EventsService eventsService;
 
     @Autowired
-    public EventController(EventsService eventsService) {
+    public EventsController(EventsService eventsService) {
         this.eventsService = eventsService;
     }
 
-    @RequestMapping(value = "/listevent", method = RequestMethod.GET)
+    @RequestMapping(value = "/listevents", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> listEvent(HttpServletResponse response) {
+    private Map<String, Object> listEvents(HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
@@ -48,10 +48,8 @@ public class EventController {
 
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
-    @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
-    public Map<String, Object> addevent(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) throws IOException {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
             if (imageFile != null)
@@ -85,9 +83,9 @@ public class EventController {
         }
     }
 
-    @RequestMapping(value = "/deleteevent", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> deleteEvent(@RequestBody Events events, HttpServletResponse response) {
+    public Map<String, Object> deleteEvents(@RequestBody Events events, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
             Boolean result = eventsService.deleteEvents(events.getEventId());
