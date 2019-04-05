@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hobbymatcher.dao.BlogDao">
+    <update id="updateBlog" parameterType="com.hobbymatcher.entity.Blog">
+        update blog
+        <set>
+            <if test="title != null">name=#{name},</if>
+            <if test="content != null">content=#{content},</if>
+        </set>
+        where blog_id=#{blodId}
+    </update>
+
+    <select id="listBlog" resultType="com.hobbymatcher.entity.Blog">
+        SELECT *
+        FROM blog
+        ORDER BY blog_id
+            DESC
+    </select>
+
+    <insert id="addBlog" useGeneratedKeys="true" keyProperty="blogId">
+        insert into blog (title, content)
+        values (#{title}, #{content})
+    </insert>
+
+    <select id="findBlogById" parameterType="map" resultType="Blog">
+        select *
+        from blog
+        where blog_id = #{id}
+    </select>
+
+    <delete id="deleteBlog">
+        DELETE
+        FROM blog
+        WHERE blog_id = #{blogId}
+    </delete>
+</mapper>
