@@ -14,6 +14,9 @@ public class UserLoginInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
+            if (httpServletRequest.getRequestURI().endsWith("/user/login")||httpServletRequest.getRequestURI().endsWith("/user/adduser")) {
+                return true;
+            }
             httpServletResponse.setStatus(403);
             return false;
         }

@@ -50,16 +50,10 @@ public class UserController {
     private Map<String, Object> login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         String passwordByMd5 = Md5.MD5(user.getPassWord());
-        User user1 = userService.findUserByEmail(user.getEmail());
-        if (user1 == null) {
-            modelMap.put("status", false);
-            response.setStatus(400);
-            return modelMap;
-        }
         request.getSession().setAttribute("user", user);
-        Boolean result = userService.login(user1.getEmail(), passwordByMd5);
+        Boolean result = userService.login(user.getEmail(), passwordByMd5);
         modelMap.put("status", result);
-        response.setStatus(result ? 200 : 400);
+        response.setStatus(result ? 200 : 401);
         return modelMap;
     }
 
@@ -87,7 +81,7 @@ public class UserController {
     public Map<String, Object> add(@RequestBody User user, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (user != null) {
-            user.setPassWord(Md5.MD5(user.getPassWord()));
+            System.out.println(user.getPassWord());
             Boolean result = userService.register(user);
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);

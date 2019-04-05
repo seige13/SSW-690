@@ -2,6 +2,7 @@ package com.hobbymatcher.controller.event;
 
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
+import com.hobbymatcher.util.FileUtil;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,31 +53,15 @@ public class EventsController {
     public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
-            if (imageFile != null)
-            {
-                String filePath = "webapp" + File.separator + "resources" + File.separator + "image" + File.separator;
-                String originalFilename = imageFile.getOriginalFilename();
-                File dir = new File(filePath);
-                if(!dir.exists())
-                {
-                    dir.mkdirs();
-                }
-                String newFileName = UUID.randomUUID() + originalFilename;
-                File targetFile = new File(filePath, newFileName);
-                try {
-                    imageFile.transferTo(targetFile);
-                    events.setEventsImage(targetFile.getAbsolutePath());
-                } catch (Exception e) {
-                    System.out.print(e.toString());
-                    modelMap.put("status", false);
-                    response.setStatus(400);
-                }
+            String imgPath = FileUtil.transferFile(imageFile);
+            if (imgPath != null) {
+                events.setEventsImage(imgPath);
             }
             Boolean result = eventsService.addEvents(events);
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);
             return modelMap;
-        }else {
+        } else {
             modelMap.put("status", false);
             response.setStatus(400);
             return modelMap;
