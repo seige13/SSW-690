@@ -2,9 +2,11 @@ package com.hobbymatcher.controller.event;
 
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -44,24 +46,41 @@ public class EventController {
         return modelMap;
     }
 
+
+    @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @RequestMapping(value = "/addevent", method = RequestMethod.POST)
     @ResponseBody
+    public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
     public Map<String, Object> addevent(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) throws IOException {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        if (events == null || imageFile == null) {
-            modelMap.put("status", false);
-            response.setStatus(400);
-            return modelMap;
-        } else {
-            String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
-            String originalFilename = imageFile.getOriginalFilename();
-            String newFileName = UUID.randomUUID() + originalFilename;
-            File targetFile = new File(filePath, newFileName);
-            imageFile.transferTo(targetFile);
-            events.setEventsImage(newFileName);
+        if (events != null) {
+            if (imageFile != null)
+            {
+                String filePath = "webapp" + File.separator + "resources" + File.separator + "image" + File.separator;
+                String originalFilename = imageFile.getOriginalFilename();
+                File dir = new File(filePath);
+                if(!dir.exists())
+                {
+                    dir.mkdirs();
+                }
+                String newFileName = UUID.randomUUID() + originalFilename;
+                File targetFile = new File(filePath, newFileName);
+                try {
+                    imageFile.transferTo(targetFile);
+                    events.setEventsImage(targetFile.getAbsolutePath());
+                } catch (Exception e) {
+                    System.out.print(e.toString());
+                    modelMap.put("status", false);
+                    response.setStatus(400);
+                }
+            }
             Boolean result = eventsService.addEvents(events);
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);
+            return modelMap;
+        }else {
+            modelMap.put("status", false);
+            response.setStatus(400);
             return modelMap;
         }
     }
