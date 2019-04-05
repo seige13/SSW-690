@@ -63,6 +63,18 @@ public class UserController {
         return modelMap;
     }
 
+    //logout
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String, Object> loginOut(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        request.getSession().invalidate();
+        modelMap.put("status", true);
+        modelMap.put("msg", "logout success");
+        response.setStatus(200);
+        return modelMap;
+    }
+
     //toRegister
 //    @RequestMapping(value = "toAdd")
 //    public String toAdd() {
