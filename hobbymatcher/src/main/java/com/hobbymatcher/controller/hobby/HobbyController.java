@@ -2,6 +2,7 @@ package com.hobbymatcher.controller.hobby;
 
 import com.hobbymatcher.entity.Hobby;
 import com.hobbymatcher.service.HobbyService;
+import com.hobbymatcher.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -45,21 +46,12 @@ public class HobbyController {
     //addhobby
     @RequestMapping(value = "/addhobby", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(@RequestBody Hobby hobby, MultipartFile imageFile, HttpServletResponse response) {
+    public Map<String, Object> add(@RequestPart("events") Hobby hobby, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (hobby != null) {
-            if (imageFile != null) {
-                String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
-                String originalFilename = imageFile.getOriginalFilename();
-                String newFileName = UUID.randomUUID() + originalFilename;
-                File targetFile = new File(filePath, newFileName);
-                try {
-                    imageFile.transferTo(targetFile);
-                    hobby.setHobbyImage(newFileName);
-                } catch (Exception e) {
-                    modelMap.put("status", false);
-                    response.setStatus(400);
-                }
+            String imgPath = FileUtil.transferFile(imageFile);
+            if (imgPath != null) {
+                hobby.setHobbyImage(imgPath);
             }
             Boolean result = hobbyService.insertHobby(hobby);
             modelMap.put("status", result);
