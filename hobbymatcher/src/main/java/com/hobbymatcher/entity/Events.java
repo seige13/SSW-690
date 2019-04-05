@@ -13,6 +13,12 @@ public class Events {
     private String holder;
     //private picture
     private String eventsImage;
+    private String hobbyId;
+
+    public String getHobbyId()
+    {
+        return hobbyId;
+    }
 
     public String getEventId() {
         return EventId;

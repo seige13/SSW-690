@@ -29,6 +29,7 @@ public class EventsServiceImpl implements EventsService {
             eventsDao.addEvents(event);
             return true;
         } catch (Exception e) {
+            System.out.print(e.toString());
             return false;
         }
     }
