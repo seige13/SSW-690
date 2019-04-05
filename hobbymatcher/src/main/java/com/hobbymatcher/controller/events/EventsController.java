@@ -6,6 +6,7 @@ import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,21 +46,28 @@ public class EventsController {
         return modelMap;
     }
 
+
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(@RequestBody Events events, MultipartFile imageFile, HttpServletResponse response) {
+    public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
             if (imageFile != null)
             {
-                String filePath = "webapp" + File.separator + "resources" + File.separator + "image";
+                String filePath = "webapp" + File.separator + "resources" + File.separator + "image" + File.separator;
                 String originalFilename = imageFile.getOriginalFilename();
+                File dir = new File(filePath);
+                if(!dir.exists())
+                {
+                    dir.mkdirs();
+                }
                 String newFileName = UUID.randomUUID() + originalFilename;
                 File targetFile = new File(filePath, newFileName);
                 try {
                     imageFile.transferTo(targetFile);
-                    events.setEventsImage(newFileName);
+                    events.setEventsImage(targetFile.getAbsolutePath());
                 } catch (Exception e) {
+                    System.out.print(e.toString());
                     modelMap.put("status", false);
                     response.setStatus(400);
                 }
