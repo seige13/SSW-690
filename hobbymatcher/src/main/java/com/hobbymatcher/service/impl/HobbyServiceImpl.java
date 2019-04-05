@@ -30,7 +30,7 @@ public class HobbyServiceImpl implements HobbyService {
 
     @Override
     public boolean updateHobby(Hobby hobby) {
-        return false;
+        return hobbyDao.updateHobby(hobby) == 1;
     }
 
     @Override

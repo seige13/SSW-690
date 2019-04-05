@@ -1,4 +1,4 @@
-package com.hobbymatcher.controller.events;
+package com.hobbymatcher.controller.event;
 
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
