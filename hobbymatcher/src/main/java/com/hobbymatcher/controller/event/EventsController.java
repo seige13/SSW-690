@@ -53,8 +53,8 @@ public class EventsController {
     public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
-            String imgPath = FileUtil.transferFile(imageFile);
-            if (imgPath != null) {
+            if (imageFile != null) {
+                String imgPath = FileUtil.transferFile(imageFile);
                 events.setEventsImage(imgPath);
             }
             Boolean result = eventsService.addEvents(events);
