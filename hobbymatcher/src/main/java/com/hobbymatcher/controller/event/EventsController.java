@@ -1,6 +1,7 @@
 package com.hobbymatcher.controller.event;
 
 import com.hobbymatcher.entity.Events;
+import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.EventsService;
 import com.hobbymatcher.util.FileUtil;
 import org.apache.ibatis.annotations.Param;
@@ -73,10 +74,10 @@ public class EventsController {
 
     @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> joinEvents(@Param("id") String id, @Param("events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> joinEvents(@Param("events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        //User user=(User) request.getSession().getAttribute("user");
-        Boolean result = eventsService.joinEvents(id, eventsId);
+        User user=(User) request.getSession().getAttribute("user");
+        Boolean result = eventsService.joinEvents(user.getId(), eventsId);
         modelMap.put("status", result);
         response.setStatus(result ? 200 : 400);
         return modelMap;

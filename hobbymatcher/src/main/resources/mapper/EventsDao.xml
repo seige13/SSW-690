@@ -24,7 +24,7 @@
 
     <insert id="joinEvents" useGeneratedKeys="true">
         insert into join_events(user_id, events_id)
-        values (#{id}, #{events_id})
+        values (#{id}, #{eventsId})
     </insert>
 
     <delete id="deleteEvents">

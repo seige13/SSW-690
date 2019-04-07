@@ -15,7 +15,7 @@ public interface EventsDao {
 
 	int addEvents(Events event);
 
-    int joinEvents(@Param("id")String id, @Param("events_id")String eventsId);
+    int joinEvents(@Param("id")String id, @Param("eventsId")String eventsId);
 
 	Events findEventsByTitle(@Param("eventsTitle") String title);
 
