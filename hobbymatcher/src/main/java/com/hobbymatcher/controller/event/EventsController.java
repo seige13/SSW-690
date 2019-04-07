@@ -74,7 +74,7 @@ public class EventsController {
 
     @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> joinEvents(@Param("events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> joinEvents(@RequestPart("events_id")String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         User user=(User) request.getSession().getAttribute("user");
         Boolean result = eventsService.joinEvents(user.getId(), eventsId);
@@ -106,7 +106,7 @@ public class EventsController {
     public Map<String, Object> deleteEvents(@RequestBody Events events, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
-            Boolean result = eventsService.deleteEvents(events.geteventsId());
+            Boolean result = eventsService.deleteEvents(events.getEventsId());
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);
             return modelMap;

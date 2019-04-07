@@ -23,17 +23,15 @@ public class Events {
         this.id = id;
     }
 
-
     public String getHobbyId() {
         return hobbyId;
     }
 
-
-    public String geteventsId() {
+    public String getEventsId() {
         return eventsId;
     }
 
-    public void setEventId(String eventsId) {
+    public void setEventsId(String eventsId) {
         this.eventsId = eventsId;
     }
 
