@@ -4,28 +4,37 @@ import java.time.LocalDateTime;
 
 public class Events {
 
-    private String EventId;
+    private String eventsId;
     private String eventsTitle;
     private LocalDateTime eventsTime;
     private String location;
     private String description;
     private String fee;
     private String holder;
-    //private picture
     private String eventsImage;
     private String hobbyId;
+    private String id;
 
-    public String getHobbyId()
-    {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public String getHobbyId() {
         return hobbyId;
     }
 
-    public String getEventId() {
-        return EventId;
+
+    public String geteventsId() {
+        return eventsId;
     }
 
-    public void setEventId(String EventId) {
-        this.EventId = EventId;
+    public void setEventId(String eventsId) {
+        this.eventsId = eventsId;
     }
 
     public String getEventsTitle() {

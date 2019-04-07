@@ -6,6 +6,7 @@ import com.hobbymatcher.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.List;
 
 @Service
@@ -32,6 +33,30 @@ public class EventsServiceImpl implements EventsService {
             System.out.print(e.toString());
             return false;
         }
+    }
+
+    @Override
+    public boolean joinEvents(String id, String eventsId)
+    {
+        try {
+            eventsDao.joinEvents(id, eventsId);
+            return true;
+        } catch (Exception e) {
+            System.out.print(e.toString());
+            return false;
+        }
+    }
+
+    @Override
+    public  Events findEventsByTitle(String title)
+    {
+        return null;
+    }
+
+    @Override
+    public Events findEventsById(int id)
+    {
+        return eventsDao.findEventsById(id);
     }
 
     @Override
