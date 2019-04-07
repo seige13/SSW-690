@@ -53,7 +53,7 @@ public class EventsController {
 
     @RequestMapping(value = "/addevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(@RequestPart("fuckyou") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
+    public Map<String, Object> add(@RequestPart("events") Events events, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
             if (imageFile != null) {
