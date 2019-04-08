@@ -14,6 +14,7 @@
         select *
         from events
         where events_id = #{events_id}
+
     </select>
 
     <insert id="addEvents" useGeneratedKeys="true" keyProperty="eventsId">
