@@ -35,6 +35,30 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public boolean joinEvents(String id, String eventsId)
+    {
+        try {
+            eventsDao.joinEvents(id, eventsId);
+            return true;
+        } catch (Exception e) {
+            System.out.print(e.toString());
+            return false;
+        }
+    }
+
+    @Override
+    public  Events findEventsByTitle(String title)
+    {
+        return null;
+    }
+
+    @Override
+    public Events findEventsById(int id)
+    {
+        return eventsDao.findEventsById(id);
+    }
+
+    @Override
     public boolean deleteEvents(String id) {
         return eventsDao.deleteEvents(id) != 0;
     }

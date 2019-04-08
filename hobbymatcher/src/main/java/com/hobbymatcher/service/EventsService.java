@@ -9,5 +9,11 @@ public interface EventsService {
 
     boolean addEvents(Events events);
 
+    Events findEventsByTitle(String name);
+
+    Events findEventsById(int id);
+
+    boolean joinEvents(String id, String eventsId);
+
     boolean deleteEvents(String id);
 }
