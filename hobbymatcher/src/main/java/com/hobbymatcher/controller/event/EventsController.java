@@ -1,8 +1,10 @@
 package com.hobbymatcher.controller.event;
 
 import com.hobbymatcher.entity.Events;
+import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.EventsService;
 import com.hobbymatcher.util.FileUtil;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
@@ -68,12 +71,43 @@ public class EventsController {
         }
     }
 
+
+    @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> joinEvents(@RequestParam(value = "events_id")String eventsId, HttpServletResponse response, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        User user=(User) request.getSession().getAttribute("user");
+        Boolean result = eventsService.joinEvents(user.getId(), eventsId);
+        modelMap.put("status", result);
+        response.setStatus(result ? 200 : 400);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/getevents", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getEvents(@RequestParam(value = "events_id") String id, HttpServletResponse response, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        try {
+            int id1 = Integer.parseInt(id);
+            System.out.println(id1);
+            Events eventsById = eventsService.findEventsById(id1);
+            modelMap.put("events", eventsById);
+            response.setStatus(eventsById == null ? 400 : 200);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            modelMap.put("msg", "valueError");
+            modelMap.put("status", false);
+            response.setStatus(400);
+        }
+        return modelMap;
+    }
+
     @RequestMapping(value = "/deleteevents", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> deleteEvents(@RequestBody Events events, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (events != null) {
-            Boolean result = eventsService.deleteEvents(events.getEventId());
+            Boolean result = eventsService.deleteEvents(events.getEventsId());
             modelMap.put("status", result);
             response.setStatus(result ? 200 : 400);
             return modelMap;
