@@ -74,7 +74,7 @@ public class EventsController {
 
     @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> joinEvents(@RequestPart("events_id")String eventsId, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> joinEvents(@RequestParam(value = "events_id")String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         User user=(User) request.getSession().getAttribute("user");
         Boolean result = eventsService.joinEvents(user.getId(), eventsId);
@@ -85,15 +85,16 @@ public class EventsController {
 
     @RequestMapping(value = "/getevents", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getEvents(String id, HttpServletResponse response) {
+    public Map<String, Object> getEvents(@RequestParam(value = "events_id") String id, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         try {
             int id1 = Integer.parseInt(id);
+            System.out.println(id1);
             Events eventsById = eventsService.findEventsById(id1);
             modelMap.put("events", eventsById);
             response.setStatus(eventsById == null ? 400 : 200);
         } catch (Exception e) {
-            System.out.print(e.toString());
+            System.out.println(e.toString());
             modelMap.put("msg", "valueError");
             modelMap.put("status", false);
             response.setStatus(400);

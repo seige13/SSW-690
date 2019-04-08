@@ -13,7 +13,8 @@
     <select id="findEventsById" parameterType="map" resultType="Events">
         select *
         from events
-        where events_id = #{id}
+        where events_id = #{events_id}
+
     </select>
 
     <insert id="addEvents" useGeneratedKeys="true" keyProperty="eventsId">
