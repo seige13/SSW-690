@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Card, FormControl, InputGroup} from 'react-bootstrap';
 import {Link} from "react-router-dom";
-import './CardCollection.css';
+import ApiService from '../services/ApiService';
+import './HobbiesList.css';
 
-import badminton from '../assets/event-cards/badminton.png';
+import badminton from '../assets/event-cards/badminton.png'
 import basketball from '../assets/event-cards/basketball.png'
 import bodybuilding from '../assets/event-cards/bodybuilding.png'
 import cat from '../assets/event-cards/cat.png'
@@ -12,7 +13,7 @@ import drawing from '../assets/event-cards/drawing.png'
 import orchid from '../assets/event-cards/orchid.jpg'
 import addHobby from '../assets/add.png'
 
-export default class CardCollection extends Component {
+export default class HobbiesList extends Component {
 
   constructor(props) {
     super(props);
@@ -53,8 +54,33 @@ export default class CardCollection extends Component {
   }
 
   componentDidMount() {
-    // TODO get data from backend
-    this.setState({rows: this.state.cardData});
+    this.setState({isLoading: true});
+
+    ApiService.getAllHobbies()
+      .then(function (response) {
+        if (response.list !== 'undefined' && response.list.length !== 0) {
+          this.setState({
+            isLoading: false,
+            rows: response.list
+          });
+        } else {
+          console.warn('No hobbies in database');
+          this.setState({
+            isLoading: false,
+            rows: this.state.cardData
+          });
+        }
+
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error.statusText);
+
+        this.setState({
+          hasErrors: true,
+          isLoading: false,
+          errorMessage: 'There has been an error processing your request.',
+        });
+      }.bind(this));
   }
 
   onSearchHandler(e) {
@@ -100,7 +126,7 @@ export default class CardCollection extends Component {
         <div className={'row'}>
           {this.state.rows.map((item, index) =>
             <div key={index} className={'col-3 mb-3'}>
-              <Link to={`hobby/${index}`}>
+              <Link to={`hobby/${item.hobbyId}`}>
                 <Card style={{width: "16rem"}}>
                   <Card.Img
                     variant="top"
