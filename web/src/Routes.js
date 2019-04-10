@@ -9,6 +9,8 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import ForgotPassword from "./containers/ForgotPassword";
 import AddHobby from './containers/AddHobby';
+import AddEvent from './containers/AddEvent';
+import ViewHobby from './containers/ViewHobby';
 
 export default ({childProps}) => (
   <Switch>
@@ -16,7 +18,9 @@ export default ({childProps}) => (
     <UnauthenticatedRoute path="/login" exact component={Login} props={childProps}/>
     <UnauthenticatedRoute path="/signup" exact component={Signup} props={childProps}/>
     <UnauthenticatedRoute path="/forgot-password" exact component={ForgotPassword} props={childProps}/>
+    <UnauthenticatedRoute path="/hobby/:id" exact component={ViewHobby} props={childProps}/>
     <AuthenticatedRoute path="/hobby/add" exact component={AddHobby} props={childProps}/>
+    <AuthenticatedRoute path="/event/add" exact component={AddEvent} props={childProps}/>
     {/* Finally, catch all unmatched routes */}
     <Route component={NotFound}/>
   </Switch>

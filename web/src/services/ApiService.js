@@ -41,6 +41,27 @@ const ApiService = {
         classification: category,
       },
     })
+  },
+  getAllHobbies() {
+    return Request({
+      url: '/hobby/listhobby',
+      method: 'get'
+    })
+  },
+  getHobbyById(id) {
+    return Request({
+      url: `/hobby/gethobby`,
+      method: 'get',
+      params: {
+        id: id
+      }
+    })
+  },
+  getAllEvents() {
+    return Request({
+      url: '/events/listevents',
+      method: 'get'
+    })
   }
 };
 
