@@ -19,11 +19,10 @@ public interface EventsDao {
 
 	Events findEventsByTitle(@Param("eventsTitle") String title);
 
-
 	Events findEventsById(@Param("events_id") int id);
 
+    int deleteEvents(@Param("id") String id);
 
-  int deleteEvents(@Param("id") String id);
+    int updateEvents(Events events);
 
-   // int joinEvents(@Param("id"))
 }

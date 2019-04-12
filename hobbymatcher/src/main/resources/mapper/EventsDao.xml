@@ -28,6 +28,21 @@
         values (#{id}, #{eventsId})
     </insert>
 
+    <update id="updateEvents" parameterType="com.hobbymatcher.entity.Events">
+        update events
+        <set>
+            <if test="eventsTitle != null">events_title=#{eventsTitle},</if>
+            <if test="eventsTime != null">eventsTime=#{eventsTime},</if>
+            <if test="Location != null">location=#{location},</if>
+            <if test="Description != null">Description=#{description},</if>
+            <if test="Fee != null">Fee=#{fee},</if>
+            <if test="Holder != null">Holder=#{holder},</if>
+            <if test="hobby_id != null">hobby_id=#{hobbyId},</if>
+            <if test="status != null">events_image=#{eventsImage},</if>
+        </set>
+        where events_id=#{events_id}
+    </update>
+
     <delete id="deleteEvents">
         DELETE
         FROM events

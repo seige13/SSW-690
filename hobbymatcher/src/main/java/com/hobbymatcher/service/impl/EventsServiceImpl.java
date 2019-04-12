@@ -63,5 +63,10 @@ public class EventsServiceImpl implements EventsService {
     public boolean deleteEvents(String id) {
         return eventsDao.deleteEvents(id) != 0;
     }
-   
+
+    @Override
+    public boolean updateEvents(Events events) {
+        return eventsDao.updateEvents(events) == 1;
+    }
+
 }
