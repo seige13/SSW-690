@@ -49,8 +49,13 @@ public class UserController {
     @ResponseBody
     private Map<String, Object> login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
+        if (user == null) {
+            modelMap.put("status", false);
+            response.setStatus(401);
+            return modelMap;
+        }
         String passwordByMd5 = Md5.MD5(user.getPassWord());
-        user=userService.findUserByEmail(user.getEmail());
+        user = userService.findUserByEmail(user.getEmail());
         request.getSession().setAttribute("user", user);
         Boolean result = userService.login(user.getEmail(), passwordByMd5);
         modelMap.put("status", result);
