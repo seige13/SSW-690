@@ -1,4 +1,4 @@
-package com.hobbymatcher.Redis;
+package com.hobbymatcher.redis;
 
 import org.apache.ibatis.cache.Cache;
 import org.springframework.data.redis.connection.RedisConnection;

@@ -1,8 +1,6 @@
-package com.hobbymatcher.Redis;
+package com.hobbymatcher.redis;
 
 
-import com.hobbymatcher.Redis.RedisConfig;
-import com.hobbymatcher.util.SerializableUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import redis.clients.jedis.Jedis;
 

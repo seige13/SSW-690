@@ -1,4 +1,4 @@
-package com.hobbymatcher.Redis;
+package com.hobbymatcher.redis;
 
 
 /**

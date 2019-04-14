@@ -1,4 +1,4 @@
-package com.hobbymatcher.Redis;
+package com.hobbymatcher.redis;
 
 import org.springframework.cache.jcache.config.JCacheConfigurerSupport;
 import org.springframework.context.annotation.Bean;
