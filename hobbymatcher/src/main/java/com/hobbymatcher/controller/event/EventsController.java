@@ -3,17 +3,18 @@ package com.hobbymatcher.controller.event;
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.service.EventsService;
 import com.hobbymatcher.util.FileUtil;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @CrossOrigin
 @SessionAttributes()
