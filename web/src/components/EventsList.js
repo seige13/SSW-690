@@ -107,7 +107,7 @@ export default class EventsList extends Component {
               </Link>
             </div>)
           }
-          <Link to={`event/add`}>
+          <Link to={`event/add?hobby=${this.props.match.params.id}`}>
             <Card style={{width: "16rem"}}>
               <Card.Img
                 variant="top"

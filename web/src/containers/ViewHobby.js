@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import ApiService from '../services/ApiService';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import EventList from "../components/EventsList";
+import {Alert} from "react-bootstrap";
 
 export default class ViewHobby extends Component {
   constructor(props) {
@@ -47,16 +49,23 @@ export default class ViewHobby extends Component {
             {this.state.hobby.description}
           </div>
         </div>
+        <EventList hobby={this.props.match.params.id}/>
       </div>
     )
   }
 
   render() {
+    if (this.state.hasErrors) {
+      var alertMessage = <Alert variant={'danger'} onClose={this.onAlertClose} className={'mt-3 mb-3'}
+                                dismissible>{this.state.errorMessage}</Alert>
+    }
+
     return (
       <div className="ViewHobby">
         {this.state.isLoading ? (
           <FontAwesomeIcon icon="sync" className="fa-spin spinning"/>) : (
-          this.renderPage()
+          this.state.hasErrors ? (alertMessage) :
+           this.renderPage()
         )}
       </div>
     );

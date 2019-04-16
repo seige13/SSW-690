@@ -143,7 +143,7 @@ export default class HobbiesList extends Component {
               </Link>
             </div>)
           }
-          <Link to={`hobby/add`}>
+          <Link to={`add/hobby`}>
             <Card style={{width: "16rem"}}>
               <Card.Img
                 variant="top"
