@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Carousel} from "react-bootstrap";
 import HobbiesList from '../components/HobbiesList';
-import EventList from '../components/EventsList';
 import basketBallImage from '../assets/basketball.jpg'
 import divingImage from '../assets/diving.jpg'
 import photographyImage from '../assets/photography.jpg'
@@ -37,8 +36,6 @@ export default class Home extends Component {
         </Carousel>
 
         <HobbiesList/>
-
-        <EventList/>
       </div>
     );
   }
