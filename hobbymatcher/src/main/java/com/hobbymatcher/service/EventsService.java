@@ -17,4 +17,6 @@ public interface EventsService {
     boolean joinEvents(String id, String eventsId);
 
     boolean deleteEvents(String id);
+
+    boolean updateEvents(Events events);
 }

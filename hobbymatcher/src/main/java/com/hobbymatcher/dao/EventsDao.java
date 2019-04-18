@@ -25,5 +25,5 @@ public interface EventsDao {
 
   int deleteEvents(@Param("id") String id);
 
-   // int joinEvents(@Param("id"))
+  int updateEvents(Events events);
 }
