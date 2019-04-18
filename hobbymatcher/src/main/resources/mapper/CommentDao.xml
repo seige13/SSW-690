@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hobbymatcher.dao.CommentDao">
+    <select id="listCommentByBlogId" resultType="com.hobbymatcher.entity.Comment">
+        SELECT *
+        FROM comment
+        WHERE blog_id = #{blogId}
+        ORDER BY time
+            DESC
+    </select>
+
+    <insert id="addComment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment (content, blog_id, user_id)
+        values (#{content}, #{blogId}, #{userId})
+    </insert>
+
+
+    <delete id="deleteComment">
+        DELETE
+        FROM comment
+        WHERE id = #{id}
+    </delete>
+</mapper>

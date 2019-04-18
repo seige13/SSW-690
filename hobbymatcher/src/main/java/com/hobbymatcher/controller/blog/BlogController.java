@@ -1,7 +1,10 @@
 package com.hobbymatcher.controller.blog;
 
 import com.hobbymatcher.entity.Blog;
+import com.hobbymatcher.entity.Comment;
 import com.hobbymatcher.service.BlogService;
+import com.hobbymatcher.service.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +19,11 @@ public class BlogController {
 
 
     private final BlogService blogService;
+    private final CommentService commentService;
 
-    public BlogController(BlogService blogService) {
+    public BlogController(BlogService blogService, CommentService commentService) {
         this.blogService = blogService;
+        this.commentService = commentService;
     }
 
     //list Blog
@@ -51,9 +56,9 @@ public class BlogController {
 
 
     //addBlog
-    @RequestMapping(value = "/addblog", method = RequestMethod.POST)
+    @RequestMapping(value = "/createblog", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addBlog(@RequestBody Blog blog, HttpServletResponse response) {
+    public Map<String, Object> createBlog(@RequestBody Blog blog, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (blog != null) {
             Boolean result = blogService.addBlog(blog);
@@ -67,6 +72,25 @@ public class BlogController {
         }
 
     }
+
+    //addBlog
+    @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> addcomment(@RequestBody Comment comment, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        if (comment != null) {
+            Boolean result = commentService.addComment(comment);
+            modelMap.put("status", result);
+            response.setStatus(result ? 200 : 400);
+            return modelMap;
+        } else {
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        }
+
+    }
+
 
     //findBlogById
     //update blog
@@ -110,4 +134,6 @@ public class BlogController {
         }
 
     }
+
+
 }
