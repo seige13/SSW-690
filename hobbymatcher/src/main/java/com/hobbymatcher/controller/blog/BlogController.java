@@ -1,12 +1,16 @@
 package com.hobbymatcher.controller.blog;
 
 import com.hobbymatcher.entity.Blog;
+import com.hobbymatcher.entity.Comment;
 import com.hobbymatcher.service.BlogService;
+import com.hobbymatcher.service.CommentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -16,9 +20,11 @@ public class BlogController {
 
 
     private final BlogService blogService;
+    private final CommentService commentService;
 
-    public BlogController(BlogService blogService) {
+    public BlogController(BlogService blogService, CommentService commentService) {
         this.blogService = blogService;
+        this.commentService = commentService;
     }
 
     //list Blog
@@ -51,9 +57,9 @@ public class BlogController {
 
 
     //addBlog
-    @RequestMapping(value = "/addblog", method = RequestMethod.POST)
+    @RequestMapping(value = "/createblog", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addBlog(@RequestBody Blog blog, HttpServletResponse response) {
+    public Map<String, Object> createBlog(@RequestBody Blog blog, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (blog != null) {
             Boolean result = blogService.addBlog(blog);
@@ -68,11 +74,29 @@ public class BlogController {
 
     }
 
+    //addBlog
+    @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> addcomment(@RequestBody Comment comment, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        if (comment != null) {
+            Boolean result = commentService.addComment(comment);
+            modelMap.put("status", result);
+            response.setStatus(result ? 200 : 400);
+            return modelMap;
+        } else {
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        }
+    }
+
+
     //findBlogById
     //update blog
-    @RequestMapping(value = "/findblogbyid", method = RequestMethod.GET)
+    @RequestMapping(value = "/findblogandcommentsbyid", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findBlogById(String blogId, HttpServletResponse response) {
+    public Map<String, Object> findBlogAndCommentsById(String blogId, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         try {
             int id1 = Integer.parseInt(blogId);
@@ -84,6 +108,12 @@ public class BlogController {
                 return modelMap;
             }
             modelMap.put("blog", blog);
+            List<Comment> comments = commentService.listCommentsByBlogId(Integer.parseInt(blog.getBlogId()));
+            if (comments != null) {
+                modelMap.put("comments", comments);
+            } else {
+                modelMap.put("msg", "no comments with blogid: " + blog.getBlogId());
+            }
             response.setStatus(200);
             return modelMap;
         } catch (Exception e) {
@@ -110,4 +140,6 @@ public class BlogController {
         }
 
     }
+
+
 }
