@@ -14,9 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
+import java.time.LocalDateTime;
 
 @CrossOrigin
 @SessionAttributes()
@@ -80,6 +79,27 @@ public class EventsController {
         Boolean result = eventsService.joinEvents(user.getId(), eventsId);
         modelMap.put("status", result);
         response.setStatus(result ? 200 : 400);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/findpastevents", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> findPastEvents(HttpServletResponse response, HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        List<Events> list = new ArrayList<Events>();
+        try {
+            User user=(User) request.getSession().getAttribute("user");
+            String userId = user.getId();
+            LocalDateTime timeStamp = LocalDateTime.now();
+            list = eventsService.findPastEvents(userId, timeStamp);
+            modelMap.put("events", list);
+            //response.setStatus(list.getEventsId() == null ? 400 : 200);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            modelMap.put("msg", "valueError");
+            modelMap.put("status", false);
+            response.setStatus(400);
+        }
         return modelMap;
     }
 

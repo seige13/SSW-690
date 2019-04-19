@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "eaa7fbab-ba5e-4f94-adca-4f2fffaef2cd",
+		"_postman_id": "d3e7e4b2-2415-401d-92cc-580c99031e71",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -277,7 +277,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": ""
+							"raw": "{{base-url}}/events/listevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"listevents"
+							]
 						}
 					},
 					"response": []
@@ -329,6 +336,52 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/findpastevents.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "find past events of current login user with compare to current server time"
+					},
+					"response": []
+				},
+				{
+					"name": "/events/getevents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "Get events by providing events_id"
 					},
 					"response": []
 				}

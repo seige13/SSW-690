@@ -1,6 +1,7 @@
 package com.hobbymatcher.entity;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Events {
 
@@ -47,8 +48,10 @@ public class Events {
         return eventsTime;
     }
 
-    public void setEventsTime(LocalDateTime eventsTime) {
-        this.eventsTime = eventsTime;
+    public void setEventsTime(String eventsTime) {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.from(f.parse(eventsTime));
+        this.eventsTime = dateTime;
     }
 
     public String getLocation() {
