@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,7 +49,7 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public  Events findEventsByTitle(String title)
+    public Events findEventsByTitle(String title)
     {
         return null;
     }
@@ -57,6 +58,12 @@ public class EventsServiceImpl implements EventsService {
     public Events findEventsById(int id)
     {
         return eventsDao.findEventsById(id);
+    }
+
+    @Override
+    public Events findPastEvents(String id, LocalDateTime currentTime)
+    {
+        return eventsDao.findPastEvents(id, currentTime);
     }
 
     @Override

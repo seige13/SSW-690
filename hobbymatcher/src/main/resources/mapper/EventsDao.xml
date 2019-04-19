@@ -17,6 +17,12 @@
 
     </select>
 
+    <select id="findPastEvents" parameterType="map" resultType="Events">
+        select *
+        from events
+        where #{current_time} > events_time
+    </select>
+
     <insert id="addEvents" useGeneratedKeys="true" keyProperty="eventsId">
         insert into events (events_title, events_time, Location, Description, Fee, Holder, events_image, hobby_id)
         values (#{eventsTitle}, #{eventsTime}, #{location}, #{description}, #{fee}, #{holder}, #{eventsImage},

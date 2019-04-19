@@ -3,6 +3,7 @@ package com.hobbymatcher.dao;
 import com.hobbymatcher.entity.Events;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EventsDao {
@@ -19,11 +20,11 @@ public interface EventsDao {
 
 	Events findEventsByTitle(@Param("eventsTitle") String title);
 
-
 	Events findEventsById(@Param("events_id") int id);
 
+    Events findPastEvents(@Param("id")String id, @Param("currentTime") LocalDateTime currentTime);
 
-  int deleteEvents(@Param("id") String id);
+    int deleteEvents(@Param("id") String id);
 
-  int updateEvents(Events events);
+    int updateEvents(Events events);
 }
