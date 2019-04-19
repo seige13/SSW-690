@@ -61,7 +61,7 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
-    public Events findPastEvents(String id, LocalDateTime currentTime)
+    public List<Events> findPastEvents(String id, LocalDateTime currentTime)
     {
         return eventsDao.findPastEvents(id, currentTime);
     }

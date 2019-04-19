@@ -86,13 +86,14 @@ public class EventsController {
     @ResponseBody
     public Map<String, Object> findPastEvents(HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
+        List<Events> list = new ArrayList<Events>();
         try {
             User user=(User) request.getSession().getAttribute("user");
             String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
-            Events pastEvents = eventsService.findPastEvents(userId, timeStamp);
-            modelMap.put("events", pastEvents);
-            response.setStatus(pastEvents.getEventsId() == null ? 400 : 200);
+            list = eventsService.findPastEvents(userId, timeStamp);
+            modelMap.put("events", list);
+            //response.setStatus(list.getEventsId() == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
             modelMap.put("msg", "valueError");

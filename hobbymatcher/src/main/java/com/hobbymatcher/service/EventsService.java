@@ -15,7 +15,7 @@ public interface EventsService {
 
     Events findEventsById(int id);
 
-    Events findPastEvents(String id, LocalDateTime currentTime);
+    List<Events> findPastEvents(String id, LocalDateTime currentTime);
 
     boolean joinEvents(String id, String eventsId);
 

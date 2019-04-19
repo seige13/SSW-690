@@ -22,7 +22,7 @@ public interface EventsDao {
 
 	Events findEventsById(@Param("events_id") int id);
 
-    Events findPastEvents(@Param("id")String id, @Param("currentTime") LocalDateTime currentTime);
+    List<Events> findPastEvents(@Param("id")String id, @Param("currentTime") LocalDateTime currentTime);
 
     int deleteEvents(@Param("id") String id);
 

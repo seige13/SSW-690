@@ -17,10 +17,11 @@
 
     </select>
 
-    <select id="findPastEvents" parameterType="map" resultType="Events">
+    <select id="findPastEvents" resultType="com.hobbymatcher.entity.Events">
         select *
         from events
-        where #{current_time} > events_time
+        join join_events je on events.events_id = je.events_id
+        where #{currentTime} > events_time
     </select>
 
     <insert id="addEvents" useGeneratedKeys="true" keyProperty="eventsId">
