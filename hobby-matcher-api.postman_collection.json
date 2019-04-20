@@ -302,8 +302,19 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{}"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "events",
+									"value": "{\"eventsTitle\":\"run\",\"eventsTime\":\"2032-10-01 09:09:09\",\"location\":\"bc\",\"description\":\"join us\",\"fee\":\"50\",\"holder\":\"wxs\", \"hobby_id\":\"0\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
 						},
 						"url": {
 							"raw": "{{base-url}}/events/addevents",
@@ -382,6 +393,29 @@
 							]
 						},
 						"description": "Get events by providing events_id"
+					},
+					"response": []
+				},
+				{
+					"name": "findupcomingevents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "Return a list of events with the event's date ahead of current server date of current login user."
 					},
 					"response": []
 				}
