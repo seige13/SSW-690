@@ -67,6 +67,12 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public List<Events> findUpcomingEvents(String id, LocalDateTime currentTime)
+    {
+        return eventsDao.findUpcomingEvents(id, currentTime);
+    }
+
+    @Override
     public boolean deleteEvents(String id) {
         return eventsDao.deleteEvents(id) != 0;
     }
