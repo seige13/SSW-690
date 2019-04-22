@@ -1,5 +1,6 @@
 package com.hobbymatcher.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -45,15 +46,15 @@ public class Events {
     }
 
     public LocalDateTime getEventsTime() {
-    public String getEventsTime() {
-
-        return this.eventsTime.toString();
+        return this.eventsTime;
     }
 
     public void setEventsTime(String eventsTime) {
+
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.from(f.parse(eventsTime));
-        this.eventsTime = dateTime;
+        LocalDate localDate = LocalDate.parse("2011-11-30", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDateTime localDateTime = localDate.atTime(23,23,23);
+        this.eventsTime = localDateTime;
     }
 
     public String getLocation() {
@@ -96,4 +97,9 @@ public class Events {
     public String getEventsImage() {
         return eventsImage;
     }
+
+    public void setHobbyId(String hobbyId) {
+        this.hobbyId = hobbyId;
+    }
+
 }

@@ -37,6 +37,8 @@ public class EventsController {
         List<Events> list = new ArrayList<Events>();
         try {
             list = eventsService.getEventsList();
+            System.out.println("list is ");
+            System.out.println(list);
             modelMap.put("list", list);
             modelMap.put("status", true);
             response.setStatus(200);
