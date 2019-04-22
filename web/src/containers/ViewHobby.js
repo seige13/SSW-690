@@ -3,6 +3,7 @@ import ApiService from '../services/ApiService';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import EventList from "../components/EventsList";
 import {Alert} from "react-bootstrap";
+import Bloglist from '../components/BlogList';
 
 export default class ViewHobby extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ export default class ViewHobby extends Component {
           </div>
         </div>
         <EventList hobby={this.props.match.params.id}/>
+        <Bloglist hobby={this.props.match.params.id} />
       </div>
     )
   }

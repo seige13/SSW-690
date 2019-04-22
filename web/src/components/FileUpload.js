@@ -22,7 +22,7 @@ export default class FileUpload extends Component {
     ));
 
     return (
-      <Dropzone onDrop={this.onDrop}>
+      <Dropzone onDrop={this.onDrop} multiple={false}>
         {({getRootProps, getInputProps}) => (
           <section className="">
             <div {...getRootProps({className: 'dropzone'})}>
@@ -30,7 +30,7 @@ export default class FileUpload extends Component {
               <p>Drag 'n' drop some files here, or click to select a file</p>
             </div>
             <aside>
-              <FormLabel>Files</FormLabel>
+              <FormLabel>Image to be Uploaded</FormLabel>
               <ul>{files}</ul>
             </aside>
           </section>

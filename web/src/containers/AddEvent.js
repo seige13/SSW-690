@@ -3,53 +3,68 @@ import {FormGroup, FormControl, FormLabel, Alert} from 'react-bootstrap';
 import ApiService from '../services/ApiService'
 import FileUpload from '../components/FileUpload';
 import LoaderButton from '../components/LoaderButton';
-import './AddHobby.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import './AddEvent.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default class AddHobby extends Component {
   constructor(props) {
     super(props);
-    this.categories = [
-      {id: 0, name: 'Select Hobby Category'},
-      {id: 1, name: 'Sports'},
-      {id: 2, name: 'Music'},
-      {id: 3, name: 'Art'},
-      {id: 4, name: 'Adventure'},
-      {id: 5, name: 'Other'},
-    ];
 
     this.state = {
-      isLoading: false,
-      name: '',
-      description: '',
-      category: this.categories[0].name,
-      picture: '',
+      isLoading: true,
+      hobby: null,
+      event: {
+        eventsTitle: "",
+        eventsTime: new Date(),
+        location: "",
+        description: "",
+        fee: "",
+        holder: "",
+        hobby_id: this.props.match.params.id
+      },
       hasErrors: false,
       errorMessage: ''
     };
   }
 
+  // @TODO add form validation
   validateForm() {
     return (
-      this.state.name !== '' && this.state.description !== '' && this.isValidCategory()
+      true
     );
   }
 
-  onCategoryChange = (event) => {
-    if (event) {
-      this.setState({
-        category: event.target.value
-      })
-    }
+  getHobby = () => {
+    ApiService.getHobbyById(this.props.match.params.id)
+      .then(function (response) {
+        this.setState({
+          hobby: response.hobby,
+          isLoading: false
+        })
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error.statusText);
+
+        this.setState({
+          hasErrors: true,
+          isLoading: false,
+          errorMessage: 'There has been an error processing your request.',
+        });
+      }.bind(this));
   };
 
-  isValidCategory() {
-    return this.state.category !== '' && this.state.category !== this.categories[0].name;
+  componentDidMount() {
+    this.getHobby();
   }
 
   handleChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    this.setState({ event: { ...this.state.event, [event.target.id]: event.target.value} });
+  };
+
+  handleDateChange = date => {
+    this.setState({ event: { ...this.state.event, eventsTime: date} });
   };
 
   handleSubmit = async event => {
@@ -57,11 +72,21 @@ export default class AddHobby extends Component {
 
     this.setState({isLoading: true});
 
-    ApiService.createHobby(this.state.name, this.state.description, this.state.categories)
+    // @TODO fix this
+    let bodyFormData = new FormData();
+
+    let debug = {hello: "world"};
+    let blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
+    let currEvent = new Blob([JSON.stringify(this.state.event)], {type : 'application/json'});
+
+    bodyFormData.append('events', currEvent);
+    //bodyFormData.append('file', blob);
+
+    ApiService.createEvent(bodyFormData)
       .then(function (response) {
+        console.log(response);
         if (response) {
-          this.props.userHasAuthenticated(true);
-          this.props.history.push("/");
+          this.props.history.push(`/hobby/${this.props.match.params.id}`);
         } else {
           this.setState({
             hasErrors: true,
@@ -82,56 +107,88 @@ export default class AddHobby extends Component {
   };
 
   renderForm() {
-    if (this.state.hasErrors) {
-      var alertMessage = <Alert variant={'danger'} onClose={this.onAlertClose} className={'mb-3'}
-                                dismissible>{this.state.errorMessage}</Alert>
-    }
-
     return (
       <div>
-        <h2 className={'text-center'}>Create Your Hobby!</h2>
-        {alertMessage}
+        <h2 className={'text-center mb-4'}>Add Your Event to {this.state.hobby.name} Community!</h2>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="name">
-            <FormLabel>Hobby Name</FormLabel>
+          <FormGroup controlId="eventsTitle">
+            <FormLabel>Event Title</FormLabel>
             <FormControl
               autoFocus
               type="text"
-              value={this.state.name}
+              value={this.state.event.eventsTitle}
               onChange={this.handleChange}
             />
           </FormGroup>
           <FormGroup controlId="description">
-            <FormLabel>Hobby Description</FormLabel>
+            <FormLabel>Event Description</FormLabel>
             <FormControl
               autoFocus
               as={'textarea'}
               type="text"
-              value={this.state.description}
+              value={this.state.event.description}
               onChange={this.handleChange}
               className={'category-select'}
             />
           </FormGroup>
-          <FormGroup controlId="category">
-            <FormLabel>Hobby Category</FormLabel>
-            <FormControl as="select" defaultValue={this.categories[0].name} onChange={this.onCategoryChange}>
-              {
-                this.categories.map(category => {
-                  return <option value={category.name} key={category.id}>{category.name}</option>
-                })
-              }
-            </FormControl>
+
+          <FormGroup controlId="location">
+            <FormLabel>Event Date</FormLabel>
+            <DatePicker
+              selected={this.state.event.eventsTime}
+              onChange={this.handleDateChange}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+              minDate={new Date()}
+              dropdownMode="select"
+            />
           </FormGroup>
 
-          <FormLabel>Hobby Photo</FormLabel>
-          <FileUpload/>
+          <FormGroup controlId="location">
+            <FormLabel>Event Location</FormLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.event.location}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="holder">
+            <FormLabel>Event Host</FormLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.event.holder}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="fee">
+            <FormLabel>Event Fee</FormLabel>
+            <FormControl
+              autoFocus
+              type="number"
+              value={this.state.event.fee}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+
+          <FormGroup controlId="fee">
+            <FormLabel>Event Image</FormLabel>
+            <FileUpload/>
+          </FormGroup>
+
           <LoaderButton
             block
             disabled={!this.validateForm()}
             type="submit"
             isLoading={this.state.isLoading}
-            text="Create Hobby"
-            loadingText="Creating Hobby..."
+            text="Create Event"
+            loadingText="Creating Event..."
           />
         </form>
       </div>
@@ -139,9 +196,18 @@ export default class AddHobby extends Component {
   }
 
   render() {
+    if (this.state.hasErrors) {
+      var alertMessage = <Alert variant={'danger'} onClose={this.onAlertClose} className={'mb-3'}
+                                dismissible>{this.state.errorMessage}</Alert>
+    }
+
     return (
-      <div className="AddHobby">
-        {this.renderForm()}
+      <div className="AddEvent">
+        {this.state.isLoading ? (
+          <FontAwesomeIcon icon="sync" className="fa-spin spinning"/>) : (
+          this.state.hasErrors ? (alertMessage) :
+            this.renderForm()
+        )}
       </div>
     );
   }
