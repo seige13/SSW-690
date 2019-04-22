@@ -45,11 +45,13 @@ public class Events {
     }
 
     public LocalDateTime getEventsTime() {
-        return eventsTime;
+    public String getEventsTime() {
+
+        return this.eventsTime.toString();
     }
 
     public void setEventsTime(String eventsTime) {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.from(f.parse(eventsTime));
         this.eventsTime = dateTime;
     }
