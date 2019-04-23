@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import ApiService from "../services/ApiService";
 import {Alert} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 
 export default class BlogList extends Component {
   constructor(props) {
@@ -56,9 +57,9 @@ export default class BlogList extends Component {
         }
         </tbody>
       </Table>
-      <a href={`/hobby/${this.props.hobby}/blogs`} className={'text-right'}>More Blogs >></a>
+      <Link to={`/hobby/${this.props.hobby}/blogs`} className={'text-right'}>More Blogs >></Link>
       <br />
-      <a href={`/hobby/${this.props.hobby}/blog/add`} className={'text-right'}>Create My Post</a>
+      <Link to={`/hobby/${this.props.hobby}/blog/add`} className={'text-right'}>Create My Post</Link>
     </div>
   }
 
