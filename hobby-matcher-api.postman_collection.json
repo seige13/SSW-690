@@ -508,13 +508,27 @@
 					"name": "/bolg/addblog",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"title\": \"\",\n    \"content\": \"\"\n}"
 						},
 						"url": {
-							"raw": ""
+							"raw": "{{base-url}}/blog/createblog",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"blog",
+								"createblog"
+							]
 						}
 					},
 					"response": []
