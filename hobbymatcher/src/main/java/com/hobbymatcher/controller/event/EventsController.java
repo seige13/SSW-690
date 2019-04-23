@@ -3,10 +3,7 @@ package com.hobbymatcher.controller.event;
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.EventsService;
-import com.hobbymatcher.util.EventsUtil;
 import com.hobbymatcher.util.FileUtil;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +35,6 @@ public class EventsController {
         List<Events> list = new ArrayList<Events>();
         try {
             list = eventsService.getEventsList();
-            //modelMap.put("list", EventsUtil.changeTime(list));
             modelMap.put("list", list);
             modelMap.put("status", true);
             response.setStatus(200);
@@ -92,8 +88,8 @@ public class EventsController {
             String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
             list = eventsService.findPastEvents(userId, timeStamp);
-            modelMap.put("events", EventsUtil.changeTime(list));
-            //response.setStatus(list.getEventsId() == null ? 400 : 200);
+
+            response.setStatus(list == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
             modelMap.put("msg", "valueError");
@@ -113,7 +109,7 @@ public class EventsController {
             String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
             list = eventsService.findUpcomingEvents(userId, timeStamp);
-            modelMap.put("events", EventsUtil.changeTime(list));
+            modelMap.put("events", list);
             //response.setStatus(list.getEventsId() == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -132,7 +128,7 @@ public class EventsController {
             int id1 = Integer.parseInt(id);
             System.out.println(id1);
             Events eventsById = eventsService.findEventsById(id1);
-            modelMap.put("events", EventsUtil.changeOneTime(eventsById));
+            modelMap.put("events", eventsById);
             response.setStatus(eventsById == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
