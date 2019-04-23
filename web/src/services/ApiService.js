@@ -62,6 +62,21 @@ const ApiService = {
       url: '/events/listevents',
       method: 'get'
     })
+  },
+  createEvent(bodyFormData) {
+    return Request({
+        method: 'post',
+        url: '/events/addevents',
+        data: bodyFormData,
+        config: {headers: {'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`}}
+      }
+    )
+  },
+  getAllBlogs() {
+    return Request({
+      url: '/blog/listblog',
+      method: 'get'
+    })
   }
 };
 

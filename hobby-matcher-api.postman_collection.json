@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d3e7e4b2-2415-401d-92cc-580c99031e71",
+		"_postman_id": "66b291b9-e21f-48b0-a8d4-2969b936c86e",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -307,6 +307,7 @@
 								{
 									"key": "events",
 									"value": "{\"eventsTitle\":\"run\",\"eventsTime\":\"2032-10-01 09:09:09\",\"location\":\"bc\",\"description\":\"join us\",\"fee\":\"50\",\"holder\":\"wxs\", \"hobby_id\":\"0\"\n}",
+									"contentType": "application/json",
 									"type": "text"
 								},
 								{
