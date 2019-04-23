@@ -49,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
         if (comment == null) {
             return false;
         } else {
-            return addComment(comment);
+            return commentDao.addComment(comment) != 0;
         }
     }
 }

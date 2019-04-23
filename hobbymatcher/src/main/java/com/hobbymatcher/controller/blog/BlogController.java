@@ -121,7 +121,8 @@ public class BlogController {
             response.setStatus(200);
             return modelMap;
         } catch (Exception e) {
-            modelMap.put("msg", "valueError");
+            modelMap.put("msg", e.getMessage());
+            e.printStackTrace();
             modelMap.put("status", false);
             response.setStatus(400);
             return modelMap;
