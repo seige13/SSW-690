@@ -4,7 +4,7 @@ import ApiService from "../services/ApiService";
 import {Alert} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export default class EventsList extends Component {
+export default class BlogList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ export default class EventsList extends Component {
   }
 
   componentDidMount() {
-    ApiService.getAllBlogs().then(function (response) {
+    ApiService.getAllBlogsByHobbyId(this.props.hobby).then(function (response) {
       this.setState({
         blogs: response.list,
         isLoading: false
@@ -45,15 +45,20 @@ export default class EventsList extends Component {
         </thead>
         <tbody>
         {this.state.blogs.map((blog, index) => {
-          return <tr key={index}>
-            <td>{blog.blogId}</td>
-            <td>{blog.title}</td>
-            <td>{blog.content}</td>
-          </tr>
+          return (
+            <tr key={index}>
+              <td>{blog.blogId}</td>
+              <td>{blog.title}</td>
+              <td dangerouslySetInnerHTML={{__html: blog.content}} />
+            </tr>
+          )
         })
         }
         </tbody>
       </Table>
+      <a href={`/hobby/${this.props.hobby}/blogs`} className={'text-right'}>More Blogs >></a>
+      <br />
+      <a href={`/hobby/${this.props.hobby}/blog/add`} className={'text-right'}>Create My Post</a>
     </div>
   }
 

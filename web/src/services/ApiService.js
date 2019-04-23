@@ -72,10 +72,23 @@ const ApiService = {
       }
     )
   },
-  getAllBlogs() {
+  getAllBlogsByHobbyId(id) {
     return Request({
       url: '/blog/listblog',
-      method: 'get'
+      method: 'get',
+      params: {
+        blogId: id
+      }
+    })
+  },
+  createBlog(title, content) {
+    return Request({
+      url: '/blog/createblog',
+      method: 'post',
+      data: {
+        title: title,
+        content: content,
+      },
     })
   }
 };
