@@ -38,7 +38,8 @@ public class EventsController {
         List<Events> list = new ArrayList<Events>();
         try {
             list = eventsService.getEventsList();
-            modelMap.put("list", EventsUtil.changeTime(list));
+            //modelMap.put("list", EventsUtil.changeTime(list));
+            modelMap.put("list", list);
             modelMap.put("status", true);
             response.setStatus(200);
         } catch (Exception e) {

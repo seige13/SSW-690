@@ -7,7 +7,7 @@ public class Events {
 
     private String eventsId;
     private String eventsTitle;
-    private LocalDateTime eventsTime;
+    private String eventsTime;
     private String location;
     private String description;
     private String fee;
@@ -15,15 +15,6 @@ public class Events {
     private String eventsImage;
     private String hobbyId;
     private String id;
-    private String frontendTime;
-
-    public String getFrontendTime() {
-        return frontendTime;
-    }
-
-    public void setFrontendTime(String frontendTime) {
-        this.frontendTime = frontendTime;
-    }
 
     public String getId() {
         return id;
@@ -57,18 +48,14 @@ public class Events {
         this.eventsTitle = eventsTitle;
     }
 
-    public LocalDateTime getEventsTime() {
+    public String getEventsTime() {
         return eventsTime;
-    }
-
-    public void setEventsTime(LocalDateTime eventsTime) {
-        this.eventsTime = eventsTime;
     }
 
     public void setEventsTime(String eventsTime) {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.from(f.parse(eventsTime));
-        this.eventsTime = dateTime;
+        this.eventsTime = dateTime.toString();
     }
 
     public String getLocation() {
