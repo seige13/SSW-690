@@ -4,8 +4,6 @@ import com.hobbymatcher.entity.Blog;
 import com.hobbymatcher.entity.Comment;
 import com.hobbymatcher.service.BlogService;
 import com.hobbymatcher.service.CommentService;
-import com.hobbymatcher.util.BlogUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,7 @@ public class BlogController {
     @ResponseBody
     public Map<String, Object> listBlog(HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("list", BlogUtil.changeTime(blogService.listBlog()));
+        modelMap.put("list", blogService.listBlog());
         modelMap.put("msg", "list success");
         response.setStatus(200);
         return modelMap;
@@ -113,7 +111,7 @@ public class BlogController {
                 response.setStatus(400);
                 return modelMap;
             }
-            modelMap.put("blog", BlogUtil.changeTime(blog));
+            modelMap.put("blog", blog);
             List<Comment> comments = commentService.listCommentsByBlogId(Integer.parseInt(blog.getBlogId()));
             if (comments != null) {
                 modelMap.put("comments", comments);
