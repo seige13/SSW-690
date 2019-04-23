@@ -27,7 +27,7 @@
     <select id="findBlogById" parameterType="map" resultType="Blog">
         select *
         from blog
-        where blog_id = #{id}
+        where blog_id = #{blogId}
     </select>
 
     <delete id="deleteBlog">
