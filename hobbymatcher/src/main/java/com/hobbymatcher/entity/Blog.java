@@ -8,15 +8,10 @@ public class Blog implements Serializable {
     private String blogId;
     private String title;
     private String content;
-    private Timestamp time;
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
+    private int hobbyId;
+    private int userId;
+    private Timestamp createDate;
+    private String frontEndCreateTime;
 
     public String getBlogId() {
         return blogId;
@@ -40,5 +35,37 @@ public class Blog implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getHobbyId() {
+        return hobbyId;
+    }
+
+    public void setHobbyId(int hobbyId) {
+        this.hobbyId = hobbyId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getFrontEndCreateTime() {
+        return frontEndCreateTime;
+    }
+
+    public void setFrontEndCreateTime(String frontEndCreateTime) {
+        this.frontEndCreateTime = frontEndCreateTime;
     }
 }

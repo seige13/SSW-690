@@ -20,8 +20,8 @@
     </select>
 
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="blogId">
-        insert into blog (title, content)
-        values (#{title}, #{content})
+        insert into blog (title, content, hobby_id, user_id)
+        values (#{title}, #{content}, #{hobbyId}, #{userId})
     </insert>
 
     <select id="findBlogById" parameterType="map" resultType="Blog">
