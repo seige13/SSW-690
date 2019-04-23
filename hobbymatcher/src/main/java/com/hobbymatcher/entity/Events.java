@@ -15,6 +15,15 @@ public class Events {
     private String eventsImage;
     private String hobbyId;
     private String id;
+    private String frontendTime;
+
+    public String getFrontendTime() {
+        return frontendTime;
+    }
+
+    public void setFrontendTime(String frontendTime) {
+        this.frontendTime = frontendTime;
+    }
 
     public String getId() {
         return id;
@@ -26,6 +35,10 @@ public class Events {
 
     public String getHobbyId() {
         return hobbyId;
+    }
+
+    public void setHobbyId(String hobbyId) {
+        this.hobbyId = hobbyId;
     }
 
     public String getEventsId() {
@@ -46,6 +59,10 @@ public class Events {
 
     public LocalDateTime getEventsTime() {
         return eventsTime;
+    }
+
+    public void setEventsTime(LocalDateTime eventsTime) {
+        this.eventsTime = eventsTime;
     }
 
     public void setEventsTime(String eventsTime) {
@@ -86,12 +103,11 @@ public class Events {
         this.holder = holder;
     }
 
-    public void setEventsImage(String eventsImage)
-    {
-        this.eventsImage = eventsImage;
-    }
-
     public String getEventsImage() {
         return eventsImage;
+    }
+
+    public void setEventsImage(String eventsImage) {
+        this.eventsImage = eventsImage;
     }
 }

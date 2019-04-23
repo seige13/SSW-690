@@ -3,6 +3,7 @@ package com.hobbymatcher.controller.event;
 import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.EventsService;
+import com.hobbymatcher.util.EventsUtil;
 import com.hobbymatcher.util.FileUtil;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.Null;
@@ -37,7 +38,7 @@ public class EventsController {
         List<Events> list = new ArrayList<Events>();
         try {
             list = eventsService.getEventsList();
-            modelMap.put("list", list);
+            modelMap.put("list", EventsUtil.changeTime(list));
             modelMap.put("status", true);
             response.setStatus(200);
         } catch (Exception e) {
@@ -71,9 +72,9 @@ public class EventsController {
 
     @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> joinEvents(@RequestParam(value = "events_id")String eventsId, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> joinEvents(@RequestParam(value = "events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        User user=(User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         Boolean result = eventsService.joinEvents(user.getId(), eventsId);
         modelMap.put("status", result);
         response.setStatus(result ? 200 : 400);
@@ -86,11 +87,11 @@ public class EventsController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            User user=(User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute("user");
             String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
             list = eventsService.findPastEvents(userId, timeStamp);
-            modelMap.put("events", list);
+            modelMap.put("events", EventsUtil.changeTime(list));
             //response.setStatus(list.getEventsId() == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -107,11 +108,11 @@ public class EventsController {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            User user=(User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute("user");
             String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
             list = eventsService.findUpcomingEvents(userId, timeStamp);
-            modelMap.put("events", list);
+            modelMap.put("events", EventsUtil.changeTime(list));
             //response.setStatus(list.getEventsId() == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -130,7 +131,7 @@ public class EventsController {
             int id1 = Integer.parseInt(id);
             System.out.println(id1);
             Events eventsById = eventsService.findEventsById(id1);
-            modelMap.put("events", eventsById);
+            modelMap.put("events", EventsUtil.changeOneTime(eventsById));
             response.setStatus(eventsById == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());
