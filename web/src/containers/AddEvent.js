@@ -75,8 +75,6 @@ export default class AddHobby extends Component {
     // @TODO fix this
     let bodyFormData = new FormData();
 
-    let debug = {hello: "world"};
-    let blob = new Blob([JSON.stringify(debug, null, 2)], {type : 'application/json'});
     let currEvent = new Blob([JSON.stringify(this.state.event)], {type : 'application/json'});
 
     bodyFormData.append('events', currEvent);
