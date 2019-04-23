@@ -9,7 +9,7 @@ public class EventsUtil {
         try {
             for (Events e : eventsList
             ) {
-                e.setEventsTime(e.getEventsTime().toString());
+                e.setFrontendTime(e.getEventsTime().toString());
             }
         } catch (Exception e) {
             return null;
@@ -20,7 +20,7 @@ public class EventsUtil {
 
     public static Events changeOneTime(Events e) {
         try {
-            e.setEventsTime(e.getEventsTime().toString());
+            e.setFrontendTime(e.getEventsTime().toString());
         } catch (Exception a) {
             return null;
         }
