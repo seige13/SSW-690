@@ -17,18 +17,26 @@
 
     </select>
 
+    <select id="getEventsForUser" resultType="com.hobbymatcher.entity.Events">
+        select *
+        from events
+        join join_events je on events.events_id = je.events_id and je.user_id = #{id}
+        order by events_time DESC
+    </select>
+
     <select id="findPastEvents" resultType="com.hobbymatcher.entity.Events">
         select *
         from events
-        join join_events je on events.events_id = je.events_id
+        join join_events je on events.events_id = je.events_id and je.user_id = #{id}
         where #{currentTime} > events_time
         order by events_time DESC
     </select>
 
+
     <select id="findUpcomingEvents" resultType="com.hobbymatcher.entity.Events">
         select *
         from events
-        join join_events je on events.events_id = je.events_id
+        join join_events je on events.events_id = je.events_id and je.user_id = #{id}
         where events_time > #{currentTime}
         order by events_time DESC
     </select>

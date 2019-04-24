@@ -19,6 +19,8 @@ public interface EventsService {
 
     List<Events> findUpcomingEvents(String id, LocalDateTime currentTime);
 
+    List<Events> getEventsForUser(String id);
+
     boolean joinEvents(String id, String eventsId);
 
     boolean deleteEvents(String id);
