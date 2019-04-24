@@ -73,6 +73,12 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public List<Events> getEventsForUser(String id)
+    {
+        return eventsDao.getEventsForUser(id);
+    }
+
+    @Override
     public boolean deleteEvents(String id) {
         return eventsDao.deleteEvents(id) != 0;
     }

@@ -26,6 +26,8 @@ public interface EventsDao {
 
     List<Events> findUpcomingEvents(@Param("id")String id, @Param("currentTime") LocalDateTime currentTime);
 
+    List<Events> getEventsForUser(@Param("id")String id);
+
     int deleteEvents(@Param("id") String id);
 
     int updateEvents(Events events);
