@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "66b291b9-e21f-48b0-a8d4-2969b936c86e",
+		"_postman_id": "f841127a-8ade-44e3-8e2c-064f57f733f4",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -333,7 +333,7 @@
 				{
 					"name": "/events/deleteevents",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -417,6 +417,29 @@
 							]
 						},
 						"description": "Return a list of events with the event's date ahead of current server date of current login user."
+					},
+					"response": []
+				},
+				{
+					"name": "/events/geteventsforuser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/geteventsforuser",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"geteventsforuser"
+							]
+						},
+						"description": "Return the whole events list the user join"
 					},
 					"response": []
 				}
