@@ -53,8 +53,9 @@ public class Events {
     }
 
     public void setEventsTime(String eventsTime) {
+        String format = eventsTime.replace("T", " ");
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.from(f.parse(eventsTime));
+        LocalDateTime dateTime = LocalDateTime.from(f.parse(format));
         this.eventsTime = dateTime.toString();
     }
 
