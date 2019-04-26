@@ -7,7 +7,7 @@ public class Comment {
     private String content;
     private int userId;
     private int blogId;
-    private Timestamp time;
+    private String time;
 
     public int getId() {
         return id;
@@ -41,11 +41,11 @@ public class Comment {
         this.blogId = blogId;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
