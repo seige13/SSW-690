@@ -77,13 +77,21 @@ public class BlogController {
 
     }
 
+
     //addBlog
     @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addcomment(@RequestBody Comment comment, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (comment != null) {
-            Boolean result = commentService.addComment(comment);
+            Boolean result;
+            try {
+                result = commentService.addComment(comment);
+            } catch (Exception e) {
+                modelMap.put("status", false);
+                modelMap.put("msg", "the foreign key not exist || the userId and blogId must can be parsed to int");
+                return modelMap;
+            }
             modelMap.put("status", result);
             modelMap.put("msg", result ? "add comment success!" : "create failed ");
             response.setStatus(result ? 200 : 400);
