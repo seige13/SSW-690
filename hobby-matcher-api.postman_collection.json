@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f841127a-8ade-44e3-8e2c-064f57f733f4",
+		"_postman_id": "51403ac2-579b-4cba-88d8-540f04bf4c97",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -528,7 +528,7 @@
 					"response": []
 				},
 				{
-					"name": "/bolg/addblog",
+					"name": "/blog/addblog",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -551,6 +551,61 @@
 							"path": [
 								"blog",
 								"createblog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findBlogAndCommentsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/findblogandcommentsbyid?blogId",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"findblogandcommentsbyid"
+							],
+							"query": [
+								{
+									"key": "blogId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addcomment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\":\"\"\n\t,\"userId\":0,\n\t\"blogId\":0\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/addcomment",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"addcomment"
 							]
 						}
 					},
