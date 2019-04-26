@@ -535,13 +535,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"\",\n    \"content\": \"\"\n}"
+							"raw": "{\n    \"title\": \"\",\n    \"content\": \"\",\n    \"userId\":0,\n    \"hobbyId\":0\n}"
 						},
 						"url": {
 							"raw": "{{base-url}}/blog/createblog",
