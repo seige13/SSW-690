@@ -9,7 +9,7 @@ public class FileUtil {
     public static String transferFile(MultipartFile imageFile) {
 
         if (imageFile != null) {
-            String filePath = "images" + File.separator;
+            String filePath = "/var/lib/tomcat/webapps/hobbymatcher/images/";
             String originalFilename = imageFile.getOriginalFilename();
             File dir = new File(filePath);
             if (!dir.exists()) {
