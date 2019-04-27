@@ -19,7 +19,7 @@ public class FileUtil {
             File targetFile = new File(filePath, newFileName);
             try {
                 imageFile.transferTo(targetFile);
-                return "/var/lib/tomcat/webapps/hobbymatcher/images/" + newFileName;
+                return "http://hobbymatcher.com/images/" + newFileName;
             } catch (Exception e) {
                 return null;
             }
