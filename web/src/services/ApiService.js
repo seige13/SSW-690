@@ -81,14 +81,36 @@ const ApiService = {
       }
     })
   },
-  createBlog(title, content) {
+  createBlog(title, content, hobbyId, userId) {
     return Request({
       url: '/blog/createblog',
       method: 'post',
       data: {
         title: title,
         content: content,
+        hobbyId: hobbyId,
+        userId: userId
       },
+    })
+  },
+  getBlogById (id) {
+    return Request({
+      url: '/blog/findblogandcommentsbyid',
+      method: 'get',
+      params: {
+        blogId: id
+      }
+    })
+  },
+  addComment(content, blogId, userId){
+    return Request({
+      url: '/blog/addcomment',
+      method: 'post',
+      data: {
+        content: content,
+        blogId: blogId,
+        userId: userId
+      }
     })
   }
 };

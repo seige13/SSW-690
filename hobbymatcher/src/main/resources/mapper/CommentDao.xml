@@ -8,7 +8,7 @@
         FROM comment
         WHERE blog_id = #{blogId}
         ORDER BY time
-            DESC
+            ASC
     </select>
 
     <insert id="addComment" useGeneratedKeys="true" keyProperty="id">
