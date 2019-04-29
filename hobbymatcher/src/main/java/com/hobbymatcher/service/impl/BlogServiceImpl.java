@@ -54,4 +54,9 @@ public class BlogServiceImpl implements BlogService {
             return false;
         }
     }
+
+    @Override
+    public List<Blog> listBlogByUserId(int id) {
+        return blogDao.listBlogByUserId(id);
+    }
 }

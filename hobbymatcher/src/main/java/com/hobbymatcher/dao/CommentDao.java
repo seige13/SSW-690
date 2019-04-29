@@ -13,4 +13,5 @@ public interface CommentDao {
 
     List<Comment> listCommentByBlogId(@Param("blogId") int blogId);
 
+    List<Comment> listCommentByUserId(@Param("userId") int userId);
 }

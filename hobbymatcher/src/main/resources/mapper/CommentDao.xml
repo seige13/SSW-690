@@ -11,6 +11,13 @@
             DESC
     </select>
 
+    <select id="listCommentByUserId" resultType="com.hobbymatcher.entity.Comment">
+        SELECT *
+        FROM comment
+        WHERE user_id = #{userId}
+        ORDER BY time
+            DESC
+    </select>
     <insert id="addComment" useGeneratedKeys="true" keyProperty="id">
         insert into comment (content, blog_id, user_id)
         values (#{content}, #{blogId}, #{userId})

@@ -52,4 +52,9 @@ public class CommentServiceImpl implements CommentService {
             return commentDao.addComment(comment) != 0;
         }
     }
+
+    @Override
+    public List<Comment> listCommentsByUserId(int userId) {
+        return commentDao.listCommentByUserId(userId);
+    }
 }

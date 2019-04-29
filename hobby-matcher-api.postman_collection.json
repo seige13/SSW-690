@@ -522,7 +522,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": ""
+							"raw": "{{base-url}}/blog/listblog",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"blog",
+								"listblog"
+							]
 						}
 					},
 					"response": []
@@ -607,6 +614,36 @@
 							"path": [
 								"addcomment"
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listblogbyuserid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listcommentsbyuserid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []

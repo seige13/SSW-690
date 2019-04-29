@@ -16,4 +16,6 @@ public interface BlogDao {
 
     List<Blog> listBlog();
 
+    List<Blog> listBlogByUserId(@Param("id") int id);
+
 }

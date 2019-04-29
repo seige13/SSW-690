@@ -79,6 +79,8 @@ public class BlogController {
     }
 
 
+    //
+
     //addBlog
     @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
     @ResponseBody
@@ -105,8 +107,7 @@ public class BlogController {
     }
 
 
-    //findBlogById
-    //update blog
+    //findBlogsandcommentsById
     @RequestMapping(value = "/findblogandcommentsbyid", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> findBlogAndCommentsById(String blogId, HttpServletResponse response) {
@@ -127,6 +128,45 @@ public class BlogController {
             } else {
                 modelMap.put("msg", "no comments with blogid: " + blog.getBlogId());
             }
+            response.setStatus(200);
+            return modelMap;
+        } catch (Exception e) {
+            modelMap.put("msg", e.getMessage());
+            e.printStackTrace();
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        }
+    }
+
+    //findBlogsByUserId
+    @RequestMapping(value = "/listblogbyuserid", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> listBlogByUserId(String userId, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        try {
+            int id = Integer.parseInt(userId);
+            modelMap.put("list", blogService.listBlogByUserId(id));
+            response.setStatus(200);
+            return modelMap;
+        } catch (Exception e) {
+            modelMap.put("msg", e.getMessage());
+            e.printStackTrace();
+            modelMap.put("status", false);
+            response.setStatus(400);
+            return modelMap;
+        }
+    }
+
+
+    //findCommentsByUserId
+    @RequestMapping(value = "/listcommentsbyuserid", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> listcommentsByUserId(String userId, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        try {
+            int id = Integer.parseInt(userId);
+            modelMap.put("list", commentService.listCommentsByUserId(id));
             response.setStatus(200);
             return modelMap;
         } catch (Exception e) {

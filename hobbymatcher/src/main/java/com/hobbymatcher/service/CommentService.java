@@ -1,6 +1,5 @@
 package com.hobbymatcher.service;
 
-import com.hobbymatcher.entity.Blog;
 import com.hobbymatcher.entity.Comment;
 
 import java.util.List;
@@ -12,5 +11,7 @@ public interface CommentService {
     Boolean deleteComment(int id);
 
     Boolean addComment(Comment comment);
+
+    List<Comment> listCommentsByUserId(int userId);
 
 }

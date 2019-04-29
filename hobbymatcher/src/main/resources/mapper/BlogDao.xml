@@ -19,6 +19,14 @@
             DESC
     </select>
 
+    <select id="listBlogByUserId" resultType="com.hobbymatcher.entity.Blog">
+        SELECT *
+        FROM blog
+        WHERE user_id = #{id}
+        ORDER BY blog_id
+            DESC
+    </select>
+
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="blogId">
         insert into blog (title, content, hobby_id, user_id)
         values (#{title}, #{content}, #{hobbyId}, #{userId})

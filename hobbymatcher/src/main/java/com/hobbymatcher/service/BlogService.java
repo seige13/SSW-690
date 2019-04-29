@@ -15,4 +15,6 @@ public interface BlogService {
     Blog findBlogById(int id);
 
     Boolean updateBlog(Blog blog);
+
+    List<Blog> listBlogByUserId(int id);
 }
