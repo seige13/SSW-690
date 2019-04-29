@@ -24,7 +24,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<Blog> listBlog() {
         List<Blog> blogs = blogDao.listBlog();
-        if (blogs == null) {
+        if (blogs == null || blogs.size() == 0) {
             return null;
         }
         for (Blog b : blogs
@@ -72,6 +72,14 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> listBlogByHobbyId(int id) {
+        List<Blog> blogs = blogDao.listBlogByHobbyId(id);
+        if (blogs == null || blogs.size() == 0) {
+            return null;
+        }
+        for (Blog b : blogs
+        ) {
+            b.setUser(userDao.findUserById(b.getUserId() + ""));
+        }
         return blogDao.listBlogByHobbyId(id);
     }
 }

@@ -25,6 +25,9 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList = new ArrayList<Comment>();
         try {
             commentList = commentDao.listCommentByBlogId(blogId);
+            if (commentList == null || commentList.size() == 0) {
+                return null;
+            }
             for (Comment c : commentList
             ) {
                 c.setUser(userDao.findUserById(c.getUserId() + ""));
