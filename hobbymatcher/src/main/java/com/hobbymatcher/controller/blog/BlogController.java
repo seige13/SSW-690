@@ -4,6 +4,7 @@ import com.hobbymatcher.entity.Blog;
 import com.hobbymatcher.entity.Comment;
 import com.hobbymatcher.service.BlogService;
 import com.hobbymatcher.service.CommentService;
+//import com.sun.deploy.net.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,13 +78,21 @@ public class BlogController {
 
     }
 
+
     //addBlog
     @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addcomment(@RequestBody Comment comment, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (comment != null) {
-            Boolean result = commentService.addComment(comment);
+            Boolean result;
+            try {
+                result = commentService.addComment(comment);
+            } catch (Exception e) {
+                modelMap.put("status", false);
+                modelMap.put("msg", "the foreign key not exist || the userId and blogId must can be parsed to int");
+                return modelMap;
+            }
             modelMap.put("status", result);
             modelMap.put("msg", result ? "add comment success!" : "create failed ");
             response.setStatus(result ? 200 : 400);
@@ -148,5 +157,20 @@ public class BlogController {
 
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/deletecomment", method = RequestMethod.GET)
+    public Map<String, Object> deleteComment(String id, HttpServletResponse response) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        try {
+            int idInt = Integer.parseInt(id);
+            Boolean result = commentService.deleteComment(idInt);
+            modelMap.put("msg", result ? "delete comment success!" : "delete failed");
+            response.setStatus(result ? 200 : 400);
+        } catch (Exception e) {
+            modelMap.put("msg", e.getMessage());
+            modelMap.put("status", false);
+            response.setStatus(400);
+        }
+        return modelMap;
+    }
 }
