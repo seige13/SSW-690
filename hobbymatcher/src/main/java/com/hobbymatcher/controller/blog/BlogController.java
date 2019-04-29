@@ -30,11 +30,25 @@ public class BlogController {
     //list Blog
     @RequestMapping(value = "/listblog", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> listBlog(HttpServletResponse response) {
+    public Map<String, Object> listBlog(String id, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap.put("list", blogService.listBlog());
-        modelMap.put("msg", "list success");
-        response.setStatus(200);
+        try {
+            if (!"".equals(id)&&id!=null) {
+                modelMap.put("list", blogService.listBlogByHobbyId(Integer.parseInt(id)));
+                modelMap.put("msg", "list with hobby success");
+                response.setStatus(200);
+                return modelMap;
+            } else {
+                modelMap.put("list", blogService.listBlog());
+                modelMap.put("msg", "list success");
+                response.setStatus(200);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            modelMap.put("msg", e.getStackTrace());
+            modelMap.put("status", false);
+            response.setStatus(400);
+        }
         return modelMap;
     }
 

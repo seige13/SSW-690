@@ -12,6 +12,16 @@ public class Blog implements Serializable {
     private int userId;
     private String createDate;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
+
     public String getBlogId() {
         return blogId;
     }
