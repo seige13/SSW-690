@@ -1,6 +1,7 @@
 package com.hobbymatcher.service.impl;
 
 import com.hobbymatcher.dao.CommentDao;
+import com.hobbymatcher.dao.UserDao;
 import com.hobbymatcher.entity.Comment;
 import com.hobbymatcher.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentDao commentDao;
+    private final UserDao userDao;
 
-    public CommentServiceImpl(CommentDao commentDao) {
+    public CommentServiceImpl(CommentDao commentDao, UserDao userDao) {
         this.commentDao = commentDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -22,6 +25,10 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList = new ArrayList<Comment>();
         try {
             commentList = commentDao.listCommentByBlogId(blogId);
+            for (Comment c : commentList
+            ) {
+                c.setUser(userDao.findUserById(c.getUserId() + ""));
+            }
             return commentList;
         } catch (Exception e) {
             System.out.println(e);
