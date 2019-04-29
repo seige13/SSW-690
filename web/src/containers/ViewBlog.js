@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Form from "react-bootstrap/Form";
 import ApiService from "../services/ApiService";
 import LoaderButton from "../components/LoaderButton";
+import {Link} from "react-router-dom";
 
 export default class ViewBlog extends Component {
   constructor(props) {
@@ -16,10 +17,15 @@ export default class ViewBlog extends Component {
     }
   }
 
-  addComment = () => {
+  handleChange = event => {
+    this.setState({[event.target.id]: event.target.value});
+  };
+
+  addComment = event => {
+    event.preventDefault();
     this.setState({isSubmitting: true});
 
-    ApiService.addCommentToBlog(this.props.match.params.blogId, this.state.userComment)
+    ApiService.addComment(this.state.userComment, this.props.match.params.blogId, this.props.loggedInUser.id)
       .then(success => {
         this.setState({
           userComment: '',
@@ -42,9 +48,10 @@ export default class ViewBlog extends Component {
       .then(success => {
         this.setState({
           blog: success.blog,
+          comments: success.comments,
           isLoading: false
         });
-    }).catch(error => {
+      }).catch(error => {
       this.setState({
         hasErrors: true,
         isLoading: false
@@ -56,31 +63,27 @@ export default class ViewBlog extends Component {
     this.getBlogWithComments();
   }
 
-  render() {
+  createBlogView = () => {
+    let date = new Date(Date.parse(this.state.blog.createDate));
+
     return (
-      <div className="row clearfix mt-4">
-        <div className="col-md-12 column">
-          <div className="card card-default">
-            <div className="card-header">
-              <section className="card-title">
-                <div className={'row justify-content-end'}>
-                  <div className={'col-9 pull-right'}>
-                    <h2>Blog Post Title Here </h2>
-                  </div>
-                </div>
-              </section>
+      <div className="card card-default">
+        <div className="card-header">
+          <section className="card-title">
+            <div className={'row justify-content-end'}>
+              <div className={'col-9 pull-right'}>
+                <h2>{this.state.blog.title}</h2>
+              </div>
             </div>
+          </section>
+        </div>
+        <ul className="list-group list-group-flush">
+          <div className={'list-group-item'}>
             <section className="row card-body">
               <section id="user-description" className="col-md-3 ">
                 <section className="well">
-                  <div className="dropdown">
-                    MOHAMMAD SHARIFI
-                  </div>
-                  <figure>
-                    <img className="img-rounded img-responsive" src="http://www.webdesignforums.net/img/wdf_avatar.jpg"
-                         alt="Mohammad Sharifi's avatar" />
-                  </figure>
 
+                  <h4>BLOG USERNAME</h4>
                   <section className="pull-left" id="id1">
                     <abbr title="count of posts in this topic">#1</abbr>
                   </section>
@@ -89,74 +92,97 @@ export default class ViewBlog extends Component {
 
               <section className="col-md-9">
 
-                  Hi, I'm wondering whats the name of the element that appaers in this website: Startupbus
+                <div dangerouslySetInnerHTML={{__html: this.state.blog.content}}></div>
 
-                  Im talking about the images that remain static in the back and change everytime a new section is
-                  reached.
-
-                  Is there a framework that does this?
-
-                  Thank you for helping
-
-                <hr />
+                <hr/>
                 <div className={'row'}>
                   <div className={'col post-footer'}>
                     <time className="pull-right">
-                      <i className={"fa fa-calendar"}/> 2014-09-15 , <i className={"fa fa-clock-o"}/> 1:35 pm
+                      <i className={"fa fa-calendar"}/> {date.toLocaleDateString('en-US', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric'
+                    })}
                     </time>
                   </div>
                 </div>
               </section>
             </section>
+          </div>
+          {this.state.comments.map((comment, index) => {
+            let date = new Date(Date.parse(comment.time));
+            return (
 
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">
+              <li className="list-group-item" key={index}>
                 <section className="row card-body">
                   <section id="user-description" className="col-md-3 ">
                     <section className="well">
-                      <div className="dropdown">
-                        MOHAMMAD SHARIFI
-                      </div>
-                      <figure>
-                        <img className="img-rounded img-responsive" src="http://www.webdesignforums.net/img/wdf_avatar.jpg"
-                             alt="Mohammad Sharifi's avatar" />
-                      </figure>
+
+                      <h4>COMMENT USERNAME</h4>
+                      <section className="pull-left" id={`id${index + 2}`}>
+                        <abbr title="count of posts in this topic">#{index + 2}</abbr>
+                      </section>
                     </section>
                   </section>
 
                   <section className="col-md-9">
-                    <h2><i className={"fa fa-smile-o"} /> Whats the name of the element of this website?</h2>
-                    <hr />
-                    Hi, I'm wondering whats the name of the element that appaers in this website: Startupbus
 
-                    Im talking about the images that remain static in the back and change everytime a new section is
-                    reached.
+                    <div>{comment.content}</div>
 
-                    Is there a framework that does this?
-
-                    Thank you for helping
+                    <hr/>
+                    <div className={'row'}>
+                      <div className={'col post-footer'}>
+                        <time className="pull-right">
+                          <i className={"fa fa-calendar"}/> {date.toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric'
+                        })}
+                        </time>
+                      </div>
+                    </div>
                   </section>
                 </section>
-
-
               </li>
-              <li className="list-group-item">Dapibus ac facilisis in</li>
-              <li className="list-group-item">Vestibulum at eros</li>
-            </ul>
-          </div>
+            )
+          })}
+        </ul>
 
+
+      </div>
+    )
+  };
+
+  render() {
+    return (
+      <div className="row clearfix mt-4">
+        <div className="col-md-12 column">
+          <Link to={`/hobby/${this.props.match.params.id}`} className={'btn btn-primary mb-3'}>&lsaquo; Back to Hobby</Link>
+
+          {this.state.isLoading ? 'Loading' : this.createBlogView()}
           <Form.Group controlId="userComment" className={'mt-4'}>
             <Form.Label>Add Comment</Form.Label>
-            <Form.Control as="textarea" rows="3" />
+            <Form.Control
+              as="textarea"
+              rows="3"
+              value={this.state.userComment}
+              onChange={this.handleChange}/>
           </Form.Group>
 
           <LoaderButton
             block
-            disabled={this.state.isSubmitting}
+            disabled={this.state.isSubmitting && this.state.userComment !== ''}
             type="submit"
             isLoading={this.state.isSubmitting}
             text="Add Comment"
             loadingText="Adding Comment..."
+            onClick={this.addComment}
           />
         </div>
       </div>
