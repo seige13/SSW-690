@@ -9,6 +9,16 @@ public class Comment {
     private int blogId;
     private String time;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private User user;
+
     public int getId() {
         return id;
     }

@@ -9,12 +9,20 @@
             <if test="title != null">name=#{name},</if>
             <if test="content != null">content=#{content},</if>
         </set>
-        where blog_id=#{blodId}
+        WHERE blog_id=#{blodId}
     </update>
 
     <select id="listBlog" resultType="com.hobbymatcher.entity.Blog">
         SELECT *
         FROM blog
+        ORDER BY blog_id
+            DESC
+    </select>
+
+    <select id="listBlogByHobbyId" resultType="com.hobbymatcher.entity.Blog">
+        SELECT *
+        FROM blog
+        WHERE hobby_id = #{hobbyId}
         ORDER BY blog_id
             DESC
     </select>
