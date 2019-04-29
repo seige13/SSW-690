@@ -12,6 +12,7 @@ import AddHobby from './containers/AddHobby';
 import AddEvent from './containers/AddEvent';
 import ViewHobby from './containers/ViewHobby';
 import AddBlog from './containers/AddBlog';
+import ViewBlog from './containers/ViewBlog';
 
 export default ({childProps}) => (
   <Switch>
@@ -23,6 +24,7 @@ export default ({childProps}) => (
     <AuthenticatedRoute path="/add/hobby" exact component={AddHobby} props={childProps}/>
     <AuthenticatedRoute path="/hobby/:id/event/add" exact component={AddEvent} props={childProps}/>
     <AuthenticatedRoute path="/hobby/:id/blog/add" exact component={AddBlog} props={childProps}/>
+    <UnauthenticatedRoute path="/hobby/:id/blog/:blogId" exact component={ViewBlog} props={childProps}/>
     {/* Finally, catch all unmatched routes */}
     <Route component={NotFound}/>
   </Switch>

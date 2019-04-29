@@ -126,7 +126,7 @@ export default class HobbiesList extends Component {
         <div className={'row'}>
           {this.state.rows.map((item, index) =>
             <div key={index} className={'col-3 mb-3'}>
-              <Link to={`hobby/${item.hobbyId}`}>
+              <Link to={`/hobby/${item.hobbyId}`}>
                 <Card style={{width: "16rem"}}>
                   <Card.Img
                     variant="top"
@@ -143,7 +143,7 @@ export default class HobbiesList extends Component {
               </Link>
             </div>)
           }
-          <Link to={`add/hobby`}>
+          <Link to={`/add/hobby`}>
             <Card style={{width: "16rem"}}>
               <Card.Img
                 variant="top"

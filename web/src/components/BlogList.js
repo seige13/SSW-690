@@ -3,9 +3,9 @@ import Table from "react-bootstrap/Table";
 import ApiService from "../services/ApiService";
 import {Alert} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
-export default class BlogList extends Component {
+class BlogList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,15 @@ export default class BlogList extends Component {
       errorMessage: '',
       blogs: []
     };
+
+    this.getBlogRows = this.getBlogRows.bind(this);
   }
+
+  navigateToBlogView = event => {
+    let blogId = event.target.getAttribute('data-item');
+
+    this.props.history.push(`/hobby/${this.props.hobby}/blog/${blogId}`);
+  };
 
   componentDidMount() {
     ApiService.getAllBlogsByHobbyId(this.props.hobby).then(function (response) {
@@ -33,6 +41,29 @@ export default class BlogList extends Component {
       }.bind(this));
   }
 
+  getBlogRows(blogs) {
+    return blogs.map((blog, index) => {
+      let date = new Date(Date.parse(blog.createDate));
+      return (
+        <tr key={index} onClick={this.navigateToBlogView} data-item={blog.blogId}>
+          <td data-item={blog.blogId}>{blog.blogId}</td>
+          <td data-item={blog.blogId}>{blog.title}</td>
+          <td data-item={blog.blogId} dangerouslySetInnerHTML={{__html: blog.content}}/>
+          <td data-item={blog.blogId}>
+            {date.toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric'
+            })}
+          </td>
+        </tr>
+      )
+    }, this)
+  }
+
   renderBlogList() {
     return <div>
       <h4>Blog List</h4>
@@ -42,23 +73,15 @@ export default class BlogList extends Component {
           <th>Id</th>
           <th>Title</th>
           <th>Content</th>
+          <th>Created Date</th>
         </tr>
         </thead>
         <tbody>
-        {this.state.blogs.map((blog, index) => {
-          return (
-            <tr key={index}>
-              <td>{blog.blogId}</td>
-              <td>{blog.title}</td>
-              <td dangerouslySetInnerHTML={{__html: blog.content}} />
-            </tr>
-          )
-        })
-        }
+        {this.getBlogRows(this.state.blogs)}
         </tbody>
       </Table>
       <Link to={`/hobby/${this.props.hobby}/blogs`} className={'text-right'}>More Blogs >></Link>
-      <br />
+      <br/>
       <Link to={`/hobby/${this.props.hobby}/blog/add`} className={'text-right'}>Create My Post</Link>
     </div>
   }
@@ -80,3 +103,5 @@ export default class BlogList extends Component {
     );
   }
 }
+
+export default withRouter(BlogList);

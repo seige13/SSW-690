@@ -11,8 +11,13 @@ class App extends Component {
 
     this.state = {
       isAuthenticated: false,
+      loggedInUser: {}
     };
   }
+
+  setLoggedInUser = user => {
+    this.setState({loggedInUser: user});
+  };
 
   userHasAuthenticated = authenticated => {
     this.setState({isAuthenticated: authenticated});
@@ -20,6 +25,7 @@ class App extends Component {
 
   handleLogout = event => {
     this.userHasAuthenticated(false);
+    this.setLoggedInUser({});
   };
 
   async componentDidMount() {
@@ -27,15 +33,15 @@ class App extends Component {
       return;
     }
 
-    // @TODO get user info
-
     this.setState({ isLoading: false });
   }
 
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
+      userHasAuthenticated: this.userHasAuthenticated,
+      setLoggedInUser: this.setLoggedInUser,
+      loggedInUser: this.state.loggedInUser
     };
 
     return (

@@ -15,6 +15,7 @@ export default class AddBlog extends Component {
 
     this.state = {
       isLoading: true,
+      isSubmitting: false,
       hobby: null,
       blog: {
         title: "",
@@ -69,13 +70,13 @@ export default class AddBlog extends Component {
 
     let rawContent = this.getHtmlFromRawContent();
 
-    this.setState({isLoading: true});
+    this.setState({isSubmitting: true});
 
-    ApiService.createBlog(this.state.blog.title, rawContent)
+    ApiService.createBlog(this.state.blog.title, rawContent, this.state.hobby.hobbyId, this.props.loggedInUser.id)
       .then(function (response) {
         console.log(response);
         if (response) {
-          this.props.history.push(`/hobby/${this.props.match.params.id}`);
+          this.props.history.push(`/hobby/${this.state.hobby.hobbyId}`);
         } else {
           this.setState({
             hasErrors: true,
@@ -121,7 +122,7 @@ export default class AddBlog extends Component {
             block
             disabled={!this.validateForm()}
             type="submit"
-            isLoading={this.state.isLoading}
+            isLoading={this.state.isSubmitting}
             text="Create Blog"
             loadingText="Creating Blog..."
           />

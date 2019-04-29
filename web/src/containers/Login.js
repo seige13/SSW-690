@@ -44,6 +44,7 @@ export default class Login extends Component {
       .then(function (success) {
         if (success) {
           this.props.userHasAuthenticated(true);
+          this.props.setLoggedInUser(success.user);
         } else {
           this.setState({
             hasErrors: true,
