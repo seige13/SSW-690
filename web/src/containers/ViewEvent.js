@@ -6,10 +6,48 @@ export default class ViewEvent extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      event: {}
+      event: {},
+      isEventJoined: false
     }
 
   }
+
+  async isEventJoined() {
+
+  }
+
+  joinEvent = event => {
+    event.preventDefault();
+
+    ApiService.joinEvent(this.props.match.params.eventId)
+      .then(function (response) {
+        if (response) {
+          console.log(response);
+          this.setState({
+            isLoading: false,
+            event: response.events,
+            isEventJoined: true
+          });
+        } else {
+          console.warn('No events in database');
+          this.setState({
+            isLoading: false,
+            rows: this.state.cardData
+          });
+        }
+
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error.statusText);
+
+        this.setState({
+          hasErrors: true,
+          isLoading: false,
+          errorMessage: 'There has been an error processing your request.',
+        });
+      }.bind(this));
+
+  };
 
   componentDidMount() {
     this.setState({isLoading: true});
@@ -69,8 +107,8 @@ export default class ViewEvent extends Component {
             <li>How Much: ${this.state.event.fee}</li>
           </ul>
 
-          <button className={'btn btn-primary'}>
-            Join Event!
+          <button className={'btn btn-primary'} onClick={this.joinEvent} disabled={this.state.isEventJoined}>
+            {this.state.isEventJoined ? 'Joined Event Already!' : 'Join Event!'}
           </button>
         </div>
       </div>

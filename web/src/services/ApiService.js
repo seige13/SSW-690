@@ -118,6 +118,15 @@ const ApiService = {
         events_id: id
       }
     })
+  },
+  joinEvent(eventId) {
+    return Request({
+      url: '/events/joinevents',
+      method: 'post',
+      params: {
+        events_id: eventId,
+      }
+    })
   }
 };
 

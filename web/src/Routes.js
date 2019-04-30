@@ -24,7 +24,7 @@ export default ({childProps}) => (
     <AuthenticatedRoute path='/add/hobby' exact component={AddHobby} props={childProps}/>
     <UnauthenticatedRoute path='/hobby/:id' exact component={ViewHobby} props={childProps}/>
     <AuthenticatedRoute path='/hobby/:id/event/add' exact component={AddEvent} props={childProps}/>
-    <UnauthenticatedRoute path='/hobby/:id/event/:eventId' exact component={ViewEvent} props={childProps}/>
+    <AuthenticatedRoute path='/hobby/:id/event/:eventId' exact component={ViewEvent} props={childProps}/>
     <AuthenticatedRoute path='/hobby/:id/blog/add' exact component={AddBlog} props={childProps}/>
     <AuthenticatedRoute path='/hobby/:id/blog/:blogId' exact component={ViewBlog} props={childProps}/>
     {/* Finally, catch all unmatched routes */}
