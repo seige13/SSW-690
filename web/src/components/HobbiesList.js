@@ -12,6 +12,7 @@ import diving from '../assets/event-cards/diving.png'
 import drawing from '../assets/event-cards/drawing.png'
 import orchid from '../assets/event-cards/orchid.jpg'
 import addHobby from '../assets/add.png'
+import defaultHobbyImage from '../assets/default-hobby.jpg';
 
 export default class HobbiesList extends Component {
 
@@ -88,7 +89,6 @@ export default class HobbiesList extends Component {
     let newRows = this.state.rows.filter(this.searchingFor(e.target.value));
 
     this.setState(prevState => {
-      console.log(prevState);
       return {
         rows: e.target.value !== '' ? newRows : this.state.cardData,
         searchTerm: e.target.value,
@@ -130,7 +130,7 @@ export default class HobbiesList extends Component {
                 <Card style={{width: "16rem"}}>
                   <Card.Img
                     variant="top"
-                    src={item.img}
+                    src={typeof item.img !== "undefined" && item.img !== '' ? item.img : defaultHobbyImage }
                     className={'card-img'}
                   />
                   <Card.Body>

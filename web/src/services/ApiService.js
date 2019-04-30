@@ -31,15 +31,12 @@ const ApiService = {
       },
     })
   },
-  createHobby(name, description, category) {
+  createHobby(bodyFormData) {
     return Request({
       url: '/hobby/addhobby',
       method: 'post',
-      data: {
-        name: name,
-        description: description,
-        classification: category,
-      },
+      data: bodyFormData,
+      config: {headers: {'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`}}
     })
   },
   getAllHobbies() {
@@ -77,7 +74,7 @@ const ApiService = {
       url: '/blog/listblog',
       method: 'get',
       params: {
-        blogId: id
+        id: id
       }
     })
   },

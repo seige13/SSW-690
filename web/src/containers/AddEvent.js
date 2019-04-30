@@ -6,7 +6,7 @@ import LoaderButton from '../components/LoaderButton';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import './AddEvent.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export default class AddHobby extends Component {
   constructor(props) {
@@ -16,14 +16,15 @@ export default class AddHobby extends Component {
       isLoading: true,
       hobby: null,
       event: {
-        eventsTitle: "",
+        eventsTitle: '',
         eventsTime: new Date(),
-        location: "",
-        description: "",
-        fee: "",
-        holder: "",
-        hobby_id: this.props.match.params.id
+        location: '',
+        description: '',
+        fee: '',
+        holder: '',
+        hobby_id: this.props.match.params.id,
       },
+      picture: '',
       hasErrors: false,
       errorMessage: ''
     };
@@ -67,18 +68,23 @@ export default class AddHobby extends Component {
     this.setState({ event: { ...this.state.event, eventsTime: date} });
   };
 
+  onUploadChange = event => {
+    this.setState({
+      picture: event.files[0]
+    });
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({isLoading: true});
 
-    // @TODO fix this
     let bodyFormData = new FormData();
 
     let currEvent = new Blob([JSON.stringify(this.state.event)], {type : 'application/json'});
 
     bodyFormData.append('events', currEvent);
-    //bodyFormData.append('file', blob);
+    bodyFormData.append('file', this.state.picture);
 
     ApiService.createEvent(bodyFormData)
       .then(function (response) {
@@ -109,84 +115,84 @@ export default class AddHobby extends Component {
       <div>
         <h2 className={'text-center mb-4'}>Add Your Event to {this.state.hobby.name} Community!</h2>
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="eventsTitle">
+          <FormGroup controlId='eventsTitle'>
             <FormLabel>Event Title</FormLabel>
             <FormControl
               autoFocus
-              type="text"
+              type='text'
               value={this.state.event.eventsTitle}
               onChange={this.handleChange}
             />
           </FormGroup>
-          <FormGroup controlId="description">
+          <FormGroup controlId='description'>
             <FormLabel>Event Description</FormLabel>
             <FormControl
               autoFocus
               as={'textarea'}
-              type="text"
+              type='text'
               value={this.state.event.description}
               onChange={this.handleChange}
               className={'category-select'}
             />
           </FormGroup>
 
-          <FormGroup controlId="location">
+          <FormGroup controlId='location'>
             <FormLabel>Event Date</FormLabel>
             <DatePicker
               selected={this.state.event.eventsTime}
               onChange={this.handleDateChange}
               showTimeSelect
-              timeFormat="HH:mm"
+              timeFormat='HH:mm'
               timeIntervals={15}
-              dateFormat="MMMM d, yyyy h:mm aa"
-              timeCaption="time"
+              dateFormat='MMMM d, yyyy h:mm aa'
+              timeCaption='time'
               minDate={new Date()}
-              dropdownMode="select"
+              dropdownMode='select'
             />
           </FormGroup>
 
-          <FormGroup controlId="location">
+          <FormGroup controlId='location'>
             <FormLabel>Event Location</FormLabel>
             <FormControl
               autoFocus
-              type="text"
+              type='text'
               value={this.state.event.location}
               onChange={this.handleChange}
             />
           </FormGroup>
 
-          <FormGroup controlId="holder">
+          <FormGroup controlId='holder'>
             <FormLabel>Event Host</FormLabel>
             <FormControl
               autoFocus
-              type="text"
+              type='text'
               value={this.state.event.holder}
               onChange={this.handleChange}
             />
           </FormGroup>
 
-          <FormGroup controlId="fee">
+          <FormGroup controlId='fee'>
             <FormLabel>Event Fee</FormLabel>
             <FormControl
               autoFocus
-              type="number"
+              type='number'
               value={this.state.event.fee}
               onChange={this.handleChange}
             />
           </FormGroup>
 
-          <FormGroup controlId="fee">
+          <FormGroup controlId='fee'>
             <FormLabel>Event Image</FormLabel>
-            <FileUpload/>
+            <FileUpload value={this.state.picture} onChange={this.onUploadChange}/>
           </FormGroup>
 
           <LoaderButton
             block
             disabled={!this.validateForm()}
-            type="submit"
+            type='submit'
             isLoading={this.state.isLoading}
-            text="Create Event"
-            loadingText="Creating Event..."
+            text='Create Event'
+            loadingText='Creating Event...'
           />
         </form>
       </div>
@@ -200,9 +206,9 @@ export default class AddHobby extends Component {
     }
 
     return (
-      <div className="AddEvent">
+      <div className='AddEvent'>
         {this.state.isLoading ? (
-          <FontAwesomeIcon icon="sync" className="fa-spin spinning"/>) : (
+          <FontAwesomeIcon icon='sync' className='fa-spin spinning'/>) : (
           this.state.hasErrors ? (alertMessage) :
             this.renderForm()
         )}

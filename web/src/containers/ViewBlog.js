@@ -83,7 +83,7 @@ export default class ViewBlog extends Component {
               <section id="user-description" className="col-md-3 ">
                 <section className="well">
 
-                  <h4>BLOG USERNAME</h4>
+                  <h4>{this.state.blog.user.nickName}</h4>
                   <section className="pull-left" id="id1">
                     <abbr title="count of posts in this topic">#1</abbr>
                   </section>
@@ -121,7 +121,7 @@ export default class ViewBlog extends Component {
                   <section id="user-description" className="col-md-3 ">
                     <section className="well">
 
-                      <h4>COMMENT USERNAME</h4>
+                      <h4>{comment.user.nickName}</h4>
                       <section className="pull-left" id={`id${index + 2}`}>
                         <abbr title="count of posts in this topic">#{index + 2}</abbr>
                       </section>
