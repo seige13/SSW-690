@@ -67,7 +67,10 @@ class BlogList extends Component {
   renderBlogList() {
     return <div>
       <h4>Blog List</h4>
-      <Table striped bordered hover>
+      <Link to={`/hobby/${this.props.hobby}/blog/add`} className={'text-right btn btn-primary mt-4 mb-4'}>Create My Post</Link>
+
+      {this.state.blogs !== null ?
+        <Table striped bordered hover>
         <thead>
         <tr>
           <th>Id</th>
@@ -79,10 +82,15 @@ class BlogList extends Component {
         <tbody>
         {this.getBlogRows(this.state.blogs)}
         </tbody>
-      </Table>
-      <Link to={`/hobby/${this.props.hobby}/blogs`} className={'text-right'}>More Blogs >></Link>
+      </Table> :
+        <div className="card bg-light">
+          <div className="card-body text-center">
+            There are no blogs created for this hobby yet...
+          </div>
+        </div>
+      }
       <br/>
-      <Link to={`/hobby/${this.props.hobby}/blog/add`} className={'text-right'}>Create My Post</Link>
+
     </div>
   }
 

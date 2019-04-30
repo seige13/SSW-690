@@ -52,12 +52,30 @@ export default class AddHobby extends Component {
     });
   };
 
+  onUploadChange = event => {
+    this.setState({
+      picture: event.files[0]
+    });
+  };
+
   handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({isLoading: true});
 
-    ApiService.createHobby(this.state.name, this.state.description, this.state.categories)
+    let bodyFormData = new FormData();
+    let eventData = {
+      "name": this.state.name,
+      "description": this.state.description,
+      "classification": this.state.category,
+    };
+
+    let currEvent = new Blob([JSON.stringify(eventData)], {type : 'application/json'});
+
+    bodyFormData.set('events', currEvent);
+    bodyFormData.set('file', this.state.picture);
+
+    ApiService.createHobby(bodyFormData)
       .then(function (response) {
         if (response) {
           this.props.userHasAuthenticated(true);
@@ -124,7 +142,7 @@ export default class AddHobby extends Component {
           </FormGroup>
 
           <FormLabel>Hobby Photo</FormLabel>
-          <FileUpload/>
+          <FileUpload value={this.state.picture} onChange={this.onUploadChange}/>
           <LoaderButton
             block
             disabled={!this.validateForm()}

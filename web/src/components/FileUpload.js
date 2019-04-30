@@ -7,7 +7,8 @@ export default class FileUpload extends Component {
   constructor(props) {
     super(props);
     this.onDrop = (files) => {
-      this.setState({files})
+      this.setState({files});
+      this.props.onChange({files});
     };
     this.state = {
       files: []

@@ -58,7 +58,7 @@ export default class EventsList extends Component {
 
     ApiService.getAllEvents()
       .then(function (response) {
-        if (response.list !== 'undefined' && response.rows.length !== 0) {
+        if (response.list) {
           this.setState({
             isLoading: false,
             rows: response.list
@@ -99,7 +99,7 @@ export default class EventsList extends Component {
                       className={'card-img'}
                     />
                     <Card.Body>
-                      <Card.Title>{item.name}</Card.Title>
+                      <Card.Title>{item.eventsTitle}</Card.Title>
                       <Card.Text>
                         {item.description}
                       </Card.Text>
