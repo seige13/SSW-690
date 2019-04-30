@@ -76,10 +76,10 @@ public class EventsController {
 
     @RequestMapping(value = "/joinevents", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> joinEvents(@RequestParam(value = "events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> joinEvents(String id, @RequestParam(value = "events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        User user = (User) request.getSession().getAttribute("user");
-        Boolean result = eventsService.joinEvents(user.getId(), eventsId);
+        //User user = (User) request.getSession().getAttribute("user");
+        Boolean result = eventsService.joinEvents(id, eventsId);
         modelMap.put("status", result);
         response.setStatus(result ? 200 : 400);
         return modelMap;
@@ -87,14 +87,14 @@ public class EventsController {
 
     @RequestMapping(value = "/findpastevents", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findPastEvents(HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> findPastEvents(String id, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            User user = (User) request.getSession().getAttribute("user");
-            String userId = user.getId();
+            //User user = (User) request.getSession().getAttribute("user");
+            //String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
-            list = eventsService.findPastEvents(userId, timeStamp);
+            list = eventsService.findPastEvents(id, timeStamp);
             modelMap.put("list", list);
             response.setStatus(list == null ? 400 : 200);
         } catch (Exception e) {
@@ -108,14 +108,14 @@ public class EventsController {
 
     @RequestMapping(value = "/findupcomingevents", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> findUpcomingEvents(HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> findUpcomingEvents(String id, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            User user = (User) request.getSession().getAttribute("user");
-            String userId = user.getId();
+            //User user = (User) request.getSession().getAttribute("user");
+            //String userId = user.getId();
             LocalDateTime timeStamp = LocalDateTime.now();
-            list = eventsService.findUpcomingEvents(userId, timeStamp);
+            list = eventsService.findUpcomingEvents(id, timeStamp);
             modelMap.put("events", list);
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -128,13 +128,13 @@ public class EventsController {
 
     @RequestMapping(value = "/geteventsforuser", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getEventsForUser(HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, Object> getEventsForUser(String id, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            User user = (User) request.getSession().getAttribute("user");
-            String userId = user.getId();
-            list = eventsService.getEventsForUser(userId);
+            //User user = (User) request.getSession().getAttribute("user");
+            //String userId = user.getId();
+            list = eventsService.getEventsForUser(id);
             modelMap.put("events", list);
         } catch (Exception e) {
             System.out.println(e.toString());
