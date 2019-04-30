@@ -31,4 +31,6 @@ public interface EventsDao {
     int deleteEvents(@Param("id") String id);
 
     int updateEvents(Events events);
+
+    List<Events> listEventsByHobbyId(@Param("hobbyId") int id);
 }

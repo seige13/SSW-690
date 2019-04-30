@@ -10,6 +10,14 @@
             DESC
     </select>
 
+    <select id="listEventsByHobbyId" resultType="com.hobbymatcher.entity.Events">
+        SELECT *
+        FROM events
+        WHERE hobby_id = #{hobbyId}
+        ORDER BY events_id
+            DESC
+    </select>
+
     <select id="findEventsById" parameterType="map" resultType="Events">
         select *
         from events

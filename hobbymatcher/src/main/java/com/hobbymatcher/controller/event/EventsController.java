@@ -7,7 +7,6 @@ import com.hobbymatcher.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,18 +29,26 @@ public class EventsController {
 
     @RequestMapping(value = "/listevents", method = RequestMethod.GET)
     @ResponseBody
-    private Map<String, Object> listEvents(HttpServletResponse response) {
+    public Map<String, Object> listEvents(String id, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         List<Events> list = new ArrayList<Events>();
         try {
-            list = eventsService.getEventsList();
-            modelMap.put("list", list);
-            modelMap.put("status", true);
-            response.setStatus(200);
+            if (!"".equals(id)&&id!=null)
+            {
+                modelMap.put("list", eventsService.listEventsByHobbyId(Integer.parseInt(id)));
+                modelMap.put("msg", "list with hobby success");
+                response.setStatus(200);
+                return modelMap;
+            }else {
+                list = eventsService.getEventsList();
+                modelMap.put("list", list);
+                modelMap.put("status", true);
+                response.setStatus(200);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             modelMap.put("status", false);
-            modelMap.put("msg", e.toString());
+            modelMap.put("msg", e.getMessage());
             response.setStatus(400);
         }
         return modelMap;
