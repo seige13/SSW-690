@@ -87,5 +87,13 @@ public class EventsServiceImpl implements EventsService {
     public boolean updateEvents(Events events) {
         return eventsDao.updateEvents(events) == 1;
     }
-   
+
+    @Override
+    public List<Events> listEventsByHobbyId(int id) {
+        List<Events> events = eventsDao.listEventsByHobbyId(id);
+        if (events == null || events.size() == 0) {
+            return null;
+        }
+        return eventsDao.listEventsByHobbyId(id);
+    }
 }
