@@ -112,49 +112,47 @@ export default class ViewBlog extends Component {
               </section>
             </section>
           </div>
-          {this.state.comments.map((comment, index) => {
-            let date = new Date(Date.parse(comment.time));
-            return (
+          {typeof this.state.comments !== "undefined" ? (this.state.comments.map((comment, index) => {
+              let date = new Date(Date.parse(comment.time));
+              return (
 
-              <li className="list-group-item" key={index}>
-                <section className="row card-body">
-                  <section id="user-description" className="col-md-3 ">
-                    <section className="well">
+                <li className="list-group-item" key={index}>
+                  <section className="row card-body">
+                    <section id="user-description" className="col-md-3 ">
+                      <section className="well">
 
-                      <h4>{comment.user.nickName}</h4>
-                      <section className="pull-left" id={`id${index + 2}`}>
-                        <abbr title="count of posts in this topic">#{index + 2}</abbr>
+                        <h4>{comment.user.nickName}</h4>
+                        <section className="pull-left" id={`id${index + 2}`}>
+                          <abbr title="count of posts in this topic">#{index + 2}</abbr>
+                        </section>
                       </section>
                     </section>
-                  </section>
 
-                  <section className="col-md-9">
+                    <section className="col-md-9">
 
-                    <div>{comment.content}</div>
+                      <div>{comment.content}</div>
 
-                    <hr/>
-                    <div className={'row'}>
-                      <div className={'col post-footer'}>
-                        <time className="pull-right">
-                          <i className={"fa fa-calendar"}/> {date.toLocaleDateString('en-US', {
-                          weekday: 'long',
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                          hour: 'numeric',
-                          minute: 'numeric'
-                        })}
-                        </time>
+                      <hr/>
+                      <div className={'row'}>
+                        <div className={'col post-footer'}>
+                          <time className="pull-right">
+                            <i className={"fa fa-calendar"}/> {date.toLocaleDateString('en-US', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric'
+                          })}
+                          </time>
+                        </div>
                       </div>
-                    </div>
+                    </section>
                   </section>
-                </section>
-              </li>
-            )
-          })}
+                </li>
+              )
+            })): ''}
         </ul>
-
-
       </div>
     )
   };
