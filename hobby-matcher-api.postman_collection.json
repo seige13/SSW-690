@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e19aed14-8ee7-4438-85cf-a28ff2f3468e",
+		"_postman_id": "5f5e9718-3297-459f-af08-1359ae910375",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -367,13 +367,19 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents",
+							"raw": "{{base-url}}/events/findpastevents?id",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"events",
 								"findpastevents"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						},
 						"description": "find past events of current login user with compare to current server time"
@@ -390,13 +396,19 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents",
+							"raw": "{{base-url}}/events/findpastevents?id",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"events",
 								"findpastevents"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						},
 						"description": "Get events by providing events_id"
@@ -413,13 +425,19 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents",
+							"raw": "{{base-url}}/events/findpastevents?id",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"events",
 								"findpastevents"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						},
 						"description": "Return a list of events with the event's date ahead of current server date of current login user."
@@ -436,16 +454,55 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/geteventsforuser",
+							"raw": "{{base-url}}/events/geteventsforuser?id",
 							"host": [
 								"{{base-url}}"
 							],
 							"path": [
 								"events",
 								"geteventsforuser"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						},
 						"description": "Return the whole events list the user join"
+					},
+					"response": []
+				},
+				{
+					"name": "joinevents",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/joinevents?events_id&id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"joinevents"
+							],
+							"query": [
+								{
+									"key": "events_id",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						},
+						"description": "join a events"
 					},
 					"response": []
 				}
