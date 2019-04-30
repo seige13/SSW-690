@@ -4,12 +4,9 @@ import com.hobbymatcher.entity.Events;
 import com.hobbymatcher.entity.User;
 import com.hobbymatcher.service.EventsService;
 import com.hobbymatcher.util.FileUtil;
-import org.apache.ibatis.annotations.Param;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
