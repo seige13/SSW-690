@@ -90,7 +90,7 @@ const ApiService = {
       },
     })
   },
-  getBlogById (id) {
+  getBlogById(id) {
     return Request({
       url: '/blog/findblogandcommentsbyid',
       method: 'get',
@@ -99,7 +99,7 @@ const ApiService = {
       }
     })
   },
-  addComment(content, blogId, userId){
+  addComment(content, blogId, userId) {
     return Request({
       url: '/blog/addcomment',
       method: 'post',
@@ -107,6 +107,15 @@ const ApiService = {
         content: content,
         blogId: blogId,
         userId: userId
+      }
+    })
+  },
+  getEventsById(id) {
+    return Request({
+      url: '/events/getevents',
+      method: 'get',
+      params: {
+        events_id: id
       }
     })
   }

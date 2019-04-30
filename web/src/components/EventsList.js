@@ -3,14 +3,6 @@ import {Card} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import ApiService from '../services/ApiService';
 import './HobbiesList.css';
-
-import badminton from '../assets/event-cards/badminton.png'
-import basketball from '../assets/event-cards/basketball.png'
-import bodybuilding from '../assets/event-cards/bodybuilding.png'
-import cat from '../assets/event-cards/cat.png'
-import diving from '../assets/event-cards/diving.png'
-import drawing from '../assets/event-cards/drawing.png'
-import orchid from '../assets/event-cards/orchid.jpg'
 import addHobby from '../assets/add.png'
 
 export default class EventsList extends Component {
@@ -19,36 +11,6 @@ export default class EventsList extends Component {
     super(props);
     this.state = {
       searchTerm: '',
-      cardData: [
-        {
-          name: 'Basketball',
-          description: 'Learn more about basketball',
-          img: basketball
-        }, {
-          name: 'Badminton',
-          description: 'Learn more about Badminton',
-          img: badminton
-        }, {
-          name: 'Body building',
-          description: 'Learn more about body building',
-          img: bodybuilding
-        }, {
-          name: 'Cat',
-          description: 'Learn more about owning a cat',
-          img: cat
-        }, {
-          name: 'Diving',
-          description: 'Learn more about diving',
-          img: diving
-        }, {
-          name: 'Drawing',
-          description: 'Learn more about drawing',
-          img: drawing
-        }, {
-          name: 'Orchid',
-          description: 'Learn more about growing orchids',
-          img: orchid
-        }],
       rows: []
     };
   }
@@ -86,12 +48,11 @@ export default class EventsList extends Component {
   render() {
     return (
       <div className={'mt-4'}>
-        <h4>Events</h4>
-        <div className="container">
+          <h4>Events</h4>
           <div className={'row'}>
             {this.state.rows.map((item, index) =>
               <div key={index} className={'col-3 mb-3'}>
-                <Link to={`event/${index}`}>
+                <Link to={`/hobby/${this.props.hobby}/event/${item.eventsId}`}>
                   <Card style={{width: "16rem"}}>
                     <Card.Img
                       variant="top"
@@ -124,7 +85,6 @@ export default class EventsList extends Component {
               </Card>
             </Link>
           </div>
-        </div>
       </div>
     );
   }
