@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "10bd8f22-4a40-424d-a1de-3e267124a65f",
+		"name": "hobby-matcher-api copy",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User API",
+			"item": [
+				{
+					"name": "/user/adduser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"passWord\": \"\",\n    \"nickName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/user/adduser",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"adduser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/listuser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/user/listuser",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"listuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"cboffa@stevens.edu\",\n    \"passWord\": \"test\"\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/user/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/deleteuser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "?id=",
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/updateuser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"passWord\": \"\",\n    \"nickName\": \"\",\n    \"firstName\": \"\",\n    \"lastName\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/user/updateuser",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"updateuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/user/logout",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hobby API",
+			"item": [
+				{
+					"name": "/hobby/listhobby",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/hobby/addhobby",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"description\": \"\",\n    \"classification\": \"\",\n    \"constrains\": \"\",\n    \"blogs\": \"\"\n}"
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/hobby/deletehobby",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "?id",
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/hobby/gethobby",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/hobby/gethobby?id=1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"hobby",
+								"gethobby"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event API",
+			"item": [
+				{
+					"name": "/events/listevents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/listevents?id=0",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"listevents"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/addevents",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "events",
+									"value": "{\"eventsTitle\":\"run\",\"eventsTime\":\"2032-10-01 09:09:09\",\"location\":\"bc\",\"description\":\"join us\",\"fee\":\"50\",\"holder\":\"wxs\", \"hobbyId\":\"1\"\n}",
+									"contentType": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/hobbymatcher_war//events/addevents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hobbymatcher_war",
+								"",
+								"events",
+								"addevents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/deleteevents",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "?id=",
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/events/findpastevents.",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "find past events of current login user with compare to current server time"
+					},
+					"response": []
+				},
+				{
+					"name": "/events/getevents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "Get events by providing events_id"
+					},
+					"response": []
+				},
+				{
+					"name": "findupcomingevents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/findpastevents",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"findpastevents"
+							]
+						},
+						"description": "Return a list of events with the event's date ahead of current server date of current login user."
+					},
+					"response": []
+				},
+				{
+					"name": "/events/geteventsforuser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/events/geteventsforuser",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"events",
+								"geteventsforuser"
+							]
+						},
+						"description": "Return the whole events list the user join"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog API",
+			"item": [
+				{
+					"name": "/blog/deleteblog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "?id",
+							"query": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/blog/findblogbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "?blogId",
+							"query": [
+								{
+									"key": "blogId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/blog/updateblog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"blogId\":\"\",\n    \"title\": \"\",\n    \"content\": \"\"\n}"
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/blog/listblog",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/blog/addblog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"\",\n    \"content\": \"\",\n    \"userId\":0,\n    \"hobbyId\":0\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/blog/createblog",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"blog",
+								"createblog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findBlogAndCommentsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base-url}}/findblogandcommentsbyid?blogId",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"findblogandcommentsbyid"
+							],
+							"query": [
+								{
+									"key": "blogId",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addcomment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\":\"\"\n\t,\"userId\":0,\n\t\"blogId\":0\n}"
+						},
+						"url": {
+							"raw": "{{base-url}}/addcomment",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"addcomment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cddfc574-6ddc-4311-8f20-43273d178a34",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b6fae9e8-15bd-493b-beec-ceb880873c76",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
