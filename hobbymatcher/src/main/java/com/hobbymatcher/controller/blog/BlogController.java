@@ -45,7 +45,7 @@ public class BlogController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            modelMap.put("msg", e.getStackTrace());
+            modelMap.put("msg", e.getMessage());
             modelMap.put("status", false);
             response.setStatus(400);
         }

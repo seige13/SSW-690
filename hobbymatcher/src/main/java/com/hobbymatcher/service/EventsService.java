@@ -9,6 +9,8 @@ import java.util.List;
 public interface EventsService {
     List<Events> getEventsList();
 
+    List<Events> listEventsByHobbyId(int id);
+
     boolean addEvents(Events events);
 
     Events findEventsByTitle(String name);
