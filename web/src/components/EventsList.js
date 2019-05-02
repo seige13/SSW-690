@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Card} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import ApiService from '../services/ApiService';
 import './HobbiesList.css';
 import addHobby from '../assets/add.png'
 
-export default class EventsList extends Component {
+class EventsList extends Component {
 
   constructor(props) {
     super(props);
@@ -89,4 +89,6 @@ export default class EventsList extends Component {
     );
   }
 }
+
+export default withRouter(EventsList)
 

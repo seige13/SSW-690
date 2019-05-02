@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Card, FormControl, InputGroup} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import ApiService from '../services/ApiService';
 import './HobbiesList.css';
 
@@ -14,7 +14,7 @@ import orchid from '../assets/event-cards/orchid.jpg'
 import addHobby from '../assets/add.png'
 import defaultHobbyImage from '../assets/default-hobby.jpg';
 
-export default class HobbiesList extends Component {
+class HobbiesList extends Component {
 
   constructor(props) {
     super(props);
@@ -163,4 +163,6 @@ export default class HobbiesList extends Component {
     );
   }
 }
+
+export default withRouter(HobbiesList)
 

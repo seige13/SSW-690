@@ -19,7 +19,7 @@ class BlogList extends Component {
   }
 
   navigateToBlogView = event => {
-    let blogId = event.target.getAttribute('data-item');
+    let blogId = event.currentTarget.getAttribute('data-item');
 
     this.props.history.push(`/hobby/${this.props.hobby}/blog/${blogId}`);
   };
