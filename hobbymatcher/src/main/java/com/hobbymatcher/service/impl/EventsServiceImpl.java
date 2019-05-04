@@ -89,6 +89,12 @@ public class EventsServiceImpl implements EventsService {
     }
 
     @Override
+    public int getNumber(int id)
+    {
+        return eventsDao.getNumber(id);
+    }
+
+    @Override
     public List<Events> listEventsByHobbyId(int id) {
         List<Events> events = eventsDao.listEventsByHobbyId(id);
         if (events == null || events.size() == 0) {

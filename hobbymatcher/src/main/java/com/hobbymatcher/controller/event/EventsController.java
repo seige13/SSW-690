@@ -78,10 +78,33 @@ public class EventsController {
     @ResponseBody
     public Map<String, Object> joinEvents(String id, @RequestParam(value = "events_id") String eventsId, HttpServletResponse response, HttpServletRequest request) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        //User user = (User) request.getSession().getAttribute("user");
-        Boolean result = eventsService.joinEvents(id, eventsId);
-        modelMap.put("status", result);
-        response.setStatus(result ? 200 : 400);
+        try {
+            List<Events> list = new ArrayList<Events>();
+            List<String> num = new ArrayList<>();
+            list = eventsService.getEventsForUser(id);
+            for(int i = 0;i < list.size();i++)
+            {
+                num.add(list.get(i).getEventsId());
+            }
+            if(num.contains(eventsId))
+            {
+                modelMap.put("msg", "User already join this event");
+                modelMap.put("status", false);
+                response.setStatus(400);
+            }
+            else {
+                Boolean result = eventsService.joinEvents(id, eventsId);
+                modelMap.put("status", result);
+                response.setStatus(result ? 200 : 400);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            modelMap.put("msg", "valueError");
+            modelMap.put("status", false);
+            response.setStatus(400);
+        }
         return modelMap;
     }
 
@@ -153,7 +176,9 @@ public class EventsController {
             int id1 = Integer.parseInt(id);
             System.out.println(id1);
             Events eventsById = eventsService.findEventsById(id1);
+            int number = eventsService.getNumber(id1);
             modelMap.put("events", eventsById);
+            modelMap.put("numberOfUser", number);
             response.setStatus(eventsById == null ? 400 : 200);
         } catch (Exception e) {
             System.out.println(e.toString());

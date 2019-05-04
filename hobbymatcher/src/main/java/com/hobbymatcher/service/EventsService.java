@@ -23,6 +23,8 @@ public interface EventsService {
 
     List<Events> getEventsForUser(String id);
 
+    int getNumber(int id);
+
     boolean joinEvents(String id, String eventsId);
 
     boolean deleteEvents(String id);

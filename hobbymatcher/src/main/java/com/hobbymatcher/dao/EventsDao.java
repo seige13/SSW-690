@@ -32,5 +32,7 @@ public interface EventsDao {
 
     int updateEvents(Events events);
 
+    int getNumber(int id);
+
     List<Events> listEventsByHobbyId(@Param("hobbyId") int id);
 }

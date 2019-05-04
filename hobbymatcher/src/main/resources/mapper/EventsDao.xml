@@ -18,11 +18,16 @@
             DESC
     </select>
 
-    <select id="findEventsById" parameterType="map" resultType="Events">
-        select *
+    <select id="findEventsById" resultType="com.hobbymatcher.entity.Events">
+       select *
         from events
         where events_id = #{events_id}
+    </select>
 
+    <select id="getNumber" resultType="int">
+        select count(user_id)
+        from join_events
+        where events_id = #{id}
     </select>
 
     <select id="getEventsForUser" resultType="com.hobbymatcher.entity.Events">

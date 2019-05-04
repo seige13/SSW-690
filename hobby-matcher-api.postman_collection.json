@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5f5e9718-3297-459f-af08-1359ae910375",
+		"_postman_id": "50a1b6dc-e3b6-4377-a0b0-7ac133f75c09",
 		"name": "hobby-matcher-api",
 		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -367,7 +367,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents?id",
+							"raw": "{{base-url}}/events/findpastevents?id=",
 							"host": [
 								"{{base-url}}"
 							],
@@ -396,7 +396,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents?id",
+							"raw": "{{base-url}}/events/findpastevents?id=",
 							"host": [
 								"{{base-url}}"
 							],
@@ -425,7 +425,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/findpastevents?id",
+							"raw": "{{base-url}}/events/findpastevents?id=",
 							"host": [
 								"{{base-url}}"
 							],
@@ -454,7 +454,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/geteventsforuser?id",
+							"raw": "{{base-url}}/events/geteventsforuser?id=",
 							"host": [
 								"{{base-url}}"
 							],
@@ -483,7 +483,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base-url}}/events/joinevents?events_id&id",
+							"raw": "{{base-url}}/events/joinevents?events_id=&id=",
 							"host": [
 								"{{base-url}}"
 							],
@@ -503,6 +503,38 @@
 							]
 						},
 						"description": "join a events"
+					},
+					"response": []
+				},
+				{
+					"name": "findeventsbyid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/hobbymatcher_war/events/getevents?events_id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"hobbymatcher_war",
+								"events",
+								"getevents"
+							],
+							"query": [
+								{
+									"key": "events_id",
+									"value": "5"
+								}
+							]
+						},
+						"description": "find the events by eventsId and return the events and number of user join that event"
 					},
 					"response": []
 				}
