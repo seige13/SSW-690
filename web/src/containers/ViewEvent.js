@@ -19,13 +19,12 @@ export default class ViewEvent extends Component {
   joinEvent = event => {
     event.preventDefault();
 
-    ApiService.joinEvent(this.props.match.params.eventId)
+    ApiService.joinEvent(this.props.match.params.eventId, this.props.loggedInUser.id)
       .then(function (response) {
         if (response) {
           console.log(response);
           this.setState({
             isLoading: false,
-            event: response.events,
             isEventJoined: true
           });
         } else {
@@ -47,6 +46,37 @@ export default class ViewEvent extends Component {
         });
       }.bind(this));
 
+  };
+
+  checkIfUserJoinedEvent = () => {
+    let userId = this.props.loggedInUser.id;
+    let eventId = this.props.match.params.eventId;
+    ApiService.getEventsUserJoinedByUserId(userId)
+      .then(function (response) {
+        if (response) {
+          let events = response.events;
+
+          console.log(events);
+
+          let eventJoined = false;
+          for(let i = 0; i < events.length - 1; i++) {
+            if (events[i].eventsId === eventId) {
+              eventJoined = true;
+              break;
+            }
+          }
+          console.log(eventJoined);
+          if (eventJoined) {
+            this.setState({
+              isEventJoined: true
+            });
+          }
+        }
+
+      }.bind(this))
+      .catch(function (error) {
+
+      });
   };
 
   componentDidMount() {
@@ -77,6 +107,8 @@ export default class ViewEvent extends Component {
           errorMessage: 'There has been an error processing your request.',
         });
       }.bind(this));
+
+    this.checkIfUserJoinedEvent();
   }
 
   render() {
@@ -94,7 +126,6 @@ export default class ViewEvent extends Component {
         <div className={'col-9'}>
           <ul>
             <li>Who: {this.state.event.holder}</li>
-            <li>What: {this.state.event.description}</li>
             <li>Where: {this.state.event.location}</li>
             <li>When: {date.toLocaleDateString('en-US', {
               weekday: 'long',
@@ -112,8 +143,12 @@ export default class ViewEvent extends Component {
           </button>
         </div>
       </div>
+      <div className={'row mt-4'}>
+        <div className={'col'}>
+          {this.state.event.description}
+        </div>
+      </div>
     </div>
-
   }
 
 }

@@ -1,0 +1,11 @@
+.BlogList table tr:hover {
+    cursor: pointer;
+}
+
+
+.ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 260px;
+}

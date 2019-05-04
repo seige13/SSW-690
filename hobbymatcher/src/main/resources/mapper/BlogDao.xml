@@ -23,8 +23,8 @@
         SELECT *
         FROM blog
         WHERE hobby_id = #{hobbyId}
-        ORDER BY blog_id
-            DESC
+        ORDER BY create_date
+            ASC
     </select>
 
     <insert id="addBlog" useGeneratedKeys="true" keyProperty="blogId">

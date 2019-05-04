@@ -4,6 +4,7 @@ import ApiService from "../services/ApiService";
 import {Alert} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link, withRouter} from "react-router-dom";
+import './BlogList.css'
 
 class BlogList extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class BlogList extends Component {
         <tr key={index} onClick={this.navigateToBlogView} data-item={blog.blogId}>
           <td data-item={blog.blogId}>{blog.blogId}</td>
           <td data-item={blog.blogId}>{blog.title}</td>
-          <td data-item={blog.blogId} dangerouslySetInnerHTML={{__html: blog.content}}/>
+          <td data-item={blog.blogId} dangerouslySetInnerHTML={{__html: blog.content}} className='ellipsis'/>
           <td data-item={blog.blogId}>
             {date.toLocaleDateString('en-US', {
               weekday: 'long',

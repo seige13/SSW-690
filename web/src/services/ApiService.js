@@ -119,12 +119,22 @@ const ApiService = {
       }
     })
   },
-  joinEvent(eventId) {
+  getEventsUserJoinedByUserId(userId) {
+    return Request({
+      url: '/events/geteventsforuser',
+      method: 'get',
+      params: {
+        id: userId
+      }
+    })
+  },
+  joinEvent(eventId, userId) {
     return Request({
       url: '/events/joinevents',
       method: 'post',
       params: {
         events_id: eventId,
+        id: userId
       }
     })
   }
