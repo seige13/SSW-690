@@ -507,7 +507,7 @@
 					"response": []
 				},
 				{
-					"name": "findeventsbyid",
+					"name": "getevents",
 					"request": {
 						"method": "GET",
 						"header": [],
