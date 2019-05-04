@@ -130,7 +130,7 @@ class HobbiesList extends Component {
                 <Card style={{width: "16rem"}}>
                   <Card.Img
                     variant="top"
-                    src={typeof item.img !== "undefined" && item.img !== '' ? item.img : defaultHobbyImage }
+                    src={typeof item.img !== "undefined" && item.img !== '' ? item.img : defaultHobbyImage}
                     className={'card-img'}
                   />
                   <Card.Body>
@@ -143,21 +143,24 @@ class HobbiesList extends Component {
               </Link>
             </div>)
           }
-          <Link to={`/add/hobby`}>
-            <Card style={{width: "16rem"}}>
-              <Card.Img
-                variant="top"
-                src={addHobby}
-                className={'card-img'}
-              />
-              <Card.Body>
-                <Card.Title>Create a Hobby</Card.Title>
-                <Card.Text>
 
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Link>
+          <div className={'col-3 mb-3'}>
+            <Link to={`/add/hobby`}>
+              <Card style={{width: "16rem", height: '100%'}}>
+                <Card.Img
+                  variant="top"
+                  src={addHobby}
+                  className={'card-img'}
+                />
+                <Card.Body>
+                  <Card.Title>Create a Hobby</Card.Title>
+                  <Card.Text>
+
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Link>
+          </div>
         </div>
       </div>
     );
