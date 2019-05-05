@@ -46,7 +46,7 @@ public class HobbyController {
     //addhobby
     @RequestMapping(value = "/addhobby", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> add(@RequestPart("events") Hobby hobby, @RequestPart("file") MultipartFile imageFile, HttpServletResponse response) {
+    public Map<String, Object> add(Hobby hobby, MultipartFile imageFile, HttpServletResponse response) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         if (hobby != null) {
             String imgPath = FileUtil.transferFile(imageFile);
