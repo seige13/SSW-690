@@ -537,36 +537,6 @@
 						"description": "find the events by eventsId and return the events and number of user join that event"
 					},
 					"response": []
-				},
-				{
-					"name": "addevents without pic",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"eventsTitle\": \"run\",\n    \"eventsTime\": \"2032-10-01 09:09:09\",\n    \"location\": \"bc\",\n    \"description\": \"join us\",\n    \"fee\": \"50\",\n    \"holder\": \"wxs\",\n    \"hobbyId\": \"0\"\n}"
-						},
-						"url": {
-							"raw": "{{base-url}}/events/addevents",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"events",
-								"addevents"
-							]
-						},
-						"description": "Add events"
-					},
-					"response": []
 				}
 			]
 		},
