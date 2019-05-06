@@ -3,14 +3,6 @@ import {Card, FormControl, InputGroup} from 'react-bootstrap';
 import {Link, withRouter} from "react-router-dom";
 import ApiService from '../services/ApiService';
 import './HobbiesList.css';
-
-import badminton from '../assets/event-cards/badminton.png'
-import basketball from '../assets/event-cards/basketball.png'
-import bodybuilding from '../assets/event-cards/bodybuilding.png'
-import cat from '../assets/event-cards/cat.png'
-import diving from '../assets/event-cards/diving.png'
-import drawing from '../assets/event-cards/drawing.png'
-import orchid from '../assets/event-cards/orchid.jpg'
 import addHobby from '../assets/add.png'
 import defaultHobbyImage from '../assets/default-hobby.jpg';
 
@@ -20,36 +12,6 @@ class HobbiesList extends Component {
     super(props);
     this.state = {
       searchTerm: '',
-      cardData: [
-        {
-          name: 'Basketball',
-          description: 'Learn more about basketball',
-          img: basketball
-        }, {
-          name: 'Badminton',
-          description: 'Learn more about Badminton',
-          img: badminton
-        }, {
-          name: 'Body building',
-          description: 'Learn more about body building',
-          img: bodybuilding
-        }, {
-          name: 'Cat',
-          description: 'Learn more about owning a cat',
-          img: cat
-        }, {
-          name: 'Diving',
-          description: 'Learn more about diving',
-          img: diving
-        }, {
-          name: 'Drawing',
-          description: 'Learn more about drawing',
-          img: drawing
-        }, {
-          name: 'Orchid',
-          description: 'Learn more about growing orchids',
-          img: orchid
-        }],
       rows: []
     };
   }
@@ -62,7 +24,8 @@ class HobbiesList extends Component {
         if (response.list !== 'undefined' && response.list.length !== 0) {
           this.setState({
             isLoading: false,
-            rows: response.list
+            rows: response.list,
+            cardData: response.list
           });
         } else {
           console.warn('No hobbies in database');
@@ -104,7 +67,7 @@ class HobbiesList extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="row justify-content-md-center">
           <div className="col-6">
             <InputGroup className="mb-3 mt-3">

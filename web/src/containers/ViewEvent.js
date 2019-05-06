@@ -56,8 +56,6 @@ export default class ViewEvent extends Component {
         if (response) {
           let events = response.events;
 
-          console.log(events);
-
           let eventJoined = false;
           for(let i = 0; i < events.length - 1; i++) {
             if (events[i].eventsId === eventId) {
