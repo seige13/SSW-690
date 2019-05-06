@@ -22,7 +22,7 @@ export default class AddHobby extends Component {
         description: '',
         fee: '',
         holder: '',
-        hobby_id: this.props.match.params.id,
+        hobbyId: this.props.match.params.id,
       },
       picture: '',
       hasErrors: false,
@@ -80,6 +80,11 @@ export default class AddHobby extends Component {
     this.setState({isLoading: true});
 
     let bodyFormData = new FormData();
+    let date = new Date(Date.parse(this.state.event.eventsTime));
+
+    this.state.event.eventsTime = date.toISOString().substring(0, 10) + ' ' + date.toISOString().substring(11, 19);
+    console.log(this.state.event.eventsTime);
+
 
     let currEvent = new Blob([JSON.stringify(this.state.event)], {type : 'application/json'});
 

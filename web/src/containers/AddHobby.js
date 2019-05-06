@@ -72,7 +72,7 @@ export default class AddHobby extends Component {
 
     let currEvent = new Blob([JSON.stringify(eventData)], {type : 'application/json'});
 
-    bodyFormData.set('events', currEvent);
+    bodyFormData.set('hobby', currEvent);
     bodyFormData.set('file', this.state.picture);
 
     ApiService.createHobby(bodyFormData)
