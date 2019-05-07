@@ -54,10 +54,13 @@ const ApiService = {
       }
     })
   },
-  getAllEvents() {
+  getAllEventsByHobbyId(hobbyId) {
     return Request({
       url: '/events/listevents',
-      method: 'get'
+      method: 'get',
+      params: {
+        id: hobbyId
+      }
     })
   },
   createEvent(bodyFormData) {

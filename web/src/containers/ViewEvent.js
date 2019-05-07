@@ -111,6 +111,7 @@ export default class ViewEvent extends Component {
 
   render() {
     let date = new Date(Date.parse(this.state.event.eventsTime));
+    let img = this.state.event.eventsImage !== null ? this.state.event.eventsImage : 'https://via.placeholder.com/250';
     return <div className={'ViewEvent mt-4'}>
       <div className={'row'}>
         <div className={'col'}>
@@ -119,7 +120,7 @@ export default class ViewEvent extends Component {
       </div>
       <div className={'row mt-4'}>
         <div className={'col'}>
-          <img src={'https://via.placeholder.com/250'} alt={'placeholder'}/>
+          <img src={img} alt={'placeholder'}/>
         </div>
         <div className={'col-9'}>
           <ul>
