@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import ApiService from "../services/ApiService";
+import './ViewHobby.css'
 
 export default class ViewEvent extends Component {
   constructor(props) {
@@ -57,13 +58,13 @@ export default class ViewEvent extends Component {
           let events = response.events;
 
           let eventJoined = false;
-          for(let i = 0; i < events.length - 1; i++) {
+          for(let i = 0; i < events.length; i++) {
             if (events[i].eventsId === eventId) {
               eventJoined = true;
               break;
             }
           }
-          console.log(eventJoined);
+
           if (eventJoined) {
             this.setState({
               isEventJoined: true
@@ -120,7 +121,7 @@ export default class ViewEvent extends Component {
       </div>
       <div className={'row mt-4'}>
         <div className={'col'}>
-          <img src={img} alt={'placeholder'}/>
+          <img src={img} alt={'placeholder'} className={'hobby-img'}/>
         </div>
         <div className={'col-9'}>
           <ul>
