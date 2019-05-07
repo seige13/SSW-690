@@ -18,7 +18,7 @@ class EventsList extends Component {
   componentDidMount() {
     this.setState({isLoading: true});
 
-    ApiService.getAllEvents()
+    ApiService.getAllEventsByHobbyId(this.props.hobby)
       .then(function (response) {
         if (response.list) {
           this.setState({
