@@ -36,7 +36,7 @@ const ApiService = {
       url: '/hobby/addhobby',
       method: 'post',
       data: bodyFormData,
-      config: {headers: {'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`}}
+      config: {headers: {'Content-Type': `multipart/form-data;`}}
     })
   },
   getAllHobbies() {
@@ -65,7 +65,7 @@ const ApiService = {
         method: 'post',
         url: '/events/addevents',
         data: bodyFormData,
-        config: {headers: {'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`}}
+        config: {headers: {'Content-Type': `multipart/form-data;`}}
       }
     )
   },

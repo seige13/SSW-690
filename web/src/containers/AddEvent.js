@@ -83,7 +83,6 @@ export default class AddHobby extends Component {
     let date = new Date(Date.parse(this.state.event.eventsTime));
 
     this.state.event.eventsTime = date.toISOString().substring(0, 10) + ' ' + date.toISOString().substring(11, 19);
-    console.log(this.state.event.eventsTime);
 
 
     let currEvent = new Blob([JSON.stringify(this.state.event)], {type : 'application/json'});
@@ -93,7 +92,6 @@ export default class AddHobby extends Component {
 
     ApiService.createEvent(bodyFormData)
       .then(function (response) {
-        console.log(response);
         if (response) {
           this.props.history.push(`/hobby/${this.props.match.params.id}`);
         } else {
