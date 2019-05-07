@@ -105,7 +105,7 @@ class HobbiesList extends Component {
                 </Card>
               </Link>
             </div>) : ''
-          }}
+          }
 
           <div className={'col-3 mb-3'}>
             <Link to={`/add/hobby`}>
