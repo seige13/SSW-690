@@ -4,6 +4,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import EventList from "../components/EventsList";
 import {Alert} from "react-bootstrap";
 import BlogList from '../components/BlogList';
+import defaultHobbyImage from '../assets/default-hobby.jpg';
+import './ViewHobby.css'
 
 export default class ViewHobby extends Component {
   constructor(props) {
@@ -43,8 +45,8 @@ export default class ViewHobby extends Component {
           </div>
         </div>
         <div className={'row mt-4'}>
-          <div className={'col'}>
-            <img src={'https://via.placeholder.com/250'} alt={'placeholder'} />
+          <div className={'col-3'}>
+            <img src={defaultHobbyImage} alt={'placeholder'} className={'hobby-img'}/>
           </div>
           <div className={'col-9'}>
             {this.state.hobby.description}

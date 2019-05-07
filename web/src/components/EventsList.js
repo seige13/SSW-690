@@ -50,7 +50,8 @@ class EventsList extends Component {
       <div className={'mt-4'}>
         <h4>Events</h4>
         <div className={'row'}>
-          {this.state.rows.map((item, index) => {
+          {this.state.rows ? (
+            this.state.rows.map((item, index) => {
               var img = item.eventsImage !== null ? item.eventsImage : defaultHobbyImage;
               return (
                 <div key={index} className={'col-3 mb-3'}>
@@ -72,7 +73,9 @@ class EventsList extends Component {
                 </div>
               )
             })
+          ) : ''
           }
+
           <div className={'col-3 mb-3'}>
             <Link to={`/hobby/${this.props.hobby}/event/add`}>
               <Card style={{width: "16rem", height: '100%'}}>
