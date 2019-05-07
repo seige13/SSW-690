@@ -23,7 +23,7 @@ export default class FileUpload extends Component {
     ));
 
     return (
-      <Dropzone onDrop={this.onDrop} multiple={false}>
+      <Dropzone multiple={false} accept="image/*" onDropAccepted={this.onDrop}>
         {({getRootProps, getInputProps}) => (
           <section className="">
             <div {...getRootProps({className: 'dropzone'})}>
