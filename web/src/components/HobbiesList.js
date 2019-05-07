@@ -87,7 +87,7 @@ class HobbiesList extends Component {
           </div>
         </div>
         <div className={'row'}>
-          {this.state.rows.map((item, index) =>
+          {this.state.rows ? this.state.rows.map((item, index) =>
             <div key={index} className={'col-3 mb-3'}>
               <Link to={`/hobby/${item.hobbyId}`}>
                 <Card style={{width: "16rem"}}>
@@ -104,8 +104,8 @@ class HobbiesList extends Component {
                   </Card.Body>
                 </Card>
               </Link>
-            </div>)
-          }
+            </div>) : ''
+          }}
 
           <div className={'col-3 mb-3'}>
             <Link to={`/add/hobby`}>
