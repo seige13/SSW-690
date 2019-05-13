@@ -16,11 +16,11 @@ public class EventsDaoTest extends BaseTest {
     @Autowired
     private EventsDao eventsDao;
 
-    @Test
-    public void testQueryEvents() {
-        List<Events> eventsList = eventsDao.queryEvents();
-        assertNotEquals(0, eventsList.size());
-    }
+//    @Test
+//    public void testQueryEvents() {
+//        List<Events> eventsList = eventsDao.queryEvents();
+//        assertNotEquals(0, eventsList.size());
+//    }
 
     @Test
     public void testInsertEvents() {

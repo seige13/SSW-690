@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +32,7 @@ public class HobbyTest extends BaseTest {
         Hobby hobby = new Hobby();
         hobby.setDescription("test");
         hobby.setConstrains("test");
-        hobby.setName("test");
+        hobby.setName("test1"+ UUID.randomUUID());
         int result = hobbyDao.insertHobby(hobby);
         assertEquals(1, result);
 
